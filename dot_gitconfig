@@ -1,0 +1,5 @@
+[user]
+	email = lethang7794@gmail.com
+	name = Le Quang Thang
+[core]
+	excludesfile = /home/lqt/.gitignore_global
