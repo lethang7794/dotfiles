@@ -3,3 +3,5 @@
 	name = Le Quang Thang
 [core]
 	# excludesfile = $XDG_CONFIG_HOME/git/ignore # or $HOME/.config/git/ignore
+[init]
+	defaultBranch = main
