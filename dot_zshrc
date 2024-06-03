@@ -529,7 +529,4 @@ fi
 # nav
 # nav bindkeys
 
-aws_secret="AKIAIMNOJVGFDXXXE4OA"                                                                                 # Test gitleaks actions alert
-export GITHUB_TOKEN=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 # Not a real GITHUB_TOKEN, just for testing
-
 # zprof
