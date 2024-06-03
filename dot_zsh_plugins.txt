@@ -1,0 +1,31 @@
+mroth/evalcache
+
+### Oh-my-zsh plugins: https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins
+ohmyzsh/ohmyzsh path:plugins/git kind:defer
+ohmyzsh/ohmyzsh path:plugins/sudo kind:defer
+## ohmyzsh/ohmyzsh path:plugins/z
+ohmyzsh/ohmyzsh path:plugins/last-working-dir
+## ohmyzsh/ohmyzsh path:plugins/colored-man-pages # Use bat instead
+ohmyzsh/ohmyzsh path:plugins/kubectl kind:defer
+ohmyzsh/ohmyzsh path:plugins/globalias kind:defer
+
+### Github repos
+
+## MISC
+## djui/alias-tips
+MichaelAquilina/zsh-you-should-use kind:defer
+# betafcc/nav
+
+## Completions
+# chitoku-k/fzf-zsh-completions kind:defer # So slow
+Aloxaf/fzf-tab kind:defer # 🌟🌟🌟
+#Freed-Wu/fzf-tab-source kind:defer
+lethang7794/fzf-tab-source kind:defer
+
+## Suggestions
+zsh-users/zsh-autosuggestions kind:defer # 🌟🌟🌟
+
+## Syntax-highlight
+## zsh-users/zsh-syntax-highlighting                    # ?
+# zdharma-continuum/fast-syntax-highlighting kind:defer # ?
+z-shell/F-Sy-H kind:defer
