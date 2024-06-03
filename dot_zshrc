@@ -529,4 +529,6 @@ fi
 # nav
 # nav bindkeys
 
+aws_secret="AKIAIMNOJVGFDXXXE4OA" # This is not a real secret; just for testing
+
 # zprof
