@@ -21,6 +21,7 @@ MichaelAquilina/zsh-you-should-use kind:defer
 Aloxaf/fzf-tab kind:defer # 🌟🌟🌟
 #Freed-Wu/fzf-tab-source kind:defer
 lethang7794/fzf-tab-source kind:defer
+junegunn/fzf-git.sh kind:defer
 
 ## Suggestions
 zsh-users/zsh-autosuggestions kind:defer # 🌟🌟🌟

@@ -294,6 +294,17 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'tree -C -L 1 $realpath | head -200'
 # switch group using `<` and `>`
 # zstyle ':fzf-tab:*' switch-group '<' '>'
 
+
+## fzf-git
+_fzf_git_fzf() {
+  fzf --tmux 80%,60% -- \
+    --layout=reverse --multi --height=50% --min-height=20 --border \
+    --border-label-pos=2 \
+    --color='header:italic:underline,label:blue' \
+    --preview-window='right,50%,border-left' \
+    --bind='ctrl-/:change-preview-window(down,50%,border-top|hidden|)' "$@"
+}
+
 # Remove the default of run-help being aliased to man
 unalias run-help
 # Use zsh's run-help, which will display information for zsh builtins.
