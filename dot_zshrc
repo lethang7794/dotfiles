@@ -170,6 +170,7 @@ typeTransformer='
 export FZF_CTRL_T_OPTS="
   --walker-skip .git,node_modules,target
   --prompt ' Files> ' \
+  --min-height=50
   --color header:italic
   --header '<Ctrl-T> Switch to Directories/Files    <Ctrl-/> Toggle Preview    <Ctrl-S> Sort' \
   --bind 'ctrl-/:toggle-preview' \
@@ -254,10 +255,11 @@ function fzf-man-widget {
       --bind "alt-m:+change-preview(${batman})+change-prompt(󰬔 Man > )+reload(cat /tmp/fzf-man-manlist)" \
       --bind "enter:become($executer)" \
       --preview "tldr --color=always {1}" \
-      --preview-window '66%,rounded,<50(up,85%,border-bottom)' \
-      --bind 'alt-/:toggle-preview' \
+      --preview-window '66%' \
       --color header:italic \
-      --header '<Alt-T> tldr  <Alt-C> Cheat  <Alt-M> Man  <Alt-/> Preview'
+      --header '<Alt-T> tldr  <Alt-C> Cheat  <Alt-M> Man  <Alt-/> Preview' \
+      --bind 'alt-/:change-preview-window:66%|up' \
+      --bind 'ctrl-/:toggle-preview'
 
   zle reset-prompt
 }
@@ -289,19 +291,8 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # preview directory's content with eza when completing cd
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'tree -C -L 1 $realpath | head -200'
 
-# switch group using `<` and `>`
+# switch group using `<` and `>` (instead of F1, F2)
 # zstyle ':fzf-tab:*' switch-group '<' '>'
-
-
-## fzf-git
-_fzf_git_fzf() {
-  fzf --tmux 80%,60% -- \
-    --layout=reverse --multi --height=50% --min-height=20 --border \
-    --border-label-pos=2 \
-    --color='header:italic:underline,label:blue' \
-    --preview-window='right,50%,border-left' \
-    --bind='ctrl-/:change-preview-window(down,50%,border-top|hidden|)' "$@"
-}
 
 # Remove the default of run-help being aliased to man
 unalias run-help
