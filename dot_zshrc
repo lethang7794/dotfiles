@@ -252,9 +252,10 @@ function fzf-man-widget {
       --bind "alt-m:+change-preview(${batman})+change-prompt(󰬔 Man > )+reload(cat /tmp/fzf-man-manlist)" \
       --bind "enter:become($executer)" \
       --preview "tldr --color=always {1}" \
-      --preview-window '80%,rounded,<50(up,85%,border-bottom)' \
+      --preview-window '66%,rounded,<50(up,85%,border-bottom)' \
+      --bind 'alt-/:toggle-preview' \
       --color header:italic \
-      --header '<Alt-T> tldr      <Alt-C> Cheat      <Alt-M> Man'
+      --header '<Alt-T> tldr  <Alt-C> Cheat  <Alt-M> Man  <Alt-/> Preview'
 
   zle reset-prompt
 }
