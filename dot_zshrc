@@ -150,8 +150,8 @@ export FZF_DEFAULT_OPTS="
 # <Ctrl-/> to toggle small preview window to see the full command
 # <Ctrl-Y> to copy the command into clipboard using xclip
 export FZF_CTRL_R_OPTS="
-  --preview 'echo {}' 
-  --preview-window up:2:hidden:wrap
+  --preview 'echo {2..} | bat --color=always -pl sh' 
+  --preview-window up:5:hidden:wrap
   --color header:italic
   --header '<Ctrl-Y> Copy to clipboard\t<Ctrl-/> Toggle preview'
   --bind 'ctrl-/:toggle-preview'
@@ -170,7 +170,8 @@ export FZF_CTRL_T_OPTS="
   --walker-skip .git,node_modules,target
   --prompt ' Files> ' \
   --color header:italic
-  --header '<Ctrl-T> Switch to Directories/Files' \
+  --header '<Ctrl-T> Switch to Directories/Files  <Ctrl-/> Toggle Preview' \
+  --bind 'ctrl-/:toggle-preview' \
   --bind 'ctrl-t:transform:$typeTransformer' \
   --preview '[[ {fzf:prompt} =~ Files ]] && bat --style=header --color=always -- {} || tree -C -L 1 {}' \
   --bind 'alt-enter:execute(code -g {1}; sleep 1)'
