@@ -205,28 +205,39 @@ function rg-fzf {
 zle -N rg-fzf        # Define rg-fzf as a new widget
 bindkey "^[f" rg-fzf # Bind Alt + f to rg-fzf
 
+function cleanup-fzf-man-widget {
+  rm -f /tmp/fzf-man-manlist
+  rm -f /tmp/fzf-man-cheatlist
+  rm -f /tmp/fzf-man-tldrlist
+}
+cleanup-fzf-man-widget
+
 function fzf-man-widget {
   batman="man {1} 2>/dev/null | bat --language=man --plain --color=always"
 
-  manlist=$(man -k . | sort | awk -v cyan=$(tput setaf 6) -v blue=$(tput setaf 4) -v res=$(tput sgr0) -v bld=$(tput bold) '{ $1=cyan bld $1; $2=res blue;} 1')
-  echo $manlist >/tmp/manlist
+  if [[ ! -e "/tmp/fzf-man-manlist" ]]; then
+    manlist=$(man -k . | sort | awk -v cyan=$(tput setaf 6) -v blue=$(tput setaf 4) -v res=$(tput sgr0) -v bld=$(tput bold) '{ $1=cyan bld $1; $2=res blue;} 1')
+    echo $manlist >/tmp/fzf-man-manlist
+  fi
 
-  cheatlist=$(cheat -l | awk '{printf "\033[1;36m%s\033[0m %s\n", $1, $3}' | tail --lines +2 | sed 's/community\,*//g' | column -t)
-  echo $cheatlist >/tmp/cheatlist
 
-  tldrlist=$(tldr -l)
-  echo $tldrlist >/tmp/tldrlist
+  if [[ ! -e "/tmp/fzf-man-cheatlist" ]]; then
+    cheatlist=$(cheat -l | awk '{printf "\033[1;36m%s\033[0m %s\n", $1, $3}' | tail --lines +2 | sed 's/community\,*//g' | column -t)
+    echo $cheatlist >/tmp/fzf-man-cheatlist
+  fi
 
+  if [[ ! -e "/tmp/fzf-man-tldrlist" ]]; then
+    tldrlist=$(tldr -l)
+    echo $tldrlist >/tmp/fzf-man-tldrlist
+  fi
+  
   executer='
-    if [[ {fzf:prompt} =~ Man ]]; then
-      echo man {1}
-      man {1}
     elif [[ {fzf:prompt} =~ TLDR ]]; then
-      echo tldr {1}
       tldr {1}
-    else
-      echo cheat {1}
+    else [[ {fzf:prompt} =~ Cheat ]]; then
       cheat {1}
+    else
+      man {1}
     fi
   '
 
@@ -236,12 +247,12 @@ function fzf-man-widget {
       --ansi \
       --tiebreak=begin \
       --prompt='󰬛 TLDR > ' \
-      --bind "alt-t:+change-preview(tldr --color=always {1})+change-prompt(󰬛 TLDR > )+reload(cat /tmp/tldrlist)" \
-      --bind "alt-c:+change-preview(cheat --colorize {1})+change-prompt(󰬊 Cheat > )+reload(cat /tmp/cheatlist)" \
-      --bind "alt-m:+change-preview(${batman})+change-prompt(󰬔 Man > )+reload(cat /tmp/manlist)" \
+      --bind "alt-t:+change-preview(tldr --color=always {1})+change-prompt(󰬛 TLDR > )+reload(cat /tmp/fzf-man-tldrlist)" \
+      --bind "alt-c:+change-preview(cheat --colorize {1})+change-prompt(󰬊 Cheat > )+reload(cat /tmp/fzf-man-cheatlist)" \
+      --bind "alt-m:+change-preview(${batman})+change-prompt(󰬔 Man > )+reload(cat /tmp/fzf-man-manlist)" \
       --bind "enter:become($executer)" \
       --preview "tldr --color=always {1}" \
-      --preview-window '50%,rounded,<50(up,85%,border-bottom)' \
+      --preview-window '80%,rounded,<50(up,85%,border-bottom)' \
       --color header:italic \
       --header '<Alt-T> tldr      <Alt-C> Cheat      <Alt-M> Man'
 
