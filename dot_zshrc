@@ -200,7 +200,7 @@ function rg-fzf {
     --prompt '1. 󱩾 ripgrep> ' \
     --delimiter : \
     --header '<Alt-F> Switch to fzf/ripgrep' \
-    --preview 'bat --color=always -- {1} --highlight-line {2}' \
+    --preview 'bat --color=always --highlight-line {2} -- {1}' \
     --preview-window 'up,50%,border-bottom,+{2}+3/3,~3' \
     --bind 'enter:execute(nvim {1} +{2})' \
     --bind 'alt-enter:execute(code -g {1}:{2}; sleep 1)'
