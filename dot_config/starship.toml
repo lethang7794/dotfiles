@@ -1,0 +1,322 @@
+continuation_prompt = '▶▶ '
+
+# format = '$all'
+format = """
+$username\
+$hostname\
+$localip\
+$shlvl\
+$singularity\
+$kubernetes\
+$directory\
+$vcsh\
+$fossil_branch\
+$fossil_metrics\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$hg_branch\
+$pijul_channel\
+$docker_context\
+$package\
+$c\
+$cmake\
+$cobol\
+$daml\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$fennel\
+$gleam\
+$golang\
+$guix_shell\
+$haskell\
+$haxe\
+$helm\
+$java\
+$julia\
+$kotlin\
+$gradle\
+$lua\
+$nim\
+$nodejs\
+$ocaml\
+$opa\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$python\
+$quarto\
+$raku\
+$rlang\
+$red\
+$ruby\
+$rust\
+$scala\
+$solidity\
+$swift\
+$terraform\
+$typst\
+$vlang\
+$vagrant\
+$zig\
+$buf\
+$nix_shell\
+$conda\
+$meson\
+$spack\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$nats\
+$direnv\
+$env_var\
+$crystal\
+$custom\
+$sudo\
+$fill\
+$cmd_duration\
+$status\
+$line_break\
+$jobs\
+$battery\
+$time\
+$os\
+$container\
+$shell\
+$character"""
+
+# right_format = """
+# """
+
+[aws]
+symbol = "  "
+
+[buf]
+symbol = " "
+
+[c]
+symbol = " "
+
+[conda]
+symbol = " "
+
+[character]
+success_symbol = '[➜](green)' # 👉➜
+error_symbol = '[⚠](red)'     # 👆🯀🛑⚠️
+
+[crystal]
+symbol = " "
+
+[dart]
+symbol = " "
+
+[directory]
+read_only = " 󰌾"
+repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) '
+repo_root_style = "underline"
+# fish_style_pwd_dir_length = 1
+# truncation_length = 5
+# truncate_to_repo = true
+# truncation_symbol = "…/"
+
+[docker_context]
+symbol = " "
+
+[elixir]
+symbol = " "
+
+[elm]
+symbol = " "
+
+[fennel]
+symbol = " "
+
+[fill]
+symbol = ' '
+
+[fossil_branch]
+symbol = " "
+
+[git_branch]
+symbol = " "
+
+[gcloud]
+disabled = true
+
+[golang]
+symbol = " "
+
+[guix_shell]
+symbol = " "
+
+[haskell]
+symbol = " "
+
+[haxe]
+symbol = " "
+
+[hg_branch]
+symbol = " "
+
+[hostname]
+ssh_symbol = " "
+
+[java]
+symbol = " "
+
+[julia]
+symbol = " "
+
+[kotlin]
+symbol = " "
+
+[kubernetes]
+disabled = false
+detect_folders = ["infra", "k8s"]
+
+[lua]
+symbol = " "
+
+[memory_usage]
+symbol = "󰍛 "
+
+[meson]
+symbol = "󰔷 "
+
+[nim]
+symbol = "󰆥 "
+
+[nix_shell]
+symbol = " "
+
+[nodejs]
+symbol = " " # 
+
+[ocaml]
+symbol = " "
+
+[os.symbols]
+Alpaquita = " "
+Alpine = " "
+Amazon = " "
+Android = " "
+Arch = " "
+Artix = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = "󰛓 "
+Gentoo = " "
+HardenedBSD = "󰞌 "
+Illumos = "󰈸 "
+Linux = " "
+Mabox = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+OpenBSD = "󰈺 "
+openSUSE = " "
+OracleLinux = "󰌷 "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+Redox = "󰀘 "
+Solus = "󰠳 "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Windows = "󰍲 "
+
+[package]
+symbol = "󰏗 "
+
+[perl]
+symbol = " "
+
+[php]
+symbol = " "
+
+[pijul_channel]
+symbol = " "
+
+[python]
+symbol = " "
+
+[rlang]
+symbol = "󰟔 "
+
+[ruby]
+symbol = " "
+
+[rust]
+symbol = " "
+
+[scala]
+symbol = " "
+
+[status]
+disabled = false
+format = '[\[$symbol$common_meaning$signal_name$maybe_int\]]($style) '
+
+[sudo]
+disabled = false
+
+[swift]
+symbol = " "
+
+[zig]
+symbol = " "
+
+[shell]
+# fish_indicator = 'fish '
+# powershell_indicator = '_'
+unknown_indicator = 'mystery shell'
+# style = 'cyan bold'
+disabled = false
+
+[custom.typescript]
+description = "TypeScript"
+symbol = "󰛦 "
+style = "#3178C5 bold"
+when = "jq --exit-status '.devDependencies.typescript' package.json"
+command = "jq --raw-output '.devDependencies.typescript' package.json | tr --delete '^'"
+
+[custom.react]
+description = "React"
+symbol = " "
+style = "#149ECA bold"
+when = "jq --exit-status '.dependencies.react' package.json"
+command = "jq --raw-output '.dependencies.react' package.json | tr --delete '^'"
+
+[custom.nextjs]
+description = "Next.js"
+symbol = "Next.js "
+style = "#F0F0F0 bold"
+when = "jq --exit-status '.dependencies.next' package.json"
+command = "jq --raw-output '.dependencies.next' package.json | tr --delete '^'"
+
+
+[custom.tailwind]
+description = "Tailwind CSS"
+symbol = "󱏿 "
+style = "#38BDF8 bold"
+when = "jq --exit-status '.devDependencies.tailwindcss' package.json"
+command = "jq --raw-output '.devDependencies.tailwindcss' package.json | tr --delete '^'"
