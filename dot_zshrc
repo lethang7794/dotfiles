@@ -268,7 +268,7 @@ zle -N fzf-man-widget
 bindkey '^[h' fzf-man-widget
 
 zstyle ":fzf-tab:*" fzf-flags \
-  --height="~90%" \
+  --height="90%" \
   --header="<Ctrl-Y> Copy to clipboard    <Ctrl-/> Toggle preview    <Ctrl-S/> Sort" \
   --color="header:italic" \
   --bind="ctrl-s:toggle-sort"
