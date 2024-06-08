@@ -286,8 +286,10 @@ function fzf-man-widget {
       --preview-window '66%' \
       --color header:italic \
       --header '<Alt-T> tldr  <Alt-C> Cheat  <Alt-M> Man  <Alt-/> Preview' \
-      --bind 'alt-/:change-preview-window:66%|up' \
-      --bind 'ctrl-/:toggle-preview'
+      --bind 'alt-/:change-preview-window:66%|down' \
+      --bind 'ctrl-/:toggle-preview' \
+      --bind='ctrl-s:toggle-sort' \
+
 
   zle reset-prompt
 }
