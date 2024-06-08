@@ -64,14 +64,14 @@ if [ "$(command -v antidote)" ]; then
   antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
 fi
 
-## Bind Alt + R to reload shell config 
+## Bind Alt+R to reload shell config 
 function source-shell {
   echo "Source shell configuration"
   # exec -l zsh
   omz reload  
 }
 zle -N source-shell        # Define source-shell as a new widget
-bindkey "^[r" source-shell # Bind Alt + R to source-shell
+bindkey "^[r" source-shell # Bind Alt+R to source-shell
 # TODO: The shell will be closed, not reload the current session 
 
 ## Zsh plugin
@@ -101,7 +101,7 @@ fi
 # Thefuck
 _evalcache thefuck --alias f
 # zle -N f        # Define f as a new widget
-# bindkey "^[f" f # Bind Alt + f to f
+# bindkey "^[f" f # Bind Alt+F to f
 
 # Starship
 if [ "$(command -v starship)" ]; then
@@ -126,7 +126,7 @@ function treeb {
 # zoxide: smarter cd
 _evalcache zoxide init zsh
 zle -N zi        # Define zi as a new widget
-bindkey "^[z" zi # Bind Alt + z to zi
+bindkey "^[z" zi # Bind Alt+z to zi
 
 # Walk https://github.com/antonmedv/walk
 function lk {
@@ -151,24 +151,32 @@ fi
 
 export FZF_DEFAULT_COMMAND="fd --color=always --hidden"
 export FZF_DEFAULT_OPTS="
-  --color pointer:white,marker:#87ff00
-  --pointer='󰋇 '
-  --marker='>'
   --ansi
-  --height=90%
-  --info inline-right
+  --border
   --highlight-line
+  --tabstop=4
+  --color='pointer:white,marker:#87ff00'
+  --height=90%
+  --info=inline-right
   --bind='alt-z:toggle-preview-wrap'
-  --bind 'ctrl-y:execute-silent(echo -n {} | xclip -selection clipboard)'
+  --bind='ctrl-y:execute-silent(echo -n {} | xclip -selection clipboard)'
+  --bind='ctrl-s:toggle-sort'
+  --bind 'ctrl-/:toggle-preview'
+  --bind 'alt-/:change-preview-window:right|down'
+  --bind 'f11:change-preview-window:right|down'
 "
+# --marker='✓'
+# --pointer='󰋇 '
 
 # <Ctrl-/> to toggle small preview window to see the full command
 # <Ctrl-Y> to copy the command into clipboard using xclip
 export FZF_CTRL_R_OPTS="
+  --color label:italic
+  --border-label='╢ Ctrl+R: Search history ╟'
   --preview 'echo {2..} | bat --color=always -pl sh' 
   --preview-window up:5:hidden:wrap
   --color header:italic
-  --header '<Ctrl-Y> Copy to clipboard    <Ctrl-/> Toggle preview    <Ctrl-S> Sort'
+  --header '<Ctrl-Y> Copy\\t<Ctrl-/> Preview\\t<Ctrl-S> Sort'
   --bind='ctrl-s:toggle-sort'
   --bind 'ctrl-/:toggle-preview'
   --bind 'ctrl-y:execute-silent(echo -n {2..} | xclip -selection clipboard)+abort'
@@ -192,12 +200,12 @@ typeTransformerCtrlT='
   fi
 '
 
-
 export FZF_CTRL_T_OPTS="
+  --border-label='╢ Ctr+T: Search files by path ╟'
   --prompt ' Files> '
-  --min-height=50
   --color header:italic
-  --header '<Ctrl-T> Switch to Directories/Files    <Ctrl-/> Toggle Preview    <Ctrl-S> Sort'
+  --color label:italic
+  --header '<Ctrl-T> Files/Directorie\\t<Ctrl-/> Preview\\t<Ctrl-S> Sort\\t\\n<Ctrl+E> Open with nvim\\t\\t<Alt-E> VS Code\\t\\t<Alt+Enter> Default App'
   --bind 'alt-/:change-preview-window:right|down'
   --bind 'ctrl-/:toggle-preview'
   --bind='ctrl-s:toggle-sort'
@@ -209,10 +217,17 @@ export FZF_CTRL_T_OPTS="
   --bind 'alt-e:execute(code -g {+}; sleep 1)'
 "
 
-export FZF_ALT_C_COMMAND="bfs -color -type d -unique -exclude \( -name .git -or -name pkg -or -name .cache -or -name cache -or -name node_modules \) 2>/dev/null | sed 's|./||'"
-export FZF_ALT_C_OPTS="--preview 'tree -C -L 1 {} | head -200'"
+export FZF_ALT_C_COMMAND="bfs -color -type d -unique -exclude \( -name .git -or -name .cache -or -name node_modules \) 2>/dev/null | sed 's|./||'"
+export FZF_ALT_C_OPTS="
+  --color header:italic
+  --color label:italic
+  --header '<Ctrl-/> Toggle Preview    <Ctrl-S> Sort'
+  --preview 'tree -C -L 1 {} | head -200'
+  --bind 'ctrl-/:toggle-preview'
+  --bind 'alt-/:change-preview-window:right|down'
+"
 
-# Switch between Ripgrep mode and fzf filtering mode (Alt-F)
+# rg-fzf: Switch files by content using Ripgrep then filter the results with fzf (Alt-F)
 function rg-fzf {
   rm -f /tmp/rg-fzf-{r,f}
 
@@ -221,22 +236,47 @@ function rg-fzf {
 
   : | fzf --ansi --disabled --query "$INITIAL_QUERY" \
     --bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \
-    --bind 'alt-f:transform:[[ ! $FZF_PROMPT =~ ripgrep ]] &&
-      echo "rebind(change)+change-prompt(1. 󱩾 ripgrep> )+disable-search+transform-query:echo \{q} > /tmp/rg-fzf-f; cat /tmp/rg-fzf-r" ||
-      echo "unbind(change)+change-prompt(2. 󰈲 fzf> )+enable-search+transform-query:echo \{q} > /tmp/rg-fzf-r; cat /tmp/rg-fzf-f"' \
+    --bind 'ctrl-f:transform:[[ ! $FZF_PROMPT =~ ripgrep ]] &&
+              echo "rebind(change)+change-prompt(1. 󱩾 ripgrep> )+disable-search+transform-query:echo \{q} > /tmp/rg-fzf-f; cat /tmp/rg-fzf-r" ||
+              echo "unbind(change)+change-prompt(2. 󰈲 fzf> )+enable-search+transform-query:echo \{q} > /tmp/rg-fzf-r; cat /tmp/rg-fzf-f"' \
     --color "header:italic,hl:-1:underline,hl+:-1:underline:reverse" \
     --color "pointer:white" \
+    --color "label:italic" \
+    --border-label "╢ rg-fzf: Search files by content ╟" \
     --prompt '1. 󱩾 ripgrep> ' \
     --delimiter : \
-    --header '<Alt-F> Switch to fzf/ripgrep' \
+    --layout=reverse \
+    --header '<Ctrl-F> Switch to fzf/ripgrep' \
     --preview 'bat --color=always --highlight-line {2} -- {1}' \
-    --preview-window 'up,50%,border-bottom,+{2}+3/3,~3' \
+    --preview-window 'down,50%,+{2}+3/3,~3' \
     --bind 'enter:execute(nvim {1} +{2})' \
     --bind 'alt-enter:execute(code -g {1}:{2}; sleep 1)'
-  # --bind "start:reload:$RG_PREFIX {q}"
 }
-zle -N rg-fzf        # Define rg-fzf as a new widget
-bindkey "^[f" rg-fzf # Bind Alt + f to rg-fzf
+zle -N rg-fzf       # Define rg-fzf as a new widget
+bindkey "^f" rg-fzf # Bind Ctrl+F to rg-fzf
+
+rga-fzf() {
+	RG_PREFIX="rga --files-with-matches --color=always"
+	local file
+	file="$(
+		FZF_DEFAULT_COMMAND="$RG_PREFIX '$1'" \
+			fzf --sort --preview="[[ ! -z {} ]] && rga --pretty --context 5 {q} {}" \
+				--phony -q "$1" \
+        --layout=reverse \
+        --color "label:italic" \
+        --border-label "╢ rga-fzf: Search all files (PDF, epub...) by content ╟" \
+        --prompt '1. 󱩾 rga> ' \
+				--bind "change:reload:$RG_PREFIX {q}" \
+				--preview-window="right" \
+        --bind='alt-z:toggle-preview-wrap' \
+        --bind='ctrl-y:execute-silent(echo -n {} | xclip -selection clipboard)' \
+        --bind='ctrl-s:toggle-sort'
+	)" &&
+	echo "Opening $file" &&
+	open "$file"
+}
+zle -N rga-fzf        # Define rga-fzf as a new widget
+bindkey "^[f" rga-fzf # Bind Alt+F to rga-fzf
 
 function cleanup-fzf-man {
   rm -f /tmp/fzf-man-manlist
@@ -306,7 +346,7 @@ zstyle ":fzf-tab:*" fzf-flags \
   --header="<Ctrl-Y> Copy to clipboard    <Ctrl-/> Toggle preview    <Ctrl-S/> Sort" \
   --color="header:italic" \
   --bind="ctrl-s:toggle-sort" \
-  --bind 'alt-/:change-preview-window:right|up' \
+  --bind 'alt-/:change-preview-window:right|down' \
   --bind 'ctrl-/:toggle-preview' 
   
 zstyle ':fzf-tab:*' continuous-trigger '/'
