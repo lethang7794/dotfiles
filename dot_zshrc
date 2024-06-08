@@ -313,7 +313,7 @@ zstyle ':fzf-tab:*' continuous-trigger '/'
 
 zstyle ':fzf-tab:complete:*' fzf-bindings \
   'ctrl-/:toggle-preview' \
-  'ctrl-y:abort+execute-silent(echo -n {2..} | xclip -selection clipboard)'
+  'ctrl-y:execute-silent(echo -n {2..} | xclip -selection clipboard)'
 
 # set descriptions format to enable group support
 zstyle ':completion:*:descriptions' format '[%d]'
@@ -441,10 +441,10 @@ go-cover-web() {
 export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"
 
 # VS Code
-VSCODE_PROFILE=Fedora
-function code {
-  /usr/bin/code "$@" --profile $VSCODE_PROFILE
-}
+# VSCODE_PROFILE=Fedora
+# function code {
+#   /usr/bin/code "$@" --profile $VSCODE_PROFILE
+# }
 
 # rbenv
 if [ "$(command -v rbenv)" ]; then
