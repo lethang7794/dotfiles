@@ -241,14 +241,14 @@ function rg-fzf {
 zle -N rg-fzf        # Define rg-fzf as a new widget
 bindkey "^[f" rg-fzf # Bind Alt + f to rg-fzf
 
-function cleanup-fzf-man-widget {
+function cleanup-fzf-man {
   rm -f /tmp/fzf-man-manlist
   rm -f /tmp/fzf-man-cheatlist
   rm -f /tmp/fzf-man-tldrlist
 }
-cleanup-fzf-man-widget
+cleanup-fzf-man
 
-function fzf-man-widget {
+function fzf-man {
   batman="man {1} 2>/dev/null | bat --language=man --plain --color=always"
 
   if [[ ! -e "/tmp/fzf-man-manlist" ]]; then
@@ -267,9 +267,9 @@ function fzf-man-widget {
   fi
   
   executer='
-    elif [[ {fzf:prompt} =~ TLDR ]]; then
+    if [[ {fzf:prompt} =~ TLDR ]]; then
       tldr {1}
-    else [[ {fzf:prompt} =~ Cheat ]]; then
+    elif [[ {fzf:prompt} =~ Cheat ]]; then
       cheat {1}
     else
       man {1}
@@ -298,8 +298,8 @@ function fzf-man-widget {
   zle reset-prompt
 }
 # `Alt-H` keybinding to launch the widget (this widget works only on zsh, don't know how to do it on bash and fish (additionaly pressing`ctrl-backspace` will trigger the widget to be executed too because both share the same keycode)
-zle -N fzf-man-widget
-bindkey '^[h' fzf-man-widget
+zle -N fzf-man
+bindkey '^[h' fzf-man
 
 zstyle ":fzf-tab:*" fzf-flags \
   --height="90%" \
