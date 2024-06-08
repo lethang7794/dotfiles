@@ -238,6 +238,7 @@ image/x-qoi=org.gnome.Loupe.desktop;
 image/x-tga=org.gnome.Loupe.desktop;
 text/calendar=org.gnome.Calendar.desktop;
 text/html=org.mozilla.FirefoxDev.desktop;
+text/plain=code.desktop;
 video/3gp=org.videolan.VLC.desktop;
 video/3gpp=org.videolan.VLC.desktop;
 video/3gpp2=org.videolan.VLC.desktop;
