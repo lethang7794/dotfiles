@@ -1,0 +1,3 @@
+# Editor
+# EDITOR=/home/linuxbrew/.linuxbrew/bin/micro
+EDITOR=nvim
