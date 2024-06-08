@@ -80,7 +80,7 @@ bindkey "^[r" source-shell # Bind Alt + R to source-shell
 ## Zsh plugin
 
 # Globalias
-GLOBALIAS_FILTER_VALUES=(ls which z grep dk)
+GLOBALIAS_FILTER_VALUES=(ls which z grep dk open)
 
 # MichaelAquilina/zsh-you-should-use
 # export YSU_MESSAGE_FORMAT="$(tput setaf 1)Hey! I found this %alias_type for %command: %alias$(tput sgr0)"
@@ -456,7 +456,11 @@ export PATH="/home/lqt/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 
 alias tmux-cleanup-sessions="tmux list-sessions | grep -v attached | awk 'BEGIN{FS=\":\"}{print $1}' | xargs -n 1 tmux kill-session -t 2> /dev/null || (echo 'Cleanup unattached sessions!' && tmux ls)"
 alias tmux-cleanup-windows="tmux list-windows | grep -v attached | awk 'BEGIN{FS=\":\"}{print $1}' | xargs -n 1 tmux kill-window -t 2> /dev/null || (echo 'Cleanup unattached windows!' && tmux ls)"
-alias open=nautilus
+
+# alias open=xdg-open # Linux
+function open() {
+  handlr open "$@"
+}
 
 export WHERE=.zshrc
 
