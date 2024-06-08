@@ -299,16 +299,21 @@ zle -N fzf-man
 bindkey '^[h' fzf-man
 
 zstyle ":fzf-tab:*" fzf-flags \
+  --multi \
+  --bind 'alt-a:select-all' \
+  --bind 'alt-t:toggle-all' \
   --height="90%" \
   --header="<Ctrl-Y> Copy to clipboard    <Ctrl-/> Toggle preview    <Ctrl-S/> Sort" \
   --color="header:italic" \
-  --bind="ctrl-s:toggle-sort"
-
+  --bind="ctrl-s:toggle-sort" \
+  --bind 'alt-/:change-preview-window:right|up' \
+  --bind 'ctrl-/:toggle-preview' 
+  
 zstyle ':fzf-tab:*' continuous-trigger '/'
 
 zstyle ':fzf-tab:complete:*' fzf-bindings \
   'ctrl-/:toggle-preview' \
-  'ctrl-y:execute-silent(echo -n {2..} | xclip -selection clipboard)+abort'
+  'ctrl-y:abort+execute-silent(echo -n {2..} | xclip -selection clipboard)'
 
 # set descriptions format to enable group support
 zstyle ':completion:*:descriptions' format '[%d]'
@@ -317,7 +322,7 @@ zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
-# zstyle ':completion:*' menu no
+zstyle ':completion:*' menu no
 
 # preview directory's content with eza when completing cd
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'tree -C -L 1 $realpath | head -200'
