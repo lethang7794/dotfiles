@@ -3,7 +3,6 @@
 # Get the active window ID
 ACTIVE_WINDOW=$(xdotool getactivewindow)
 
-
 # Unmaximize the active window
 wmctrl -i -r $ACTIVE_WINDOW -b remove,fullscreen
 wmctrl -i -r $ACTIVE_WINDOW -b remove,maximized_vert,maximized_horz
