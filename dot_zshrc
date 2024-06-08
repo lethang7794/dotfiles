@@ -159,6 +159,10 @@ export FZF_DEFAULT_OPTS="
   --marker='>'
   --ansi
   --height=90%
+  --info inline-right
+  --highlight-line
+  --bind='alt-z:toggle-preview-wrap'
+  --bind 'ctrl-y:execute-silent(echo -n {} | xclip -selection clipboard)'
 "
 
 # <Ctrl-/> to toggle small preview window to see the full command
