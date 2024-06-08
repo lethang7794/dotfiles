@@ -182,12 +182,12 @@ export FZF_CTRL_R_OPTS="
   --bind 'ctrl-y:execute-silent(echo -n {2..} | xclip -selection clipboard)+abort'
 "
 
-export FZF_ALT_T_COMMAND="fd --color=always --hidden --exclude=.git --exclude=node_modules --type=file '' '$HOME' | sed -e \"s|$HOME|~|\""
+export FZF_ALT_T_COMMAND="fd --color=always --hidden --exclude=.git --exclude=node_modules --type=file '' '$HOME'"
 typeTransformerAltT='
   if [[ ! {fzf:prompt} =~ Files ]]; then
-    echo "change-prompt( Files> )+reload(fd --color=always --hidden --exclude=.git --exclude=node_modules --type=file {q} '$HOME' | sed -e \"s|$HOME|~|\")"
+    echo "change-prompt( Files> )+reload(fd --color=always --hidden --exclude=.git --exclude=node_modules --type=file {q} '$HOME')"
   else
-    echo "change-prompt( Directories> )+reload(fd --color=always --hidden --exclude=.git --exclude=node_modules --type=directory {q} '$HOME' | sed -e \"s|$HOME|~|\")"
+    echo "change-prompt( Directories> )+reload(fd --color=always --hidden --exclude=.git --exclude=node_modules --type=directory {q} '$HOME')"
   fi
 '
 
@@ -211,7 +211,7 @@ export FZF_CTRL_T_OPTS="
   --bind='ctrl-s:toggle-sort'
   --bind 'ctrl-t:transform:$typeTransformerCtrlT'
   --bind 'alt-t:transform:$typeTransformerAltT'
-  --preview 'sleep 0; lessfilter \$(echo {} | sed \"s|^~\/|\$HOME\/|\")'
+  --preview 'sleep 0; lessfilter {}'
   --bind 'alt-enter:execute(for file in {+}; do xdg-open \$file; done)' 
   --bind 'ctrl-e:execute(nvim {+})'
   --bind 'alt-e:execute(code -g {+}; sleep 1)'
