@@ -147,12 +147,10 @@ function funcs {
 #==========================================================================================================================
 #                                                     fzf
 #==========================================================================================================================
-
 # fzf setup
 if [ -d "$HOMEBREW_PREFIX/opt/fzf" ]; then
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 fi
-
 
 export FZF_DEFAULT_COMMAND="fd --color=always --hidden"
 export FZF_DEFAULT_OPTS="
@@ -175,25 +173,39 @@ export FZF_CTRL_R_OPTS="
   --bind 'ctrl-y:execute-silent(echo -n {2..} | xclip -selection clipboard)+abort'
 "
 
-export FZF_CTRL_T_COMMAND="fd --color=always --hidden --type=file --exclude .git"
-typeTransformer='
+export FZF_ALT_T_COMMAND="fd --color=always --hidden --exclude=.git --exclude=node_modules --type=file '' '$HOME'"
+typeTransformerAltT='
   if [[ ! {fzf:prompt} =~ Files ]]; then
-    echo "change-prompt( Files> )+reload(fd --color=always --hidden --type=file --exclude .git)"
+    echo "change-prompt( Files> )+reload(fd --color=always --hidden --exclude=.git --exclude=node_modules --type=file {q} '$HOME')"
   else
-    echo "change-prompt( Directories> )+reload(fd --color=always --hidden --type=directory --exclude .git)"
+    echo "change-prompt( Directories> )+reload(fd --color=always --hidden --exclude=.git --exclude=node_modules --type=directory {q} '$HOME')"
   fi
 '
+
+export FZF_CTRL_T_COMMAND="fd --color=always --hidden --exclude=.git --exclude=node_modules --type=file"
+typeTransformerCtrlT='
+  if [[ ! {fzf:prompt} =~ Files ]]; then
+    echo "change-prompt( Files> )+reload(fd --color=always --hidden --exclude=.git --exclude=node_modules --type=file)"
+  else
+    echo "change-prompt( Directories> )+reload(fd --color=always --hidden --exclude=.git --exclude=node_modules --type=directory)"
+  fi
+'
+
+
 export FZF_CTRL_T_OPTS="
-  --walker-skip .git,node_modules,target
-  --prompt ' Files> ' \
+  --prompt ' Files> '
   --min-height=50
   --color header:italic
-  --header '<Ctrl-T> Switch to Directories/Files    <Ctrl-/> Toggle Preview    <Ctrl-S> Sort' \
-  --bind 'ctrl-/:toggle-preview' \
-  --bind='ctrl-s:toggle-sort' \
-  --bind 'ctrl-t:transform:$typeTransformer' \
-  --preview '[[ {fzf:prompt} =~ Files ]] && bat --style=header --color=always -- {} || tree -C -L 1 {}' \
-  --bind 'alt-enter:execute(code -g {1}; sleep 1)'
+  --header '<Ctrl-T> Switch to Directories/Files    <Ctrl-/> Toggle Preview    <Ctrl-S> Sort'
+  --bind 'alt-/:change-preview-window:right|down'
+  --bind 'ctrl-/:toggle-preview'
+  --bind='ctrl-s:toggle-sort'
+  --bind 'ctrl-t:transform:$typeTransformerCtrlT'
+  --bind 'alt-t:transform:$typeTransformerAltT'
+  --preview 'sleep 0; lessfilter {}'
+  --bind 'alt-enter:execute(for file in {+}; do xdg-open \$file; done)' 
+  --bind 'ctrl-e:execute(nvim {+})'
+  --bind 'alt-e:execute(code -g {+}; sleep 1)'
 "
 
 export FZF_ALT_C_COMMAND="bfs -color -type d -unique -exclude \( -name .git -or -name pkg -or -name .cache -or -name cache -or -name node_modules \) 2>/dev/null | sed 's|./||'"
