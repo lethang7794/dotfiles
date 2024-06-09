@@ -1,4 +1,13 @@
+# Git
+.git
+
+# Golang
 go/pkg
+
+# Node
 node_modules
+
+# Misc
+Cache
 cache
 .cache
