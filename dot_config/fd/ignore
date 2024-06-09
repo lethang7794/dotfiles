@@ -9,6 +9,23 @@
 # Golang
 go/pkg
 
+# Python
+__pycache__
+
+# Apps
+Cache Storage
+Crash Reports
+Crashpad
+CacheStorage
+Code Cache
+.config/**/*Cache*/**
+.config/**/*Cache/**
+.config/**/Cache*/**
+.var/**/*Cache*/**
+
+# VS Code
+CachedData
+
 # Misc
 Cache
 cache
