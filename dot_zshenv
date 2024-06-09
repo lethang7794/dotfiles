@@ -1,5 +1,43 @@
-# Editor
-# EDITOR=/home/linuxbrew/.linuxbrew/bin/micro
-EDITOR=nvim
+# print "🪝$0: loading .zshenv"
+# if [[ -o login ]]; then
+#   print "  Login shell"
+# else
+#   print "  Not a login shell"
+# fi
+# if [[ -o interactive ]]; then
+#   print "  Interactive shell"
+# else
+#   print "  Not an interactive shell"
+# fi
 
+## Environment variables https://wiki.archlinux.org/title/Environment_variables
+# XDG https://wiki.archlinux.org/title/XDG_Base_Directory
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_DATA_HOME="$HOME/.local/share"
+
+# Editor
+export EDITOR="nvim"
+
+# zsh
+# TODO: move .zshrc to $XDG_CONFIG_HOME
+# export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
+# Ripgrep
+export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
+
+# Bat
+export BAT_CONFIG_PATH="$XDG_CONFIG_HOME/bat/config"
+export BAT_THEME="Dracula"
+
+# gobrew: Golang version manager
+export GOROOT="$HOME/.gobrew/current/go"
+
+## Setup PATH
+export PATH="$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:$PATH" # gobrew
+export PATH="$PATH:$HOME/go/bin"                                # Golang's binary
+
+## Other setup
+# Cargo - Rust
 . "$HOME/.cargo/env"

@@ -1,3 +1,15 @@
+# print "🪝$0: loading .zshrc"
+# if [[ -o login ]]; then
+#   print "  Login shell"
+# else
+#   print "  Not a login shell"
+# fi
+# if [[ -o interactive ]]; then
+#   print "  Interactive shell"
+# else
+#   print "  Not an interactive shell"
+# fi
+
 # zmodload zsh/zprof
 
 # Inherit PATH from bash
@@ -101,7 +113,7 @@ fi
 # Thefuck
 _evalcache thefuck --alias f
 # zle -N f        # Define f as a new widget
-# bindkey "^[f" f # Bind Alt+F to f
+# bindkey "^[f" f # Bind Alt+f to f
 
 # Starship
 if [ "$(command -v starship)" ]; then
@@ -144,6 +156,9 @@ function funcs {
 #==========================================================================================================================
 #                                                     fzf
 #==========================================================================================================================
+# ripgrep
+export RIPGREP_CONFIG_PATH="$HOME/ripgrep/config"
+
 # fzf setup
 if [ -d "$HOMEBREW_PREFIX/opt/fzf" ]; then
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -164,9 +179,9 @@ export FZF_DEFAULT_OPTS="
   --bind 'ctrl-/:toggle-preview'
   --bind 'alt-/:change-preview-window:right|down'
   --bind 'f11:change-preview-window:right|down'
+  --marker='✓'
 "
-# --marker='✓'
-# --pointer='󰋇 '
+  # --pointer='󰋇 '
 
 # <Ctrl-/> to toggle small preview window to see the full command
 # <Ctrl-Y> to copy the command into clipboard using xclip
@@ -212,9 +227,9 @@ export FZF_CTRL_T_OPTS="
   --bind 'ctrl-t:transform:$typeTransformerCtrlT'
   --bind 'alt-t:transform:$typeTransformerAltT'
   --preview 'sleep 0; lessfilter {}'
-  --bind 'alt-enter:execute(for file in {+}; do xdg-open \$file; done)' 
   --bind 'ctrl-e:execute(nvim {+})'
   --bind 'alt-e:execute(code -g {+}; sleep 1)'
+  --bind 'alt-enter:execute(for file in {+}; do xdg-open \$file; done)'
 "
 
 export FZF_ALT_C_COMMAND="bfs -color -type d -unique -exclude \( -name .git -or -name .cache -or -name node_modules \) 2>/dev/null | sed 's|./||'"
@@ -377,9 +392,6 @@ autoload run-help
 
 # bat: color man. help
 if [ "$(command -v bat)" ]; then
-  export BAT_THEME=Dracula
-  export BAT_CONFIG_PATH="~/.config/bat/config"
-
   alias bathelp="bat -pl help"
   function man() {
     /usr/bin/man "$@" | bat -pl help
@@ -459,13 +471,6 @@ alias "kube-tree"="kube-lineage"
 
 # awsume
 alias awsume=". awsume"
-
-# Golang
-export PATH="$PATH:$HOME/go/bin"
-
-# gobrew
-export PATH="$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:$PATH"
-export GOROOT="$HOME/.gobrew/current/go"
 
 # Go cover https://dave.cheney.net/2013/11/14/more-simple-test-coverage-in-go-1-2
 go-cover() {
