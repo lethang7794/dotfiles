@@ -25,7 +25,7 @@ export EDITOR="nvim"
 # export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 # Ripgrep
-export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
+export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/rc"
 
 # Bat
 export BAT_CONFIG_PATH="$XDG_CONFIG_HOME/bat/config"
