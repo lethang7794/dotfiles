@@ -229,6 +229,7 @@ export FZF_CTRL_T_OPTS="
   --bind 'alt-enter:execute(for file in {+}; do xdg-open \$file; done)'
   --bind 'ctrl-alt-a:execute-silent(chezmoi add {+})'
   --bind 'ctrl-alt-e:execute(chezmoi edit --watch {+})'
+  --bind 'ctrl-alt-o:execute(EDITOR=code chezmoi edit --watch {+})'
 "
 
 export FZF_ALT_C_COMMAND="bfs -color -type d -unique -exclude \( -name .git -or -name .cache -or -name node_modules \) 2>/dev/null | sed 's|./||'"
