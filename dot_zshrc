@@ -66,7 +66,7 @@ fi
 # Load argc-completions first, so they can be override by others
 export ARGC_COMPLETIONS_ROOT="/home/lqt/go/src/github.com/sigoden/argc-completions"
 export ARGC_COMPLETIONS_PATH="$ARGC_COMPLETIONS_ROOT/completions"
-export PATH="$ARGC_COMPLETIONS_ROOT/bin:$PATH"
+# export PATH="$ARGC_COMPLETIONS_ROOT/bin:$PATH"
 # To add a subset of completions only, change next line e.g. argc_scripts=( cargo git )
 argc_scripts=($(ls -p -1 "$ARGC_COMPLETIONS_ROOT/completions" | sed -n 's/\.sh$//p'))
 source <(argc --argc-completions zsh $argc_scripts)
@@ -361,6 +361,9 @@ function fzf-man {
 # `Alt-H` keybinding to launch the widget (this widget works only on zsh, don't know how to do it on bash and fish (additionaly pressing`ctrl-backspace` will trigger the widget to be executed too because both share the same keycode)
 zle -N fzf-man
 bindkey '^[h' fzf-man
+
+## fzf-tab
+bindkey '^Xh' _complete_help
 
 zstyle ":fzf-tab:*" fzf-flags \
   --multi \
