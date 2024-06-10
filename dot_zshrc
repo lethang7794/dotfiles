@@ -43,9 +43,13 @@ ZSH_THEME="robbyrussell"
 # zstyle ':omz:update' mode auto # update automatically without asking
 # zstyle ':omz:update' frequency 13
 
-if [ "$(command -v git)" ]; then
+if [[ "$(command -v git)" && -d $ZSH ]]; then
   ZSH_CACHE_DIR=$HOME/.cache/zsh
   ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump-$HOST"
+
+  plugins=(
+    golang
+  )
 
   mkdir -p $ZSH_CACHE_DIR
   source $ZSH/oh-my-zsh.sh
@@ -62,18 +66,6 @@ fi
 # #d alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-## argc-completions
-# Load argc-completions first, so they can be override by others
-export ARGC_COMPLETIONS_ROOT="/home/lqt/go/src/github.com/sigoden/argc-completions"
-export ARGC_COMPLETIONS_PATH="$ARGC_COMPLETIONS_ROOT/completions"
-# export PATH="$ARGC_COMPLETIONS_ROOT/bin:$PATH"
-# To add a subset of completions only, change next line e.g. argc_scripts=( cargo git )
-argc_scripts=($(ls -p -1 "$ARGC_COMPLETIONS_ROOT/completions" | sed -n 's/\.sh$//p'))
-source <(argc --argc-completions zsh $argc_scripts)
-# _evalcache argc --argc-completions zsh $argc_scripts
-
-
-
 # Antidote - zsh package
 ANTIDOTE_BIN="$HOMEBREW_PREFIX/opt/antidote/share/antidote/antidote.zsh"
 if [ -f "$ANTIDOTE_BIN" ]; then
@@ -84,6 +76,16 @@ if [ "$(command -v antidote)" ]; then
   [[ -f ${zsh_plugins:r}.txt ]] || touch ${zsh_plugins:r}.txt
   antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
 fi
+
+## argc-completions
+# Load argc-completions first, so they can be override by others
+# export ARGC_COMPLETIONS_ROOT="/home/lqt/go/src/github.com/sigoden/argc-completions"
+# export ARGC_COMPLETIONS_PATH="$ARGC_COMPLETIONS_ROOT/completions"
+# export PATH="$ARGC_COMPLETIONS_ROOT/bin:$PATH"
+# To add a subset of completions only, change next line e.g. argc_scripts=( cargo git )
+# argc_scripts=($(ls -p -1 "$ARGC_COMPLETIONS_ROOT/completions" | sed -n 's/\.sh$//p'))
+# source <(argc --argc-completions zsh $argc_scripts)
+# _evalcache argc --argc-completions zsh $argc_scripts
 
 ## Bind Alt+R to reload shell config 
 function source-shell {
@@ -106,7 +108,6 @@ GLOBALIAS_FILTER_VALUES=(ls which z grep dk open)
 # Atuin
 if [ "$(command -v atuin)" ]; then
   export ATUIN_NOBIND="true"
-  # eval "$(atuin init zsh)"
   _evalcache atuin init zsh
   # eval "$(atuin init zsh --disable-up-arrow)"
   # eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
@@ -126,7 +127,6 @@ _evalcache thefuck --alias f
 
 # Starship
 if [ "$(command -v starship)" ]; then
-  # eval "$(starship init zsh --print-full-init)"
   _evalcache starship init zsh --print-full-init
 fi
 
@@ -241,6 +241,10 @@ export FZF_CTRL_T_OPTS="
   --bind 'ctrl-alt-o:execute(EDITOR=code chezmoi edit --watch {+}; sleep 1)'
 "
 
+function fzf-path-preview () {
+  fzf "$@" --preview 'lessfilter {}'
+}
+
 export FZF_ALT_C_COMMAND="bfs -color -type d -unique -exclude \( -name .git -or -name .cache -or -name node_modules \) 2>/dev/null | sed 's|./||'"
 export FZF_ALT_C_OPTS="
   --color header:italic
@@ -307,7 +311,7 @@ function cleanup-fzf-man {
   rm -f /tmp/fzf-man-cheatlist
   rm -f /tmp/fzf-man-tldrlist
 }
-cleanup-fzf-man
+# cleanup-fzf-man
 
 function fzf-man {
   batman="man {1} 2>/dev/null | bat --language=man --plain --color=always"
@@ -619,7 +623,6 @@ fi
 
 # Mise-en-place
 if [ "$(command -v mise)" ]; then
-  # eval "$(mise activate zsh)"
   _evalcache mise activate zsh
 fi
 
