@@ -16,6 +16,7 @@ diffFilter = delta --color-only --features=interactive
 conflictstyle = diff3
 
 [diff]
+tool = smerge
 colorMoved = default
 
 [delta]
