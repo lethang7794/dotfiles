@@ -162,7 +162,7 @@ function lk {
 function funcs {
   declare -f | perl -0777 -pe 's/^}\n/}\0/gm' |
     bat --plain --language bash --color always |
-    fzf --read0 --ansi --reverse --multi --highlight-line |
+    fzf --read0 --ansi --reverse --multi --highlight-line --query "$1" |
     bat --plain --language bash --color always
 }
 
