@@ -459,10 +459,13 @@ alias p="pnpm"
 # alias b="br"
 alias vi="nvim"
 alias vim="nvim"
-alias help="bat -pl help"
+alias v="nvim"
+# alias help="bat -pl help"
 alias ladder="ladder -r https://t.ly/14PSf"
 alias mk="minikube"
+alias lg="lazygit"
 # alias upd="sudo dnf update -y --refresh && flatpak update && brew update && brew upgrade"
+
 
 function upd() {
   echo "\n🆕 Update dnf packages"
