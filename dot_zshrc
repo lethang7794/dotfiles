@@ -79,6 +79,15 @@ if [ -f "$HOMEBREW_BIN" ]; then
   fi
 fi
 
+alias rm="echo Use \'trash\' or \'trash-put\' instead of \'rm\'."
+alias rmdir="echo Use \'trash\' or \'trash-put\' instead of \'rmdir\'."
+# rip2: a safer rm # rip2 is not compatible with XDG
+# function rip {
+#   local args=$@
+#   eval "$HOME/.cargo/bin/rip --graveyard $RIP_GRAVEYARD -i $@"
+# }
+
+
 ## argc-completions
 # Load argc-completions first, so they can be override by others
 export ARGC_COMPLETIONS_ROOT="/home/lqt/go/src/github.com/sigoden/argc-completions"

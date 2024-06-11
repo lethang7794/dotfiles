@@ -40,6 +40,9 @@ export BAT_THEME="Dracula"
 # gobrew: Golang version manager
 export GOROOT="$HOME/.gobrew/current/go"
 
+# rip2: a safer rm (not compatible with XDG Trash Spec)
+# export RIP_GRAVEYARD="$XDG_DATA_HOME/Trash" # ~/.local/share/Trash
+
 ## Setup PATH
 export PATH="$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:$PATH" # gobrew
 export PATH="$PATH:$HOME/go/bin"                                # Golang's binary
