@@ -325,6 +325,8 @@ zle -N rga-fzf        # Define rga-fzf as a new widget
 bindkey "^[f" rga-fzf # Bind Alt+F to rga-fzf
 
 function fzf-man {
+  local query=$1
+
   local batman="man {1} 2>/dev/null | bat --language=man --plain --color=always"
 
   local N=1
@@ -371,7 +373,7 @@ function fzf-man {
 
   echo $tldrlist |
     fzf \
-      -q "$1" \
+      -q "$query" \
       --ansi \
       --tiebreak=begin \
       --prompt='󰬛 TLDR > ' \
@@ -390,9 +392,14 @@ function fzf-man {
 
   zle reset-prompt
 }
+
+function fzf-man-widget {
+  fzf-man $LBUFFER
+}
+
 # `Alt-H` keybinding to launch the widget (this widget works only on zsh, don't know how to do it on bash and fish (additionaly pressing`ctrl-backspace` will trigger the widget to be executed too because both share the same keycode)
-zle -N fzf-man
-bindkey '^[h' fzf-man
+zle -N fzf-man-widget
+bindkey '^[h' fzf-man-widget
 
 ## fzf-tab
 bindkey '^Xh' _complete_help
