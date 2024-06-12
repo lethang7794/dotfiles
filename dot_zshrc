@@ -377,9 +377,9 @@ function fzf-man {
       --ansi \
       --tiebreak=begin \
       --prompt='󰬛 TLDR > ' \
-      --bind "alt-t:+change-preview(tldr --color=always {1})+change-prompt(󰬛 TLDR > )+reload(cat $tldrlist_file)" \
-      --bind "alt-c:+change-preview(cheat --colorize {1})+change-prompt(󰬊 Cheat > )+reload(cat $chealist_file)" \
-      --bind "alt-m:+change-preview(${batman})+change-prompt(󰬔 Man > )+reload(cat $manlist_file)" \
+      --bind "alt-t:change-prompt(󰬛 TLDR > )+reload(cat $tldrlist_file)+change-preview(tldr --color=always {1})" \
+      --bind "alt-c:change-prompt(󰬊 Cheat > )+reload(cat $chealist_file)+change-preview(cheat --colorize {1})" \
+      --bind "alt-m:change-prompt(󰬔 Man > )+reload(cat $manlist_file)+change-preview(${batman})" \
       --bind "enter:become($executer)" \
       --preview "tldr --color=always {1}" \
       --preview-window '66%' \
