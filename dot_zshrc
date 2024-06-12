@@ -162,7 +162,33 @@ function treeb {
 # autoload -Uz compinit && compinit
 # complete -C '/usr/bin/aws_completer' aws
 
-# zoxide: smarter cd
+## zoxide: smarter cd
+# https://github.com/ajeetdsouza/zoxide/blob/main/src/cmd/query.rs
+export _ZO_FZF_OPTS="
+  --exact
+  --no-sort
+  --bind=ctrl-z:ignore,btab:up,tab:down
+  --cycle
+  --keep-right
+  --border=sharp
+  --color=label:italic
+  --border-label='╢ Alt+Z: Search frequently directories ╟'
+  --height=90%
+  --info=inline-right
+  --highlight-line
+  --color='pointer:white'
+  --layout=reverse
+  --tabstop=1
+  --exit-0
+  --preview='tree -C --dirsfirst -L 1 {2..}'
+  --preview-window=right
+  --bind='alt-z:toggle-preview-wrap'
+  --bind='ctrl-y:execute-silent(echo -n {2..} | xclip -selection clipboard)'
+  --bind='ctrl-s:toggle-sort'
+  --bind 'ctrl-/:toggle-preview'
+  --bind 'alt-/:change-preview-window:right|down'
+  --bind 'f11:change-preview-window:right|down'
+"
 _evalcache zoxide init zsh
 zle -N zi        # Define zi as a new widget
 bindkey "^[z" zi # Bind Alt+z to zi
@@ -191,7 +217,7 @@ fi
 export FZF_DEFAULT_COMMAND="fd --color=always --hidden"
 export FZF_DEFAULT_OPTS="
   --ansi
-  --border
+  --border=sharp
   --highlight-line
   --tabstop=4
   --color='pointer:white,marker:#87ff00'
@@ -268,7 +294,7 @@ export FZF_ALT_C_OPTS="
   --color header:italic
   --color label:italic
   --header '<Ctrl-/> Toggle Preview    <Ctrl-S> Sort'
-  --preview 'tree -C -L 1 {} | head -200'
+  --preview 'tree -C --dirsfirst -L 1 {} | head -200'
   --bind 'ctrl-/:toggle-preview'
   --bind 'alt-/:change-preview-window:right|down'
 "
