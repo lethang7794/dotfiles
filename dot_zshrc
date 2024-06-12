@@ -429,6 +429,8 @@ bindkey '^[h' fzf-man-widget
 
 ## fzf-tab
 bindkey '^Xh' _complete_help
+zle -N enable-fzf-tab
+bindkey '^Xx' enable-fzf-tab
 
 zstyle ":fzf-tab:*" fzf-flags \
   --multi \
