@@ -275,7 +275,7 @@ export FZF_ALT_C_OPTS="
 
 # rg-fzf: Switch files by content using Ripgrep then filter the results with fzf (Alt-F)
 function rg-fzf {
-  rm -f /tmp/rg-fzf-{r,f}
+  /usr/bin/rm -f /tmp/rg-fzf-{r,f}
 
   RG_PREFIX="rg --line-number --no-heading --color=always --smart-case --colors=path:style:underline --colors=line:style:underline --colors=line:fg:white --colors=match:style:nobold --colors=match:fg:197,209,222 --colors=match:bg:45,88,156"
   INITIAL_QUERY="${*:-}"
@@ -629,7 +629,7 @@ function yy() {
   if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
     cd -- "$cwd"
   fi
-  rm -f -- "$tmp"
+  /usr/bin/rm -f -- "$tmp"
 }
 
 # Temp workaround to disable punycode deprecation logging to stderr
