@@ -483,7 +483,7 @@ zstyle ':completion:*' menu no
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'tree -C --dirsfirst -L 1 $realpath | head -200'
 
 # switch group using `<` and `>` (instead of F1, F2)
-# zstyle ':fzf-tab:*' switch-group '<' '>'
+zstyle ':fzf-tab:*' switch-group '<' '>'
 
 # TODO: short git commit by time, bot commit hash
 # zstyle ':completion:*:git-branch:*' sort true # Doesn't work
