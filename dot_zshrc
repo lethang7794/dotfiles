@@ -502,18 +502,17 @@ fi
 # fx
 # source <(fx --comp zsh) # Need to disable argc-complete for fx; Not so smooth when first release (v33)
 
+# atac
+export ATAC_MAIN_DIR=~/.config/atac
+
 # Alias
 alias p="pnpm"
-# alias b="br"
+alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
-alias v="nvim"
-# alias help="bat -pl help"
-alias ladder="ladder -r https://t.ly/14PSf"
 alias mk="minikube"
 alias lg="lazygit"
-# alias upd="sudo dnf update -y --refresh && flatpak update && brew update && brew upgrade"
-
+alias yless="jless --yaml" # How to use? :help, F1
 
 function upd() {
   echo "\n🆕 Update dnf packages"
