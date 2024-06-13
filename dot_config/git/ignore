@@ -1,4 +1,6 @@
-# Custom
+## Custom
+# nvim: 
+# TODO: config nvim swap location
 .txt
 
 # Created by https://www.toptal.com/developers/gitignore/api/macos,linux,windows,jetbrains,visualstudiocode,sublimetext,go,react,node,ruby
@@ -335,7 +337,7 @@ dist
 
 node_modules
 
-*.sublime*
+# *.sublime*
 
 psd
 thumb

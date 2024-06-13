@@ -1,6 +1,7 @@
-## Custom
+### Custom
 
-# vim swap file
+## nvim 
+# TODO: config nvim swap location
 .txt
 
 # Git
@@ -31,7 +32,7 @@ Cache
 cache
 .cache
 
-## Custom - End
+### Custom - End
 
 # Created by https://www.toptal.com/developers/gitignore/api/macos,linux,windows,jetbrains,visualstudiocode,sublimetext,go,react,node,ruby
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,linux,windows,jetbrains,visualstudiocode,sublimetext,go,react,node,ruby
@@ -367,7 +368,7 @@ dist
 
 node_modules
 
-*.sublime*
+# *.sublime*
 
 psd
 thumb
