@@ -249,7 +249,7 @@ export FZF_CTRL_R_OPTS="
 
 export FZF_ALT_T_COMMAND="fd --color=always --hidden --type=file '' '$HOME'"
 typeTransformerAltT='
-  if [[ ! {fzf:prompt} =~ Files ]]; then
+  if [[ ! $FZF_PROMPT =~ Files ]]; then
     echo "change-prompt( Files> )+reload(fd --color=always --hidden --type=file {q} '$HOME')"
   else
     echo "change-prompt( Directories> )+reload(fd --color=always --hidden --type=directory {q} '$HOME')"
@@ -258,7 +258,7 @@ typeTransformerAltT='
 
 export FZF_CTRL_T_COMMAND="fd --color=always --hidden --type=file"
 typeTransformerCtrlT='
-  if [[ ! {fzf:prompt} =~ Files ]]; then
+  if [[ ! $FZF_PROMPT =~ Files ]]; then
     echo "change-prompt( Files> )+reload(fd --color=always --hidden --type=file)"
   else
     echo "change-prompt( Directories> )+reload(fd --color=always --hidden --type=directory)"
@@ -387,10 +387,10 @@ function fzf-man {
     local tldrlist=$(cat $file)
   fi
   
-  executer='
-    if [[ {fzf:prompt} =~ TLDR ]]; then
+  local executer='
+    if [[ $FZF_PROMPT =~ TLDR ]]; then
       tldr {1}
-    elif [[ {fzf:prompt} =~ Cheat ]]; then
+    elif [[ $FZF_PROMPT =~ Cheat ]]; then
       cheat {1}
     else
       man {1}
