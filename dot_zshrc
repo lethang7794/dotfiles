@@ -38,6 +38,9 @@ if [ "$(command -v antidote)" ]; then
   antidote load ${ZDOTDIR:-$HOME}/.zsh_plugins.txt
 fi
 
+# Plugins
+export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
 # Path to your oh-my-zsh installation.
 # export ZSH="$HOME/.oh-my-zsh"
 export ZSH=$(antidote path ohmyzsh/ohmyzsh)
@@ -172,8 +175,6 @@ function treee {
 }
 
 ## AWS https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-completion.html#cli-command-completion-linux
-# autoload bashcompinit && bashcompinit
-# autoload -Uz compinit && compinit
 # complete -C '/usr/bin/aws_completer' aws
 
 ## zoxide: smarter cd
@@ -756,8 +757,7 @@ fi
 # nav
 # nav bindkeys
 
-## is this needed?
-# autoload -Uz compinit
-# compinit
+autoload -Uz compinit && compinit
+autoload -Uz bashcompinit && bashcompinit
 
 # zprof
