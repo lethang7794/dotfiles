@@ -470,6 +470,8 @@ function fzf-chezmoi {
       --bind='alt-r:execute(echo "$HOME/{}" | xargs chezmoi apply; notify-send -t 1 "Chezmoi" "{+} reverted from source" --app-name="Chezmoi")+change-preview(chezmoi diff --reverse ${HOME}/{})' \
       --bind='alt-m:execute(echo "Merging $HOME/{}"; echo "$HOME/{}" | xargs chezmoi merge)+change-preview(echo "Run chezmoi add ${HOME}/{} to add any diff to source dir\n"; chezmoi diff ${HOME}/{})' \
       --bind="ctrl-r:reload(chezmoi status | awk '{print \$2}')" \
+      --bind 'ctrl-e:execute($EDITOR {+})' \
+      --bind 'alt-e:execute(code -g {+}; sleep 1)' \
       --color header:italic \
       --header $'<Alt-A> chezmoi add          <Alt-R> chezmoi apply         <Alt-M>  chezmoi merge\n       (dotfiles -> source)         (source -> dotfiles)   <Ctrl-R> Reload' \
       --layout=reverse \
