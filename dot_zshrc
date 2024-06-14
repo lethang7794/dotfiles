@@ -468,10 +468,19 @@ function fzf-chezmoi {
       --preview-window 'right' \
       --bind='alt-a:execute(echo "$HOME/{}" | xargs chezmoi add; notify-send -t 1 "Chezmoi" "{+} added" --app-name="Chezmoi")+change-preview(chezmoi diff --reverse ${HOME}/{})' \
       --bind='alt-r:execute(echo "$HOME/{}" | xargs chezmoi apply; notify-send -t 1 "Chezmoi" "{+} reverted" --app-name="Chezmoi")+change-preview(chezmoi diff --reverse ${HOME}/{})' \
-      --bind='alt-m:execute(echo "Merging $HOME/{}"; echo "$HOME/{}" | xargs chezmoi merge)+change-preview(echo "Run chezmoi add ${HOME}/{} to add it to source dir\n"; chezmoi diff ${HOME}/{})'
+      --bind='alt-m:execute(echo "Merging $HOME/{}"; echo "$HOME/{}" | xargs chezmoi merge)+change-preview(echo "Run chezmoi add ${HOME}/{} to add any diff to source dir\n"; chezmoi diff ${HOME}/{})' \
+      --color header:italic \
+      --header $'<Alt-A> chezmoi add          <Alt-R> chezmoi apply         <Alt-M> chezmoi merge\n       (dotfiles -> source)         (source -> dotfiles)' \
+      --layout=reverse \
+      --color "label:italic" \
+      --border-label "╢ fzf-chezmoi: Sync dotfiles and chezmoi's source ╟"
+
 }
 function fzf-chezmoi-widget {
-  fzf-chezmoi
+  LBUFFER="${LBUFFER}$(fzf-chezmoi)"
+  local ret=$?
+  zle reset-prompt
+  return $ret
 }
 zle -N fzf-chezmoi-widget
 bindkey '^[m' fzf-chezmoi-widget
