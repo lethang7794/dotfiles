@@ -51,7 +51,6 @@ ZSH_THEME="robbyrussell"
 zstyle ':omz:update' mode disabled
 
 if [[ "$(command -v git)" && -d $ZSH ]]; then
-  ZSH_CACHE_DIR=$HOME/.cache/zsh
   ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump-$HOST"
 
   plugins=(
