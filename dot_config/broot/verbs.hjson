@@ -164,8 +164,25 @@
 	# to the git status filter:
     {
       "key": "alt-g",
-      "execution": ":toggle_git_status"
+      "internal": ":toggle_git_status"
     },
+    {
+      "key": "alt-d",
+      "internal": ":sort_by_date"
+    },
+    {
+      "key": "alt-t",
+      "internal": ":sort_by_type"
+    },
+    {
+      "key": "alt-s",
+      "internal": ":sort_by_size"
+    },
+    {
+      "key": "alt-n",
+      "internal": ":sort_by_count"
+    },
+
 
 	# You can reproduce the bindings of Norton Commander
 	# on copying or moving to the other panel:
