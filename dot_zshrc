@@ -462,6 +462,20 @@ function fzf-man-widget {
 zle -N fzf-man-widget
 bindkey '^[h' fzf-man-widget
 
+function fzf-chezmoi {
+  chezmoi status | awk '{print $2}' | 
+    fzf --preview 'chezmoi diff --reverse ${HOME}/{}' \
+      --preview-window 'right' \
+      --bind='alt-a:execute(echo "$HOME/{}" | xargs chezmoi add; notify-send -t 1 "Chezmoi" "{+} added" --app-name="Chezmoi")+change-preview(chezmoi diff --reverse ${HOME}/{})' \
+      --bind='alt-r:execute(echo "$HOME/{}" | xargs chezmoi apply; notify-send -t 1 "Chezmoi" "{+} reverted" --app-name="Chezmoi")+change-preview(chezmoi diff --reverse ${HOME}/{})' \
+      --bind='alt-m:execute(echo "Merging $HOME/{}"; echo "$HOME/{}" | xargs chezmoi merge)+change-preview(echo "Run chezmoi add ${HOME}/{} to add it to source dir\n"; chezmoi diff ${HOME}/{})'
+}
+function fzf-chezmoi-widget {
+  fzf-chezmoi
+}
+zle -N fzf-chezmoi-widget
+bindkey '^[m' fzf-chezmoi-widget
+
 ## fzf-tab
 bindkey '^Xh' _complete_help
 zle -N enable-fzf-tab
