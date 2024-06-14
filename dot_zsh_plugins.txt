@@ -20,12 +20,13 @@ MichaelAquilina/zsh-you-should-use kind:defer
 # betafcc/nav
 
 ## Completions
-Aloxaf/fzf-tab kind:defer # 🌟🌟🌟
-lethang7794/fzf-tab-source kind:defer
-junegunn/fzf-git.sh kind:defer
 zsh-users/zsh-completions
+Aloxaf/fzf-tab kind:defer             # 🌟🌟🌟
+lethang7794/fzf-tab-source kind:defer # 🌟🌟
+lethang7794/fzf-git.sh kind:defer
 
-#Freed-Wu/fzf-tab-source kind:defer
+# junegunn/fzf-git.sh                      # Use my fork
+# Freed-Wu/fzf-tab-source                  # Use my fork
 # chitoku-k/fzf-zsh-completions kind:defer # So slow
 
 ## Suggestions
