@@ -51,7 +51,16 @@
       "invocation": "open",
       "key": "alt-Enter",
       "execution": "handlr open {file}",
+      "apply_to": "file",
       "leave_broot": false
+    },
+    {
+      "invocation": "open",
+      "key": "alt-Enter",
+      "execution": "$SHELL",
+      "set_working_dir": true,
+      "apply_to": "directory",
+      "leave_broot": true
     },
     {
       "invocation": "edit",
