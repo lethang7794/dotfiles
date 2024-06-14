@@ -1,5 +1,5 @@
 [Added Associations]
-application/epub+zip=com.github.johnfactotum.Foliate.desktop;
+application/epub+zip=com.github.johnfactotum.Foliate.desktop;re.sonny.Junction.desktop;
 application/vnd.debian.binary-package=gnome-software-local-file-packagekit.desktop;
 application/x-application-xmind=net.xmind.XMind.desktop;
 application/x-bittorrent=org.qbittorrent.qBittorrent.desktop;
@@ -11,7 +11,7 @@ application/x-extension-xhtml=org.mozilla.firefox.desktop;
 application/x-rpm=gnome-software-local-file-packagekit.desktop;
 application/x-yaml=code-url-handler.desktop;
 application/xhtml+xml=org.mozilla.firefox.desktop;
-application/zip=net.xmind.XMind.desktop;org.gnome.Nautilus.desktop;
+application/zip=org.gnome.Nautilus.desktop;
 audio/3gpp=org.videolan.VLC.desktop;
 audio/3gpp2=org.videolan.VLC.desktop;
 audio/aac=org.videolan.VLC.desktop;
@@ -131,7 +131,7 @@ x-scheme-handler/sms=org.gnome.Shell.Extensions.GSConnect.desktop;
 x-scheme-handler/tel=org.gnome.Shell.Extensions.GSConnect.desktop;
 
 [Default Applications]
-application/epub+zip=com.github.johnfactotum.Foliate.desktop;
+application/epub+zip=re.sonny.Junction.desktop
 application/vnd.debian.binary-package=gnome-software-local-file-packagekit.desktop;
 application/x-application-xmind=net.xmind.XMind.desktop;
 application/x-bittorrent=org.qbittorrent.qBittorrent.desktop;
