@@ -119,13 +119,13 @@
       "leave_broot": false
     },
     {
-      "invocation": "cma",
+      "invocation": "ca",
       "execution": "chezmoi add {file}",
       "leave_broot": false
     },
     {
-      "invocation": "cmra",
-      "execution": "chezmoi re-add {file}",
+      "invocation": "cm",
+      "execution": "chezmoi merge {file}",
       "leave_broot": false
     },
 
