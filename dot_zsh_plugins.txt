@@ -14,6 +14,7 @@ ohmyzsh/ohmyzsh path:plugins/globalias kind:defer
 ### Github repos
 
 ## MISC
+#bilelmoussaoui/flatpak-zsh-completion kind:defer # not working
 MichaelAquilina/zsh-you-should-use kind:defer
 ## djui/alias-tips
 # betafcc/nav
