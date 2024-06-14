@@ -147,12 +147,13 @@ if [ "$(command -v starship)" ]; then
   _evalcache starship init zsh --print-full-init
 fi
 
-# Broot
-# From ~/.local/share/broot/launcher/bash/1
+## Broot
+# broot launch script ~/.local/share/broot/launcher/bash/1,
+# - Modified: show tree & git-info
 function br {
     local cmd cmd_file code
     cmd_file=$(mktemp)
-    if broot --outcmd "$cmd_file" "$@"; then
+    if broot --show-git-info --no-tree --outcmd "$cmd_file" "$@"; then
         cmd=$(<"$cmd_file")
         command rm -f "$cmd_file"
         eval "$cmd"
