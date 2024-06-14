@@ -148,12 +148,25 @@ if [ "$(command -v starship)" ]; then
 fi
 
 # Broot
-source /home/lqt/.config/broot/launcher/bash/br
+# From ~/.local/share/broot/launcher/bash/1
+function br {
+    local cmd cmd_file code
+    cmd_file=$(mktemp)
+    if broot --outcmd "$cmd_file" "$@"; then
+        cmd=$(<"$cmd_file")
+        command rm -f "$cmd_file"
+        eval "$cmd"
+    else
+        code=$?
+        command rm -f "$cmd_file"
+        return "$code"
+    fi
+}
 # compdef br=broot # doesn't work
 function cdd {
   br --only-folders
 }
-function treeb {
+function treee {
   br -c :pt "$@"
 }
 
