@@ -14,7 +14,7 @@
     //   "execution": "tail -f -n {lines_count} {file}"
     // },
 
-    // Example 2: creating a new file withou3t leaving broot
+    // Example 2: creating a new file without leaving broot
     {
       "name": "touch",
       "invocation": "touch {new_file}",
@@ -36,29 +36,33 @@
     //    execution: "nvim +{line} {file}"
     //    execution: "helix {file}:{line}"
     {
-      "invocation": "open",
       "key": "Enter",
-      "execution": "$EDITOR {file}",
-      "apply_to": "text_file",
+      "execution": ":toggle_preview",
+      "apply_to": "file",
+      "leave_broot": false
+    },
+    {
+      "key": "right",
+      "apply_to": "file",
+      "execution": ":toggle_preview",
       "leave_broot": false
     },
     {
       "invocation": "open",
-      "key": "right",
-      "execution": "$EDITOR {file}",
-      "apply_to": "text_file",
+      "key": "alt-Enter",
+      "execution": "handlr open {file}",
       "leave_broot": false
     },
     {
       "invocation": "edit",
-      "shortcut": "e",
+      "shortcut": "ctrl-e",
       "execution": "$EDITOR {file}",
       "leave_broot": false
     },
     {
       "invocation": "code",
       "shortcut": "code",
-      "key": "ctrl-e",
+      "key": "alt-e",
       "execution": "code --profile Fedora {file}",
       "leave_broot": false
     },
@@ -157,34 +161,64 @@
       "internal": ":trash"
     },
     {
-      "invocation": "copy_path",
+      "key": "ctrl-y",
       "internal": ":copy_path"
     },
 
 
-	# If you develop using git, you might like to often switch
-	# to the git status filter:
+    // git status filter:
     {
       "key": "alt-g",
       "internal": ":toggle_git_status"
     },
+
+    // sort
     {
-      "key": "alt-d",
-      "internal": ":sort_by_date"
-    },
-    {
-      "key": "alt-t",
-      "internal": ":sort_by_type"
-    },
-    {
-      "key": "alt-s",
+      "key": "ctrl-f1",
       "internal": ":sort_by_size"
     },
     {
-      "key": "alt-n",
+      "key": "ctrl-f2",
+      "internal": ":sort_by_date"
+    },
+    {
+      "key": "ctrl-f4",
       "internal": ":sort_by_count"
     },
+    {
+      "key": "ctrl-f5",
+      "internal": ":sort_by_type"
+    },
 
+    // display columns
+    {
+      "key": "alt-1",
+      "internal": ":toggle_sizes"
+    },
+    {
+      "key": "alt-2",
+      "internal": ":toggle_dates"
+    },
+    {
+      "key": "alt-3",
+      "internal": ":toggle_perm"
+    },
+    {
+      "key": "alt-4",
+      "internal": ":toggle_counts"
+    },
+    {
+      "key": "alt-5",
+      "internal": ":toggle_git_file_info"
+    },
+    {
+      "key": "alt-t",
+      "internal": ":toggle_tree"
+    },
+    {
+      "key": "alt-f",
+      "internal": ":toggle_files"
+    },
 
     // You can reproduce the bindings of Norton Commander
     // on copying or moving to the other panel:
