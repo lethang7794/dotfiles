@@ -462,18 +462,19 @@ bindkey '^[h' fzf-man-widget
 
 function fzf-chezmoi {
   local default_preview="chezmoi diff --reverse {}"
+  local chezmoi_status_cmd="chezmoi status --path-style=absolute"
 
   # Use ANSI C quoting, $'..' to escape single quote with '\'' for awk
   local transformer=$'
     if [[ $FZF_PROMPT =~ Changed ]]; then
-      echo "change-prompt(All Managed Files > )+reload(chezmoi managed --path-style=absolute)"
+      echo "change-prompt(All Managed Files > )+reload(chezmoi managed --path-style=absolute --include nodirs)"
     else
       echo "change-prompt(Changed Files > )+reload(chezmoi status --path-style=absolute | awk '\''{print \$2}'\'')"
     fi
   '
 
 
-  chezmoi status --path-style=absolute | awk '{print $2}' | 
+  eval $chezmoi_status_cmd | awk '{print $2}' | 
     fzf --preview $default_preview \
       --prompt 'Changed Files > ' \
       --preview-window 'right' \
@@ -483,7 +484,7 @@ function fzf-chezmoi {
       --bind "alt-m:transform:$transformer" \
       --bind "alt-l:change-preview(lessfilter {})" \
       --bind "alt-k:change-preview($default_preview)" \
-      --bind "ctrl-r:change-prompt(Changed Files > )+reload(chezmoi status --path-style=absolute | awk '{print \$2}')+change-preview($default_preview)" \
+      --bind "ctrl-r:change-prompt(Changed Files > )+reload(eval $chezmoi_status_cmd | awk '{print \$2}')+change-preview($default_preview)" \
       --bind 'alt-e:execute(code -g {+}; sleep 1)' \
       --bind 'alt-g:execute(smerge $(chezmoi source-path))' \
       --bind 'ctrl-e:execute($EDITOR {+})' \
