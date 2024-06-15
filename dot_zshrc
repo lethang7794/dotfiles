@@ -534,8 +534,9 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'tree -C --dirsfirst -L 1 $realpath 
 # switch group using `<` and `>` (instead of F1, F2)
 zstyle ':fzf-tab:*' switch-group '<' '>'
 
-# TODO: short git commit by time, bot commit hash
-# zstyle ':completion:*:git-branch:*' sort true # Doesn't work
+# Show git sub-commands, git objects in original order
+zstyle ':completion:*:git:*' sort false   # Show the git subcommands in group
+zstyle ':completion:*:git-*:*' sort false # Show the git objects in created-time order
 
 # Remove the default of run-help being aliased to man
 unalias run-help
