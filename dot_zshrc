@@ -484,7 +484,7 @@ function fzf-chezmoi {
       --bind 'ctrl-e:execute($EDITOR {+})' \
       --bind 'ctrl-g:execute(lazygit -p $(chezmoi source-path))' \
       --color header:italic \
-      --header $'<Alt-A> chezmoi add           <Alt-D>  chezmoi merge    <Alt-R> chezmoi apply\n       (dotfiles -> source)   <Ctrl-R> Reload                  (dotfiles <- source)' \
+      --header $'<Alt-A> chezmoi add           <Alt-D>  chezmoi merge    <Alt-R> chezmoi apply\n       (dotfiles -> source)   <Ctrl-R> Reload                  (dotfiles <- source)\n<Alt-M> Toggle all files      <Ctrl+E> Edit file        <Ctrl+G> Open lazygit' \
       --layout=reverse \
       --color "label:italic" \
       --border-label "╢ fzf-chezmoi: Sync dotfiles and chezmoi's source ╟"
