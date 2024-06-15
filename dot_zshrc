@@ -463,9 +463,6 @@ bindkey '^[h' fzf-man-widget
 function fzf-chezmoi {
   local default_preview="chezmoi diff --reverse {}"
 
-  export local preview_mode="/tmp/fzf-chezmoi-preview"
-  echo "diff" > $preview_mode
-
   # Use ANSI C quoting, $'..' to escape single quote with '\'' for awk
   local transformer=$'
     if [[ $FZF_PROMPT =~ Changed ]]; then
@@ -475,15 +472,6 @@ function fzf-chezmoi {
     fi
   '
 
-  local transformerPreview='
-    if [[ $(cat "/tmp/fzf-chezmoi-preview") =~ diff ]]; then
-      echo "preview" > "/tmp/fzf-chezmoi-preview"
-      echo "change-preview@lessfilter {}@"
-    else
-      echo "diff" > "/tmp/fzf-chezmoi-preview"
-      echo "change-preview@chezmoi diff --reverse {}@"
-    fi
-  '
 
   chezmoi status --path-style=absolute | awk '{print $2}' | 
     fzf --preview $default_preview \
@@ -493,9 +481,8 @@ function fzf-chezmoi {
       --bind 'alt-d:execute(echo "Merging {}"; chezmoi merge {})+change-preview(echo "Run chezmoi add {} to add any diff to source dir\n"; chezmoi diff {})' \
       --bind 'alt-r:execute-silent(chezmoi apply {})+change-preview(echo "{+} is applied from source dir. \n\nReload (Ctrl-R) to see other diff.")' \
       --bind "alt-m:transform:$transformer" \
-      --bind "alt-o:transform:$transformerPreview" \
       --bind "alt-l:change-preview(lessfilter {})" \
-      --bind "alt-p:change-preview($default_preview)" \
+      --bind "alt-k:change-preview($default_preview)" \
       --bind "ctrl-r:change-prompt(Changed Files > )+reload(chezmoi status --path-style=absolute | awk '{print \$2}')+change-preview($default_preview)" \
       --bind 'alt-e:execute(code -g {+}; sleep 1)' \
       --bind 'alt-g:execute(smerge $(chezmoi source-path))' \
