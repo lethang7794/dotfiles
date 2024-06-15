@@ -483,6 +483,7 @@ function fzf-chezmoi {
       --bind 'alt-g:execute(smerge $(chezmoi source-path))' \
       --bind 'ctrl-e:execute($EDITOR {+})' \
       --bind 'ctrl-g:execute(lazygit -p $(chezmoi source-path))' \
+      --bind ctrl-z:ignore \
       --color header:italic \
       --header $'<Alt-M> Toggle all files      <Ctrl+E> Edit dotfile\n<Alt-A> chezmoi add           <Alt-D>  chezmoi merge    <Alt-R>  chezmoi apply\n       (dotfiles -> source)                                     (dotfiles <- source)\n                              <Ctrl-R> Reload           <Ctrl+G> Open lazygit' \
       --layout=reverse \
