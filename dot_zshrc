@@ -477,10 +477,12 @@ function fzf-chezmoi {
       --bind='alt-a:execute(echo "$HOME/{}" | xargs chezmoi add; notify-send -t 1 "Chezmoi" "{+} added to source" --app-name="Chezmoi")+change-preview(chezmoi diff --reverse ${HOME}/{})' \
       --bind='alt-d:execute(echo "Merging $HOME/{}"; echo "$HOME/{}" | xargs chezmoi merge)+change-preview(echo "Run chezmoi add ${HOME}/{} to add any diff to source dir\n"; chezmoi diff ${HOME}/{})' \
       --bind='alt-r:execute(echo "$HOME/{}" | xargs chezmoi apply; notify-send -t 1 "Chezmoi" "{+} reverted from source" --app-name="Chezmoi")+change-preview(chezmoi diff --reverse ${HOME}/{})' \
-      --bind="ctrl-r:reload(chezmoi status | awk '{print \$2}')" \
       --bind "alt-m:transform:$transformer" \
-      --bind 'ctrl-e:execute($EDITOR {+})' \
+      --bind="ctrl-r:reload(chezmoi status | awk '{print \$2}')" \
       --bind 'alt-e:execute(code -g {+}; sleep 1)' \
+      --bind 'alt-g:execute(smerge $(chezmoi source-path))' \
+      --bind 'ctrl-e:execute($EDITOR {+})' \
+      --bind 'ctrl-g:execute(lazygit -p $(chezmoi source-path))' \
       --color header:italic \
       --header $'<Alt-A> chezmoi add           <Alt-D>  chezmoi merge    <Alt-R> chezmoi apply\n       (dotfiles -> source)   <Ctrl-R> Reload                  (dotfiles <- source)' \
       --layout=reverse \
