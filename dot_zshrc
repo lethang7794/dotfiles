@@ -464,19 +464,19 @@ function fzf-chezmoi {
   # Use ANSI C quoting, $'..' to escape single quote with '\'' for awk
   local transformer=$'
     if [[ $FZF_PROMPT =~ Changed ]]; then
-      echo "change-prompt(All Managed Files > )+reload(chezmoi managed)"
+      echo "change-prompt(All Managed Files > )+reload(chezmoi managed --path-style=absolute)"
     else
       echo "change-prompt(Changed Files > )+reload(chezmoi status | awk '\''{print \$2}'\'')"
     fi
   '
 
-  chezmoi status | awk '{print $2}' | 
-    fzf --preview 'chezmoi diff --reverse ${HOME}/{}' \
+  chezmoi status --path-style=absolute | awk '{print $2}' | 
+    fzf --preview 'chezmoi diff --reverse {}' \
       --prompt 'Changed Files > ' \
       --preview-window 'right' \
-      --bind='alt-a:execute(echo "$HOME/{}" | xargs chezmoi add; notify-send -t 1 "Chezmoi" "{+} added to source" --app-name="Chezmoi")+change-preview(chezmoi diff --reverse ${HOME}/{})' \
-      --bind='alt-d:execute(echo "Merging $HOME/{}"; echo "$HOME/{}" | xargs chezmoi merge)+change-preview(echo "Run chezmoi add ${HOME}/{} to add any diff to source dir\n"; chezmoi diff ${HOME}/{})' \
-      --bind='alt-r:execute(echo "$HOME/{}" | xargs chezmoi apply; notify-send -t 1 "Chezmoi" "{+} reverted from source" --app-name="Chezmoi")+change-preview(chezmoi diff --reverse ${HOME}/{})' \
+      --bind='alt-a:execute(chezmoi add {}; notify-send -t 1 "Chezmoi" "{+} added to source" --app-name="Chezmoi")+change-preview(chezmoi diff --reverse {})' \
+      --bind='alt-d:execute(echo "Merging {}"; chezmoi merge {})+change-preview(echo "Run chezmoi add {} to add any diff to source dir\n"; chezmoi diff {})' \
+      --bind='alt-r:execute(chezmoi apply {}; notify-send -t 1 "Chezmoi" "{+} reverted from source" --app-name="Chezmoi")+change-preview(chezmoi diff --reverse {})' \
       --bind "alt-m:transform:$transformer" \
       --bind="ctrl-r:reload(chezmoi status | awk '{print \$2}')" \
       --bind 'alt-e:execute(code -g {+}; sleep 1)' \
