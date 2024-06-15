@@ -16,7 +16,7 @@ ohmyzsh/ohmyzsh path:plugins/globalias kind:defer
 mdumitru/fancy-ctrl-z kind:defer
 #bilelmoussaoui/flatpak-zsh-completion kind:defer # not working
 # betafcc/nav
-## djui/alias-tips
+# djui/alias-tips
 # MichaelAquilina/zsh-you-should-use kind:defer
 
 ## Completions

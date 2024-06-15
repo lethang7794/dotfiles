@@ -473,7 +473,6 @@ function fzf-chezmoi {
     fi
   '
 
-
   eval $chezmoi_status_cmd | awk '{print $2}' | 
     fzf --preview $default_preview \
       --prompt 'Changed Files > ' \
@@ -495,14 +494,15 @@ function fzf-chezmoi {
       --layout reverse \
       --color "label:italic" \
       --border-label "╢ fzf-chezmoi: Sync dotfiles and chezmoi's source ╟"
-
 }
+
 function fzf-chezmoi-widget {
   LBUFFER="${LBUFFER}$(fzf-chezmoi)"
   local ret=$?
   zle reset-prompt
   return $ret
 }
+
 zle -N fzf-chezmoi-widget
 bindkey '^[m' fzf-chezmoi-widget
 
@@ -593,6 +593,7 @@ alias vim="nvim"
 alias mk="minikube"
 alias lg="lazygit"
 alias yless="jless --yaml" # How to use? :help, F1
+alias cz="chezmoi"
 
 function upd() {
   echo "\n🆕 Update dnf packages"
