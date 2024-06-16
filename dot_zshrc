@@ -39,7 +39,7 @@ if [ "$(command -v antidote)" ]; then
 fi
 
 # Plugins
-export ZSH_AUTOSUGGEST_STRATEGY=(history)
+export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # Path to your oh-my-zsh installation.
 # export ZSH="$HOME/.oh-my-zsh"
