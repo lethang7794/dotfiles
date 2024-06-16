@@ -485,9 +485,9 @@ function fzf-chezmoi {
       --bind "alt-l:change-preview(lessfilter {})" \
       --bind "alt-k:change-preview($default_preview)" \
       --bind "ctrl-r:change-prompt(Changed Files > )+reload(eval $chezmoi_status_cmd | awk '{print \$2}')+change-preview($default_preview)" \
-      --bind "alt-e:execute|line=\`chezmoi diff | grep -oP '(?<=:)\d+(?= @)' | head -n 1\` && code -g {+}:\$line; sleep 1|" \
+      --bind "alt-e:execute|line=\`chezmoi diff {+} | grep -oP '(?<=:)\d+(?= @)' | head -n 1\`; code -g {+}:\$line; sleep 1|" \
       --bind 'alt-g:execute(smerge $(chezmoi source-path))' \
-      --bind "ctrl-e:execute|line=\`chezmoi diff | grep -oP '(?<=:)\d+(?= @)' | head -n 1\`; $EDITOR {+} +\$line|" \
+      --bind "ctrl-e:execute|line=\`chezmoi diff {+} | grep -oP '(?<=:)\d+(?= @)' | head -n 1\`; $EDITOR {+} +\$line|" \
       --bind 'ctrl-g:execute(lazygit -p $(chezmoi source-path))' \
       --bind ctrl-z:ignore \
       --color header:italic \
