@@ -51,8 +51,14 @@ gui:
 # Config relating to git
 git:
   paging:
+    ## delta: doesn't integrate good enough with lazy: show many newline characters
+    # colorArg: always
+    # pager: delta --dark --paging=never --side-by-side
+
+    ## diff-so-fancy: show diff for word, but doesn't support side-by-side diff:
+    # TODO: find a way to have side-by-side diff
     colorArg: always
-    pager: delta --dark --paging=never --side-by-side
+    pager: diff-so-fancy
 
 # Periodic update checks
 # update:
