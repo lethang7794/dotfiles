@@ -301,7 +301,8 @@ function fzf-path-preview () {
   fzf "$@" --preview 'lessfilter {}'
 }
 
-export FZF_ALT_C_COMMAND="bfs -color -type d -unique -exclude \( -name .git -or -name .cache -or -name node_modules \) 2>/dev/null | sed 's|./||'"
+BFS_EXCLUDE="-name .git -or -name .cache -or -name node_modules"
+export FZF_ALT_C_COMMAND="bfs -color -type d -unique -exclude \( $BFS_EXCLUDE \) 2>/dev/null | sed 's|./||'"
 export FZF_ALT_C_OPTS="
   --color header:italic
   --color label:italic
