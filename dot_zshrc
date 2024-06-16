@@ -119,7 +119,7 @@ bindkey "^[r" source-shell # Bind Alt+R to source-shell
 ## Zsh plugin
 
 # Globalias
-GLOBALIAS_FILTER_VALUES=(ls which z grep dk open)
+GLOBALIAS_FILTER_VALUES=(ls which z grep dk open rm rmdir)
 
 # MichaelAquilina/zsh-you-should-use
 # export YSU_MESSAGE_FORMAT="$(tput setaf 1)Hey! I found this %alias_type for %command: %alias$(tput sgr0)"
