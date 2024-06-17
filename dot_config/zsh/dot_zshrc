@@ -26,8 +26,8 @@ autoload -Uz bashcompinit && bashcompinit
 autoload -Uz compinit
 compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$HOST-$ZSH_VERSION
 # Custon completions
-[ -d "$XDG_STATE_HOME"/zsh/completions ] || mkdir -p "$XDG_STATE_HOME"/zsh/completions
-FPATH="${XDG_STATE_HOME}/zsh/completions:${FPATH}"
+[ -d "$XDG_DATA_HOME"/zsh/completions ] || mkdir -p "$XDG_DATA_HOME"/zsh/completions
+FPATH="${XDG_DATA_HOME}/zsh/completions:${FPATH}"
 
 ## Brew
 HOMEBREW_BIN=/home/linuxbrew/.linuxbrew/bin/brew
