@@ -44,7 +44,54 @@
 ###############################################################
 # Whether to mark the selected line with a triangle
 #
-show_selection_mark: true
+{
+###############################################################
+# This configuration file lets you
+# - define new commands
+# - change the shortcut or triggering keys of built-in verbs
+# - change the colors
+# - set default values for flags
+# - set special behaviors on specific paths
+# - and more...
+#
+# Configuration documentation is available at
+#     https://dystroy.org/broot
+#
+# This file's format is Hjson ( https://hjson.github.io/ ). Some
+# properties are commented out. To enable them, remove the `#`.
+#
+###############################################################
+
+###############################################################
+# Default flags
+# You can set up flags you want broot to start with by
+# default, for example `default_flags="ihp"` if you usually want
+# to see hidden and gitignored files and the permissions (then
+# if you don't want the hidden files you can launch `br -H`)
+# A popular flag is the `g` one which displays git related info.
+#
+# default_flags:
+
+###############################################################
+# Date/Time format
+# If you want to change the format for date/time, uncomment the
+# following line and change it according to
+# https://docs.rs/chrono/0.4.11/chrono/format/strftime/index.html
+#
+# date_time_format: %Y/%m/%d %R
+
+###############################################################
+# uncomment to activate modal mode
+#
+# (you really should read https://dystroy.org/broot/modal/
+# before as it may not suit everybody even among vim users)
+#
+# modal: true
+
+###############################################################
+# Whether to mark the selected line with a triangle
+#
+  "show_selection_mark": true,
 
 ###############################################################
 # Column order
@@ -71,7 +118,7 @@ show_selection_mark: true
 # and set it to false or true if you notice the colors in
 # previewed images are too off.
 #
-true_colors: true
+  "true_colors": true,
 
 ###############################################################
 # Icons
@@ -80,19 +127,20 @@ true_colors: true
 # troubleshooting)
 #
 # icon_theme: vscode
-icon_theme: nerdfont
+  "icon_theme": "nerdfont",
 
 ###############################################################
 # Special paths
 # If some paths must be handled specially, uncomment (and change
 # this section as per the examples)
 #
-special_paths: {
-    "/media" : "no-enter" // comment it if desired
-    # "/media/slow-backup-disk"    : no-enter
-    # "/home/dys/useless"    : hide
+  "special_paths": {
+    # comment it if desired    
+    # "/media/slow-backup-disk"    : no-enter    
+    # "/home/dys/useless"    : hide    
     # "/home/dys/my-link-I-want-to-explore"    : enter
-}
+    "/media": "no-enter"
+  },
 
 ###############################################################
 # Quit on last cancel
@@ -148,7 +196,7 @@ special_paths: {
 # Bigger files are ignored when searching their content. You
 # can specify this size either in ISO units (eg 5GB) or in
 # the old binary units (eg 44Kib)
-content_search_max_file_size: 10MB
+  "content_search_max_file_size": "10MB",
 
 ###############################################################
 # Max Panels Count
@@ -166,33 +214,34 @@ content_search_max_file_size: 10MB
 # color, which makes it possible to have a different skin 
 # chosen when your terminal has a light background and when
 # it has a light one.
-imports: [
+  "imports": [
 
     # Verbs are better configured in verbs.hjson. But you
     # can also add another files for your personal verbs
-    verbs.hjson
+    "verbs.hjson",
 
     # This file contains the skin to use when the terminal
     # is dark (or when this couldn't be determined)
     {
-        luma: [
-            dark
-            unknown
-        ]
-        # (un)comment to choose your preferred skin
-        // file: skins/dark-blue.hjson
-        file: skins/catppuccin-macchiato.hjson
-        //file: skins/catppuccin-mocha.hjson
-        //file: skins/dark-gruvbox.hjson
-        //file: skins/dark-orange.hjson
-        //file: skins/solarized-dark.hjson
-    }
+      "luma": [
+        "dark",
+        "unknown"
+      ],
+      # (un)comment to choose your preferred skin
+      # file: skins/dark-blue.hjson
+      # file: skins/catppuccin-mocha.hjson        
+      # file: skins/dark-gruvbox.hjson        
+      # file: skins/dark-orange.hjson        
+      # file: skins/solarized-dark.hjson
+      "file": "skins/catppuccin-macchiato.hjson"
+    },
 
     # This skin is imported when your terminal is light
     {
-        luma: light
-        # (un)comment to choose your preferred skin
-        //file: skins/solarized-light.hjson
-        file: skins/white.hjson
+      "luma": "light",
+      # (un)comment to choose your preferred skin
+      # file: skins/solarized-light.hjson
+      "file": "skins/white.hjson"
     }
-]
+  ]
+}
