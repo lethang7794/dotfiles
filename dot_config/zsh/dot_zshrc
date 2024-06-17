@@ -15,6 +15,17 @@
 # Inherit PATH from bash
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+## zsh
+# History
+[ -d "$XDG_STATE_HOME"/zsh ] || mkdir -p "$XDG_STATE_HOME"/zsh
+HISTFILE="$XDG_STATE_HOME"/zsh/history
+# Completion
+autoload -Uz bashcompinit && bashcompinit
+autoload -Uz compinit && compinit
+[ -d "$XDG_CACHE_HOME"/zsh ] || mkdir -p "$XDG_CACHE_HOME"/zsh
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
+compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$ZSH_VERSION
+
 ## Brew
 HOMEBREW_BIN=/home/linuxbrew/.linuxbrew/bin/brew
 if [ -f "$HOMEBREW_BIN" ]; then
@@ -792,8 +803,5 @@ fi
 
 # nav
 # nav bindkeys
-
-autoload -Uz compinit && compinit
-autoload -Uz bashcompinit && bashcompinit
 
 # zprof
