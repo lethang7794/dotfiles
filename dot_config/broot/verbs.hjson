@@ -183,19 +183,19 @@
 
     // sort
     {
-      "key": "f1",
+      "key": "ctrl-f1",
       "internal": ":sort_by_size"
     },
     {
-      "key": "f2",
+      "key": "ctrl-f2",
       "internal": ":sort_by_date"
     },
     {
-      "key": "f4",
+      "key": "ctrl-f4",
       "internal": ":sort_by_count"
     },
     {
-      "key": "f5",
+      "key": "ctrl-f5",
       "internal": ":sort_by_type"
     },
 
