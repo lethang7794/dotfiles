@@ -491,9 +491,9 @@ function fzf-chezmoi {
       --cycle \
       --prompt 'Changed Files > ' \
       --preview-window 'right' \
-      --bind 'alt-a:execute-silent(chezmoi add {})+change-preview(echo "{+} is added to source dir. \n\nReload (Ctrl-R) to see other diff.")' \
+      --bind 'alt-a:execute(chezmoi add {})+change-preview(echo "{+} is added to source dir. \n\nReload (Ctrl-R) to see other diff.")' \
       --bind 'alt-d:execute(echo "Merging {}"; chezmoi merge {})+change-preview(echo "Run chezmoi add {} to add any diff to source dir\n"; chezmoi diff {})' \
-      --bind 'alt-r:execute-silent(chezmoi apply {})+change-preview(echo "{+} is applied from source dir. \n\nReload (Ctrl-R) to see other diff.")' \
+      --bind 'alt-r:execute(chezmoi apply {})+change-preview(echo "{+} is applied from source dir. \n\nReload (Ctrl-R) to see other diff.")' \
       --bind "alt-backspace:execute($forgetTarget)+change-preview(echo '{+} is removed from source dir. \n\nReload (Ctrl-R) to see other diff.')" \
       --bind "alt-m:transform:$transformer" \
       --bind "alt-l:change-preview(lessfilter {})" \
