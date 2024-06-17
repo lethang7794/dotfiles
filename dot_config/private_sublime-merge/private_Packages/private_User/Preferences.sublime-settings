@@ -4,4 +4,5 @@
 	"image_diff_style": "side-by-side",
 	"diff_style": "auto",
 	"tab_size": 2,
+	"always_show_command_status": true,
 }
