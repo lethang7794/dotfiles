@@ -85,13 +85,13 @@ $sudo\
 $fill\
 $cmd_duration\
 $status\
+$shell\
 $line_break\
 $jobs\
 $battery\
 $time\
 $os\
 $container\
-$shell\
 $character"""
 
 # right_format = """
