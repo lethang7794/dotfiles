@@ -81,15 +81,6 @@ if [ -f "$HOMEBREW_BIN" ]; then
   fi
 fi
 
-alias rm="echo Use \'trash\' or \'trash-put\' instead of \'rm\'."
-alias rmdir="echo Use \'trash\' or \'trash-put\' instead of \'rmdir\'."
-# rip2: a safer rm # rip2 is not compatible with XDG
-# function rip {
-#   local args=$@
-#   eval "$HOME/.cargo/bin/rip --graveyard $RIP_GRAVEYARD -i $@"
-# }
-
-
 ## argc-completions
 # Load argc-completions first, so they can be override by others
 export ARGC_COMPLETIONS_ROOT="/home/lqt/go/src/github.com/sigoden/argc-completions"
@@ -117,9 +108,6 @@ bindkey "^[r" source-shell # Bind Alt+R to source-shell
 # TODO: The shell will be closed, not reload the current session 
 
 ## Zsh plugin
-
-# Globalias
-GLOBALIAS_FILTER_VALUES=(ls which z grep dk open rm rmdir)
 
 # MichaelAquilina/zsh-you-should-use
 # export YSU_MESSAGE_FORMAT="$(tput setaf 1)Hey! I found this %alias_type for %command: %alias$(tput sgr0)"
@@ -585,7 +573,14 @@ fi
 # atac
 export ATAC_MAIN_DIR=~/.config/atac
 
-# Alias
+## Aliases
+alias rm="echo Use \'trash\' or \'trash-put\' instead of \'rm\'."
+alias rmdir="echo Use \'trash\' or \'trash-put\' instead of \'rmdir\'."
+alias mv="mv -iv"
+
+alias rm-yes-i-know="/usr/bin/rm -iv"
+alias rmdir-yes-i-know="/usr/bin/rmdir -iv"
+
 alias p="pnpm"
 alias v="nvim"
 alias vi="nvim"
@@ -594,6 +589,10 @@ alias mk="minikube"
 alias yless="jless --yaml" # How to use? :help, F1
 alias cz="chezmoi"
 
+# Globalias
+GLOBALIAS_FILTER_VALUES=(ls which z grep dk open rm rmdir rm-yes-i-know rmdir-yes-i-know mv)
+
+## lazygit
 # alias lg="lazygit"
 function lg()    {
   lazygit "$@"
@@ -603,6 +602,12 @@ function lg()    {
     rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
   fi
 }
+
+## rip2: a safer rm # rip2 is not compatible with XDG
+# function rip {
+#   local args=$@
+#   eval "$HOME/.cargo/bin/rip --graveyard $RIP_GRAVEYARD -i $@"
+# }
 
 
 function upd() {
