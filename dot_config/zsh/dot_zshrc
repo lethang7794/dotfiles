@@ -29,6 +29,28 @@ compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$HOST-$ZSH_VERSION
 [ -d "$XDG_DATA_HOME"/zsh/completions ] || mkdir -p "$XDG_DATA_HOME"/zsh/completions
 FPATH="${XDG_DATA_HOME}/zsh/completions:${FPATH}"
 
+## Aliases
+alias rm="echo Use \'trash\' or \'trash-put\' instead of \'rm\'."
+alias rmdir="echo Use \'trash\' or \'trash-put\' instead of \'rmdir\'."
+alias mv="mv -iv"
+
+alias rm-yes-i-know="/usr/bin/rm -iv"
+alias rmdir-yes-i-know="/usr/bin/rmdir -iv"
+
+alias p="pnpm"
+alias v="nvim"
+alias vi="nvim"
+alias vim="nvim"
+alias mk="minikube"
+alias yless="jless --yaml" # How to use? :help, F1
+alias cz="chezmoi"
+
+alias c="code --disable-extensions"
+compdef c=code
+
+# Globalias
+GLOBALIAS_FILTER_VALUES=(ls which z grep dk open rm rmdir rm-yes-i-know rmdir-yes-i-know mv c)
+
 ## Brew
 HOMEBREW_BIN=/home/linuxbrew/.linuxbrew/bin/brew
 if [ -f "$HOMEBREW_BIN" ]; then
@@ -600,28 +622,6 @@ fi
 
 # atac
 export ATAC_MAIN_DIR=~/.config/atac
-
-## Aliases
-alias rm="echo Use \'trash\' or \'trash-put\' instead of \'rm\'."
-alias rmdir="echo Use \'trash\' or \'trash-put\' instead of \'rmdir\'."
-alias mv="mv -iv"
-
-alias rm-yes-i-know="/usr/bin/rm -iv"
-alias rmdir-yes-i-know="/usr/bin/rmdir -iv"
-
-alias p="pnpm"
-alias v="nvim"
-alias vi="nvim"
-alias vim="nvim"
-alias mk="minikube"
-alias yless="jless --yaml" # How to use? :help, F1
-alias cz="chezmoi"
-
-alias c="code --disable-extensions"
-compdef c=code
-
-# Globalias
-GLOBALIAS_FILTER_VALUES=(ls which z grep dk open rm rmdir rm-yes-i-know rmdir-yes-i-know mv c)
 
 ## lazygit
 # alias lg="lazygit"
