@@ -561,6 +561,8 @@ zstyle ':fzf-tab:*' switch-group '<' '>'
 zstyle ':completion:*:git:*' sort false   # Show the git subcommands in group
 zstyle ':completion:*:git-*:*' sort false # Show the git objects in created-time order
 
+zstyle ':completion:*:docker-*:*' sort false
+
 # Remove the default of run-help being aliased to man
 unalias run-help
 # Use zsh's run-help, which will display information for zsh builtins.
