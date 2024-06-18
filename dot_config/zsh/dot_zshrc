@@ -314,11 +314,11 @@ export FZF_CTRL_T_OPTS="
   --bind 'alt-t:transform:$typeTransformerAltT'
   --preview 'sleep 0; lessfilter {}'
   --bind 'ctrl-e:execute(nvim {+})'
-  --bind 'alt-e:execute(code -g {+}; sleep 1)'
+  --bind 'alt-e:execute(code --disable-extensions -g {+}; sleep 1)'
   --bind 'alt-enter:execute(for file in {+}; do xdg-open \$file; done)'
   --bind 'ctrl-alt-a:execute-silent(chezmoi add {+} && notify-send -t 1 \"Chezmoi\" \"{+} added.\" --app-name=\"Chezmoi\")'
   --bind 'ctrl-alt-e:execute(chezmoi edit --watch {+})'
-  --bind 'ctrl-alt-o:execute(EDITOR=code chezmoi edit --watch {+}; sleep 1)'
+  --bind 'ctrl-alt-o:execute(EDITOR=\"code --disable-extensions\" chezmoi edit --watch {+}; sleep 1)'
 "
 
 function fzf-path-preview () {
@@ -359,7 +359,7 @@ function rg-fzf {
     --preview 'bat --color=always --highlight-line {2} -- {1}' \
     --preview-window 'down,50%,+{2}+3/3,~3' \
     --bind 'enter:execute(nvim {1} +{2})' \
-    --bind 'alt-enter:execute(code -g {1}:{2}; sleep 1)'
+    --bind 'alt-enter:execute(code --disable-extensions -g {1}:{2}; sleep 1)'
 }
 zle -N rg-fzf       # Define rg-fzf as a new widget
 bindkey "^f" rg-fzf # Bind Ctrl+F to rg-fzf
