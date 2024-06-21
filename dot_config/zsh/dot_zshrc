@@ -576,6 +576,8 @@ zstyle ':completion:*' menu no
 # preview directory's content with eza when completing cd
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'tree -C --dirsfirst -L 1 $realpath | head -200'
 
+# zstyle ':fzf-tab:*' single-group color header
+
 # switch group using `<` and `>` (instead of F1, F2)
 zstyle ':fzf-tab:*' switch-group '<' '>'
 
