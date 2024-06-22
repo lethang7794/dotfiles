@@ -406,20 +406,20 @@ function fzf-man-cleanup {
 function fzf-man {
   local query=$1
 
-  export local man_cmd="man {1} 2>/dev/null | bat --language=man --plain --color=always"
-  export local cheat_cmd="cheat --colorize {1}"
-  export local tldr_cmd="tldr --color=always {1}"
-
-  local N=1
-  local N_DAYS_AGO="/tmp/$N-days-ago-$$"
-  touch -d "$N days ago" $N_DAYS_AGO
+  export local tldr_cmd="echo $ tldr {1}; tldr --color=always {1} | tail -n +3"
+  export local cheat_cmd="echo $ cheat {1}; cheat --colorize {1}"
+  export local man_cmd="echo $ man {1}; man {1} 2>/dev/null | bat --language=man --plain --color=always"
 
   export local manlist_file="/tmp/fzf-man-manlist"
   export local cheatlist_file="/tmp/fzf-man-cheatlist"
   export local tldrlist_file="/tmp/fzf-man-tldrlist"
 
+  local N=22
+  local CACHE_TIME="/tmp/fzf-man-cache-time"
+  touch -d "$N hours ago" $CACHE_TIME
+
   local file=$manlist_file
-  if [[ ! -e $file || $file -ot $N_DAYS_AGO ]]; then
+  if [[ ! -e $file || $file -ot $CACHE_TIME ]]; then
     local manlist=$(man -k . | sort | awk -v cyan=$(tput setaf 6) -v blue=$(tput setaf 4) -v res=$(tput sgr0) -v bld=$(tput bold) '{ $1=cyan bld $1; $2=res blue;} 1')
     echo $manlist >$file
   else
@@ -427,7 +427,7 @@ function fzf-man {
   fi
 
   local file=$cheatlist_file
-  if [[ ! -e $file || $file -ot $N_DAYS_AGO ]]; then
+  if [[ ! -e $file || $file -ot $CACHE_TIME ]]; then
     local cheatlist=$(cheat -l | awk '{printf "\033[1;36m%s\033[0m %s\n", $1, $3}' | tail --lines +2 | sed 's/community\,*//g' | column -t)
     echo $cheatlist >$file
   else
@@ -435,7 +435,7 @@ function fzf-man {
   fi
 
   local file=$tldrlist_file
-  if [[ ! -e $file || $file -ot $N_DAYS_AGO ]]; then
+  if [[ ! -e $file || $file -ot $CACHE_TIME ]]; then
     tldr --update >/dev/null 2>&1
     local tldrlist=$(tldr --list)
     echo $tldrlist >$file
