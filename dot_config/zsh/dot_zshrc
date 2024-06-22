@@ -268,12 +268,13 @@ export FZF_DEFAULT_OPTS="
   --color='pointer:white,marker:#87ff00'
   --height=90%
   --info=inline-right
+  --preview-window=right,~1,+{0}+1/2
   --bind='alt-z:toggle-preview-wrap'
   --bind='ctrl-y:execute-silent(echo -n {} | xclip -selection clipboard)'
   --bind='ctrl-s:toggle-sort'
   --bind 'ctrl-/:toggle-preview'
   --bind 'alt-/:change-preview-window:right|down'
-  --bind 'f11:change-preview-window:down|down,99%|hidden|'
+  --bind 'f11:change-preview-window:down,~1,+{0}+1/2|down,99%,~1,+{0}+1/2|hidden|'
   --marker='✓'
 "
   # --pointer='󰋇 '
@@ -314,7 +315,7 @@ export FZF_CTRL_T_OPTS="
   --color header:italic
   --color label:italic
   --header '<Ctrl-T> Files/Directorie\\t<Ctrl-/> Preview\\t<Ctrl-S> Sort\\t\\n<Ctrl+E> Open with nvim\\t\\t<Alt-E> VS Code\\t\\t<Alt+Enter> Default App'
-  --bind 'alt-/:change-preview-window:right|down'
+  --bind 'alt-/:change-preview-window:right,~1,+{0}+1/2|down,~1,+{0}+1/2'
   --bind 'ctrl-/:toggle-preview'
   --bind='ctrl-s:toggle-sort'
   --bind 'ctrl-t:transform:$typeTransformerCtrlT'
