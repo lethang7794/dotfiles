@@ -406,7 +406,9 @@ function fzf-man-cleanup {
 function fzf-man {
   local query=$1
 
-  export local batman="man {1} 2>/dev/null | bat --language=man --plain --color=always"
+  export local man_cmd="man {1} 2>/dev/null | bat --language=man --plain --color=always"
+  export local cheat_cmd="cheat --colorize {1}"
+  export local tldr_cmd="tldr --color=always {1}"
 
   local N=1
   local N_DAYS_AGO="/tmp/$N-days-ago-$$"
@@ -449,21 +451,18 @@ function fzf-man {
     elif [[ $FZF_PROMPT =~ Man ]]; then
       man {1}
     else
-      ;
+      :
     fi
   '
 
-  ## TODO:
-  # - only man works
-  # - tldr, cheat: preview not show after item changed
   # TLDR -> Cheat -> man 
   local transformer='
     if [[ $FZF_PROMPT =~ TLDR ]]; then
-      echo "change-prompt(󰬊 Cheat > )+reload(cat $cheatlist_file)+change-preview(cheat --colorize {1})"
+      echo "change-prompt(󰬊 Cheat > )+reload(cat $cheatlist_file)+change-preview($cheat_cmd)"
     elif [[ $FZF_PROMPT =~ Cheat ]]; then
-      echo "change-prompt(󰬔 Man > )+reload(cat $manlist_file)+change-preview($batman)"
+      echo "change-prompt(󰬔 Man > )+reload(cat $manlist_file)+change-preview($man_cmd)"
     else
-      echo "change-prompt(󰬛 TLDR > )+reload(cat $tldrlist_file)+change-preview(tldr --color=always {1})"
+      echo "change-prompt(󰬛 TLDR > )+reload(cat $tldrlist_file)+change-preview($tldr_cmd)"
     fi
   '
   #   echo "change-prompt(-h > )+reload(cat)+change-preview(bash -c \"{1} -h\")"
@@ -478,16 +477,16 @@ function fzf-man {
       --border none \
       --tiebreak=begin \
       --prompt='󰬛 TLDR > ' \
-      --bind "alt-t:change-prompt(󰬛 TLDR > )+reload(cat $tldrlist_file)+change-preview(tldr --color=always {1})" \
-      --bind "alt-c:change-prompt(󰬊 Cheat > )+reload(cat $cheatlist_file)+change-preview(cheat --colorize {1})" \
-      --bind "alt-m:change-prompt(󰬔 Man > )+reload(cat $manlist_file)+change-preview(${batman})" \
-      --bind "ctrl-h:transform:$transformer" \
+      --bind "alt-1:change-prompt(󰬛 TLDR > )+reload(cat $tldrlist_file)+change-preview($tldr_cmd)" \
+      --bind "alt-2:change-prompt(󰬊 Cheat > )+reload(cat $cheatlist_file)+change-preview($cheat_cmd)" \
+      --bind "alt-3:change-prompt(󰬔 Man > )+reload(cat $manlist_file)+change-preview($man_cmd)" \
+      --bind "alt-h:transform:$transformer" \
       --bind "enter:become($executer)" \
-      --preview "tldr --color=always {1}" \
-      --preview-window '66%,noborder' \
+      --preview "$tldr_cmd" \
+      --preview-window '70%,noborder' \
       --color header:italic \
-      --header '<Alt-T> tldr  <Alt-C> Cheat  <Alt-M> Man  <Alt-/> Preview' \
-      --bind 'alt-/:change-preview-window:66%|down' \
+      --header '<Alt-1> tldr  <Alt-2> Cheat  <Alt-3> Man  <Alt-/> Preview' \
+      --bind 'alt-/:change-preview-window:70%|down' \
       --bind 'ctrl-/:toggle-preview' \
       --bind='ctrl-s:toggle-sort'
 
