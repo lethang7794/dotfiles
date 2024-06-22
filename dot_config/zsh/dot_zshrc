@@ -393,6 +393,14 @@ rga-fzf() {
 zle -N rga-fzf        # Define rga-fzf as a new widget
 bindkey "^[f" rga-fzf # Bind Alt+F to rga-fzf
 
+function fzf-man-cleanup {
+  local manlist_file="/tmp/fzf-man-manlist"
+  local cheatlist_file="/tmp/fzf-man-cheatlist"
+  local tldrlist_file="/tmp/fzf-man-tldrlist"
+
+  /usr/bin/rm $manlist_file $cheatlist_file $tldrlist_file 
+}
+
 function fzf-man {
   local query=$1
 
@@ -424,7 +432,8 @@ function fzf-man {
 
   local file=$tldrlist_file
   if [[ ! -e $file || $file -ot $N_DAYS_AGO ]]; then
-    local tldrlist=$(tldr -l)
+    tldr --update >/dev/null 2>&1
+    local tldrlist=$(tldr --list)
     echo $tldrlist >$file
   else 
     local tldrlist=$(cat $file)
@@ -464,6 +473,7 @@ function fzf-man {
     fzf \
       -q "$query" \
       --ansi \
+      --border none \
       --tiebreak=begin \
       --prompt='󰬛 TLDR > ' \
       --bind "alt-t:change-prompt(󰬛 TLDR > )+reload(cat $tldrlist_file)+change-preview(tldr --color=always {1})" \
@@ -472,13 +482,12 @@ function fzf-man {
       --bind "ctrl-h:transform:$transformer" \
       --bind "enter:become($executer)" \
       --preview "tldr --color=always {1}" \
-      --preview-window '66%' \
+      --preview-window '66%,noborder' \
       --color header:italic \
       --header '<Alt-T> tldr  <Alt-C> Cheat  <Alt-M> Man  <Alt-/> Preview' \
       --bind 'alt-/:change-preview-window:66%|down' \
       --bind 'ctrl-/:toggle-preview' \
-      --bind='ctrl-s:toggle-sort' \
-
+      --bind='ctrl-s:toggle-sort'
 
   zle reset-prompt
 }
