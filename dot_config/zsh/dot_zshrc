@@ -238,8 +238,9 @@ zle -N zi        # Define zi as a new widget
 bindkey "^[z" zi # Bind Alt+z to zi
 
 # Walk https://github.com/antonmedv/walk
+export WALK_REMOVE_CMD=trash
 function lk {
-  cd "$(walk "$@")"
+  cd "$(walk --icons --fuzzy --preview "$@")"
 }
 
 # List the shell functions with highlight, fuzzy search
