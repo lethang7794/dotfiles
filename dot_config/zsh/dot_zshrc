@@ -273,7 +273,7 @@ export FZF_DEFAULT_OPTS="
   --bind='ctrl-s:toggle-sort'
   --bind 'ctrl-/:toggle-preview'
   --bind 'alt-/:change-preview-window:right|down'
-  --bind 'f11:change-preview-window:right|down'
+  --bind 'f11:change-preview-window:down|down,99%|hidden|'
   --marker='✓'
 "
   # --pointer='󰋇 '
