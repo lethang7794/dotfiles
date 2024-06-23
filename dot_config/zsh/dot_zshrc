@@ -58,9 +58,6 @@ if [ -f "$HOMEBREW_BIN" ]; then
 
   # Brew autoupdate
   export HOMEBREW_AUTO_UPDATE_SECS="86400"
-
-  # Brew completions
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 
 ## Antidote - zsh packages
@@ -121,6 +118,9 @@ if [ -f "$HOMEBREW_BIN" ]; then
   if [ -f "$HB_CNF_HANDLER" ]; then
     source "$HB_CNF_HANDLER"
   fi
+
+  # Brew completions
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 
 ## argc-completions
