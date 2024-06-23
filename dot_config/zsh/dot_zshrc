@@ -399,20 +399,44 @@ function fzf-man-cleanup {
   local manlist_file="/tmp/fzf-man-manlist"
   local cheatlist_file="/tmp/fzf-man-cheatlist"
   local tldrlist_file="/tmp/fzf-man-tldrlist"
+  export compgenlist_file="/tmp/fzf-man-compgenlist"
 
-  /usr/bin/rm $manlist_file $cheatlist_file $tldrlist_file 
+  /usr/bin/rm $manlist_file $cheatlist_file $tldrlist_file $compgenlist_file
 }
 
 function fzf-man {
   local query=$1
 
   export local tldr_cmd="echo $ tldr {1}; tldr --color=always {1} | tail -n +3"
-  export local cheat_cmd="echo $ cheat {1}; cheat --colorize {1}"
+  export local cheat_cmd="echo $ cheat {1}; echo; cheat --colorize {1}"
   export local man_cmd="echo $ man {1}; man {1} 2>/dev/null | bat --language=man --plain --color=always"
+  export local help_cmd='
+    if [ "\$(command -v {1})" ]; then
+      if timeout 0.3s bash -c "{1} -h" 1>/dev/null 2>&1; then
+        h=$({1} -h 2>/dev/null | bat --color=always -pl help)
+      fi
+      if timeout 0.3s bash -c "{1} --h" 1>/dev/null 2>&1; then
+        help=$({1} --help 2>/dev/null | bat --color=always -pl help)
+      fi
+      if [[ -n "$h" ]] ; then
+        echo \$ {1} -h
+        echo $h
+      fi
+      if [[ -n "$help" ]] && [[ "$h" != "$help" ]] ; then
+        echo
+        echo \$ {1} --help
+        echo $help
+      fi
+      if [[ -z "$h" ]] && [[ -z "$help" ]] ; then
+        echo \$ {1}: -h or --help are not available
+      fi
+    fi
+  '
 
   export local manlist_file="/tmp/fzf-man-manlist"
   export local cheatlist_file="/tmp/fzf-man-cheatlist"
   export local tldrlist_file="/tmp/fzf-man-tldrlist"
+  export local compgenlist_file="/tmp/fzf-man-compgenlist"
 
   local N=22
   local CACHE_TIME="/tmp/fzf-man-cache-time"
@@ -442,6 +466,14 @@ function fzf-man {
   else 
     local tldrlist=$(cat $file)
   fi
+
+  local file=$compgenlist_file
+  if [[ ! -e $file || $file -ot $CACHE_TIME ]]; then
+    local compgenlist=$(compgen -c | sort -u | grep -Ev "^_")
+    echo $compgenlist >$file
+  else 
+    local compgenlist=$(cat $file)
+  fi
   
   local executer='
     if [[ $FZF_PROMPT =~ TLDR ]]; then
@@ -455,20 +487,18 @@ function fzf-man {
     fi
   '
 
-  # TLDR -> Cheat -> man 
+  # TLDR -> Cheat --> help --> man 
   local transformer='
     if [[ $FZF_PROMPT =~ TLDR ]]; then
       echo "change-prompt(󰬊 Cheat > )+reload(cat $cheatlist_file)+change-preview($cheat_cmd)"
     elif [[ $FZF_PROMPT =~ Cheat ]]; then
+      echo "change-prompt(󰬏 Help > )+reload(cat $compgenlist_file)+change-preview($help_cmd)"
+    elif [[ $FZF_PROMPT =~ Help ]]; then
       echo "change-prompt(󰬔 Man > )+reload(cat $manlist_file)+change-preview($man_cmd)"
     else
       echo "change-prompt(󰬛 TLDR > )+reload(cat $tldrlist_file)+change-preview($tldr_cmd)"
     fi
   '
-  #   echo "change-prompt(-h > )+reload(cat)+change-preview(bash -c \"{1} -h\")"
-  # elif [[ $FZF_PROMPT =~ ^-h ]]; then
-  #   echo "change-prompt(--help > )+reload(cat)+change-preview(bash -c \"{1} --help\")"
-  # elif [[ $FZF_PROMPT =~ --help ]]; then
 
   echo $tldrlist |
     fzf \
@@ -479,14 +509,16 @@ function fzf-man {
       --prompt='󰬛 TLDR > ' \
       --bind "alt-1:change-prompt(󰬛 TLDR > )+reload(cat $tldrlist_file)+change-preview($tldr_cmd)" \
       --bind "alt-2:change-prompt(󰬊 Cheat > )+reload(cat $cheatlist_file)+change-preview($cheat_cmd)" \
-      --bind "alt-3:change-prompt(󰬔 Man > )+reload(cat $manlist_file)+change-preview($man_cmd)" \
+      --bind "alt-3:change-prompt(󰬏 Help > )+reload(cat $compgenlist_file)+change-preview($help_cmd)" \
+      --bind "alt-4:change-prompt(󰬔 Man > )+reload(cat $manlist_file)+change-preview($man_cmd)" \
       --bind "alt-h:transform:$transformer" \
       --bind "enter:become($executer)" \
       --preview "$tldr_cmd" \
-      --preview-window '70%,noborder' \
+      --preview-window '70%,noborder,~2,+{1}+2/3' \
       --color header:italic \
-      --header '<Alt-1> tldr  <Alt-2> Cheat  <Alt-3> Man  <Alt-/> Preview' \
-      --bind 'alt-/:change-preview-window:70%|down' \
+      --header $'<Ctrl-/> Toggle Preview    <Alt-/>, <F11> Change Preview mode    <Ctrl+S> Toggle Sort\n<Alt-H> Next mode    <Alt-1> tldr    <Alt-2> Cheat    <Alt-3> Help    <Alt-4> Man' \
+      --bind 'alt-/:change-preview-window:down,~2,+{1}+2/3|down,99%,~2,+{1}+2/3|hidden|' \
+      --bind 'f11:change-preview-window:down,~2,+{1}+2/3|down,99%,~2,+{1}+2/3|hidden|' \
       --bind 'ctrl-/:toggle-preview' \
       --bind='ctrl-s:toggle-sort'
 
