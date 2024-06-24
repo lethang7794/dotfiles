@@ -1,55 +1,7 @@
-# print "🪝$0: loading .zshrc"
-# if [[ -o login ]]; then
-#   print "  Login shell"
-# else
-#   print "  Not a login shell"
-# fi
-# if [[ -o interactive ]]; then
-#   print "  Interactive shell"
-# else
-#   print "  Not an interactive shell"
-# fi
-
 # zmodload zsh/zprof
 
 # Inherit PATH from bash
 export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-## zsh
-# History
-[ -d "$XDG_STATE_HOME"/zsh ] || mkdir -p "$XDG_STATE_HOME"/zsh
-HISTFILE="$XDG_STATE_HOME"/zsh/history
-# Completion
-[ -d "$XDG_CACHE_HOME"/zsh ] || mkdir -p "$XDG_CACHE_HOME"/zsh
-zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
-autoload -Uz bashcompinit && bashcompinit
-autoload -Uz compinit
-compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$HOST-$ZSH_VERSION
-# Custon completions
-[ -d "$XDG_DATA_HOME"/zsh/completions ] || mkdir -p "$XDG_DATA_HOME"/zsh/completions
-FPATH="${XDG_DATA_HOME}/zsh/completions:${FPATH}"
-
-## Aliases
-alias rm="echo Use \'trash\' or \'trash-put\' instead of \'rm\'."
-alias rmdir="echo Use \'trash\' or \'trash-put\' instead of \'rmdir\'."
-alias mv="mv -iv"
-
-alias rm-yes-i-know="/usr/bin/rm -iv"
-alias rmdir-yes-i-know="/usr/bin/rmdir -iv"
-
-alias p="pnpm"
-alias v="nvim"
-alias vi="nvim"
-alias vim="nvim"
-alias mk="minikube"
-alias yless="jless --yaml" # How to use? :help, F1
-alias cz="chezmoi"
-
-alias c="code --disable-extensions"
-compdef c=code
-
-# Globalias
-GLOBALIAS_FILTER_VALUES=(ls which z grep dk open rm rmdir rm-yes-i-know rmdir-yes-i-know mv c)
 
 ## Brew
 HOMEBREW_BIN=/home/linuxbrew/.linuxbrew/bin/brew
@@ -76,6 +28,23 @@ if [ -f ${zsh_plugins}.zsh ]; then
   source ${zsh_plugins}.zsh
 fi
 
+## zsh
+# History
+[ -d "$XDG_STATE_HOME"/zsh ] || mkdir -p "$XDG_STATE_HOME"/zsh
+HISTFILE="$XDG_STATE_HOME"/zsh/history
+
+# Completion
+[ -d "$XDG_CACHE_HOME"/zsh ] || mkdir -p "$XDG_CACHE_HOME"/zsh
+[ -d "$XDG_CACHE_HOME"/zsh/zcompcache ] || mkdir -p "$XDG_CACHE_HOME"/zsh/zcompcache
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
+autoload -Uz bashcompinit && bashcompinit
+autoload -Uz compinit
+# compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$HOST-$ZSH_VERSION
+# Custon completions
+[ -d "$XDG_DATA_HOME"/zsh/completions ] || mkdir -p "$XDG_DATA_HOME"/zsh/completions
+FPATH="${XDG_DATA_HOME}/zsh/completions:${FPATH}"
+# Brew completions
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
 # Plugins
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
@@ -101,29 +70,7 @@ if [[ "$(command -v git)" && -d $ZSH ]]; then
   source $ZSH/oh-my-zsh.sh
 fi
 
-# User configuration
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example Aliases
-# #d alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-## Brew
-if [ -f "$HOMEBREW_BIN" ]; then
-  HB_CNF_HANDLER="$(brew --repository)/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
-  if [ -f "$HB_CNF_HANDLER" ]; then
-    source "$HB_CNF_HANDLER"
-  fi
-
-  # Brew completions
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-fi
-
-## argc-completions
+## argc-completions: load after oh-my-zsh
 # Load argc-completions first, so they can be override by others
 export ARGC_COMPLETIONS_ROOT="/home/lqt/go/src/github.com/sigoden/argc-completions"
 export ARGC_COMPLETIONS_PATH="$ARGC_COMPLETIONS_ROOT/completions"
@@ -138,6 +85,48 @@ argc_scripts=(
   fzf
 )
 _evalcache argc --argc-completions zsh $argc_scripts
+
+# User configuration
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example Aliases
+# #d alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
+## Aliases
+alias rm="echo Use \'trash\' or \'trash-put\' instead of \'rm\'."
+alias rmdir="echo Use \'trash\' or \'trash-put\' instead of \'rmdir\'."
+alias mv="mv -iv"
+
+alias rm-yes-i-know="/usr/bin/rm -iv"
+alias rmdir-yes-i-know="/usr/bin/rmdir -iv"
+
+alias p="pnpm"
+alias v="nvim"
+alias vi="nvim"
+alias vim="nvim"
+alias mk="minikube"
+alias yless="jless --yaml" # How to use? :help, F1
+alias cz="chezmoi"
+
+alias c="code --disable-extensions"
+compdef c=code
+
+# Globalias
+GLOBALIAS_FILTER_VALUES=(ls which z grep dk open rm rmdir rm-yes-i-know rmdir-yes-i-know mv c)
+
+
+## Brew
+if [ -f "$HOMEBREW_BIN" ]; then
+  HB_CNF_HANDLER="$(brew --repository)/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
+  if [ -f "$HB_CNF_HANDLER" ]; then
+    source "$HB_CNF_HANDLER"
+  fi
+fi
 
 ## Bind Alt+R to reload shell config 
 function source-shell {
