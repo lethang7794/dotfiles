@@ -35,19 +35,16 @@ HISTFILE="$XDG_STATE_HOME"/zsh/history
 
 # Completion
 [ -d "$XDG_CACHE_HOME"/zsh ] || mkdir -p "$XDG_CACHE_HOME"/zsh
-[ -d "$XDG_CACHE_HOME"/zsh/zcompcache ] || mkdir -p "$XDG_CACHE_HOME"/zsh/zcompcache
-zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
 autoload -Uz bashcompinit && bashcompinit
 autoload -Uz compinit
+# [ -d "$XDG_CACHE_HOME"/zsh/zcompcache ] || mkdir -p "$XDG_CACHE_HOME"/zsh/zcompcache
+# zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
 # compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$HOST-$ZSH_VERSION
 # Custon completions
 [ -d "$XDG_DATA_HOME"/zsh/completions ] || mkdir -p "$XDG_DATA_HOME"/zsh/completions
 FPATH="${XDG_DATA_HOME}/zsh/completions:${FPATH}"
 # Brew completions
 FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-
-# Plugins
-export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # Path to your oh-my-zsh installation.
 # export ZSH="$HOME/.oh-my-zsh"
@@ -70,21 +67,26 @@ if [[ "$(command -v git)" && -d $ZSH ]]; then
   source $ZSH/oh-my-zsh.sh
 fi
 
+## Completions from command
+# _evalcache kubeadm completion zsh
+
 ## argc-completions: load after oh-my-zsh
-# Load argc-completions first, so they can be override by others
-export ARGC_COMPLETIONS_ROOT="/home/lqt/go/src/github.com/sigoden/argc-completions"
-export ARGC_COMPLETIONS_PATH="$ARGC_COMPLETIONS_ROOT/completions"
-# export PATH="$ARGC_COMPLETIONS_ROOT/bin:$PATH"
+# Load argc-completions first, so they can be override by others                    # ?
+export ARGC_COMPLETIONS_ROOT="/home/lqt/go/src/github.com/sigoden/argc-completions" # 
+export ARGC_COMPLETIONS_PATH="$ARGC_COMPLETIONS_ROOT/completions"                   #
+# export PATH="$ARGC_COMPLETIONS_ROOT/bin:$PATH"                                    # Use the one from brew
 # To add a subset of completions only, change next line e.g. argc_scripts=( cargo git )
-# argc_scripts=($(ls -p -1 "$ARGC_COMPLETIONS_ROOT/completions" | sed -n 's/\.sh$//p'))
-# source <(argc --argc-completions zsh $argc_scripts)
-# _evalcache argc --argc-completions zsh $argc_scripts
+# argc_scripts=($(ls -p -1 "$ARGC_COMPLETIONS_ROOT/completions" | sed -n 's/\.sh$//p')) # All argc-completions 
 argc_scripts=( 
-  # go # doesn't need this
   broot
   fzf
+  kubeadm # Better then the builtin
+  minikube
 )
 _evalcache argc --argc-completions zsh $argc_scripts
+
+# Plugins
+export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 # User configuration
 
