@@ -265,7 +265,7 @@ export FZF_DEFAULT_OPTS="
   --bind='ctrl-s:toggle-sort'
   --bind 'ctrl-/:toggle-preview'
   --bind 'alt-/:change-preview-window:right|down'
-  --bind 'f11:change-preview-window:down,~1,+{0}+1/2|down,99%,~1,+{0}+1/2|hidden|'
+  --bind 'f11:change-preview-window:down,99%,~1,+{0}+1/2|down,~1,+{0}+1/2|hidden|'
   --marker='✓'
 "
   # --pointer='󰋇 '
@@ -508,8 +508,8 @@ function fzf-man {
       --preview-window '70%,noborder,~2,+{1}+2/3' \
       --color header:italic \
       --header $'<Ctrl-/> Toggle Preview    <Alt-/>, <F11> Change Preview mode    <Ctrl+S> Toggle Sort\n<Alt-H> Next mode    <Alt-1> tldr    <Alt-2> Cheat    <Alt-3> Help    <Alt-4> Man' \
-      --bind 'alt-/:change-preview-window:down,~2,+{1}+2/3|down,99%,~2,+{1}+2/3|hidden|' \
-      --bind 'f11:change-preview-window:down,~2,+{1}+2/3|down,99%,~2,+{1}+2/3|hidden|' \
+      --bind 'alt-/:change-preview-window:down,99%,~2,+{1}+2/3|down,~2,+{1}+2/3|hidden|' \
+      --bind 'f11:change-preview-window:down,99%,~2,+{1}+2/3|down,~2,+{1}+2/3|hidden|' \
       --bind 'ctrl-/:toggle-preview' \
       --bind='ctrl-s:toggle-sort'
 
