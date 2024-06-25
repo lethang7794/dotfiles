@@ -620,16 +620,15 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'tree -C --dirsfirst -L 1 $realpath 
 # switch group using `<` and `>` (instead of F1, F2)
 zstyle ':fzf-tab:*' switch-group '<' '>'
 
+# Turn off sort for all completions
+zstyle ':completion:*' sort false
 # Show git sub-commands, git objects in original order
-zstyle ':completion:*:git:*' sort false   # Show the git subcommands in group
-zstyle ':completion:*:git-*:*' sort false # Show the git objects in created-time order
+# zstyle ':completion:*:git:*' sort false   # Show the git subcommands in group
+# zstyle ':completion:*:git-*:*' sort false # Show the git objects in created-time order
+# zstyle ':completion:*:docker-*:*' sort false
 
-zstyle ':completion:*:docker-*:*' sort false
-
-# Remove the default of run-help being aliased to man
-unalias run-help
-# Use zsh's run-help, which will display information for zsh builtins.
-autoload run-help
+unalias run-help  # Remove the default of run-help being aliased to man
+autoload run-help # Use zsh's run-help, which will display information for zsh builtins.
 
 # bat: color man. help
 if [ "$(command -v bat)" ]; then
@@ -667,7 +666,7 @@ export ATAC_MAIN_DIR=~/.config/atac
 ## lazygit
 # alias lg="lazygit"
 function lg()    {
-  lazygit "$@"
+  lazygit "$@" 
 
   if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
     cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
