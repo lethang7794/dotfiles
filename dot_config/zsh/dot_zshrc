@@ -118,9 +118,11 @@ alias cz="chezmoi"
 alias c="code --disable-extensions"
 compdef c=code
 
-# Globalias
-GLOBALIAS_FILTER_VALUES=(ls which z grep dk open rm rmdir rm-yes-i-know rmdir-yes-i-know mv c)
+alias ci="code-insiders --disable-extensions"
+compdef ci=code-insiders
 
+# Globalias
+GLOBALIAS_FILTER_VALUES=(ls which z grep dk open rm rmdir rm-yes-i-know rmdir-yes-i-know mv c ci v)
 
 ## Brew
 if [ -f "$HOMEBREW_BIN" ]; then
