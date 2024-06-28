@@ -185,6 +185,7 @@ symbol = " "
 [kubernetes]
 disabled = false
 detect_folders = ["infra", "k8s"]
+detect_env_vars = ["k8s"]
 
 [lua]
 symbol = " "
