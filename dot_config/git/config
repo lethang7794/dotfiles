@@ -19,10 +19,22 @@ diffFilter = delta --color-only --show-syntax-themes --features=interactive
 conflictstyle = diff3
 
 [diff]
-tool = smerge
 colorMoved = default
 
 [delta]
 syntax-theme = DarkNeon
 navigate = true
-side-by-side = true
+# side-by-side = true
+
+# difftastic
+[diff]
+external = difft               # use difftastic as your default diff tool
+tool = difftastic
+[difftool]
+prompt = false
+[difftool "difftastic"]
+cmd = difft "$LOCAL" "$REMOTE"
+[pager]
+difftool = true
+[alias]
+dft = difftool
