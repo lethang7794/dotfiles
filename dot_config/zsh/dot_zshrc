@@ -88,7 +88,7 @@ _evalcache argc --argc-completions zsh $argc_scripts
 
 # TODO: migrate away from oh-my-zsh to have full control
 # Load completions the second time 
-compint -d $ZSH_COMPDUMP
+compinit -d $ZSH_COMPDUMP
 
 # Plugins
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
