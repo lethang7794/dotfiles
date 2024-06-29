@@ -2,6 +2,7 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 continuation_prompt = '▶▶ '
+command_timeout = 1000
 
 # format = '$all'
 format = """
@@ -88,11 +89,11 @@ $sudo\
 $fill\
 $cmd_duration\
 $status\
+$time\
 $shell\
 $line_break\
 $jobs\
 $battery\
-$time\
 $os\
 $container\
 $character"""
@@ -113,8 +114,8 @@ symbol = " "
 symbol = " "
 
 [character]
-success_symbol = '[➜](green)' # 👉➜
-error_symbol = '[⚠](red)'     # 👆🯀🛑⚠️
+success_symbol = '[❯](green)' # 👉➜➜＄﹩$💲󠀤
+error_symbol = '[](red)'     # 👆🯀🛑⚠️⚠
 
 [crystal]
 symbol = " "
@@ -294,6 +295,9 @@ symbol = " "
 # powershell_indicator = '_'
 unknown_indicator = 'mystery shell'
 # style = 'cyan bold'
+disabled = false
+
+[time]
 disabled = false
 
 [custom.typescript]
