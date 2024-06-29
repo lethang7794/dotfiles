@@ -43,8 +43,6 @@ autoload -Uz compinit
 # Custon completions
 [ -d "$XDG_DATA_HOME"/zsh/completions ] || mkdir -p "$XDG_DATA_HOME"/zsh/completions
 FPATH="${XDG_DATA_HOME}/zsh/completions:${FPATH}"
-# Brew completions
-FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
 # Path to your oh-my-zsh installation.
 # export ZSH="$HOME/.oh-my-zsh"
@@ -67,6 +65,9 @@ if [[ "$(command -v git)" && -d $ZSH ]]; then
   source $ZSH/oh-my-zsh.sh
 fi
 
+# Brew completions
+FPATH="${FPATH}:$(brew --prefix)/share/zsh/site-functions"
+
 ## Completions from command
 # _evalcache kubeadm completion zsh
 
@@ -84,6 +85,10 @@ argc_scripts=(
   minikube
 )
 _evalcache argc --argc-completions zsh $argc_scripts
+
+# TODO: migrate away from oh-my-zsh to have full control
+# Load completions the second time 
+compint -d $ZSH_COMPDUMP
 
 # Plugins
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
@@ -323,7 +328,7 @@ export FZF_CTRL_T_OPTS="
 "
 
 function fzf-path-preview () {
-  fzf "$@" --preview 'lessfilter {}'
+  fzf "$@" --layout=reverse --preview 'lessfilter {}'
 }
 
 BFS_EXCLUDE="-name .git -or -name .cache -or -name node_modules"
