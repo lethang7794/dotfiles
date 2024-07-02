@@ -1,4 +1,5 @@
-# zmodload zsh/zprof
+# DEBUG_PERF=true
+[[ $DEBUG_PERF == true ]] && zmodload zsh/zprof
 
 # Inherit PATH from bash
 export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -83,12 +84,13 @@ argc_scripts=(
   fzf
   kubeadm # Better then the builtin
   minikube
+  ctrld
 )
 _evalcache argc --argc-completions zsh $argc_scripts
 
 # TODO: migrate away from oh-my-zsh to have full control
-# Load completions the second time 
-compinit -d $ZSH_COMPDUMP
+# Load completions the second time, which will make zsh startup a lot slower
+# compinit -d $ZSH_COMPDUMP 
 
 # Plugins
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
@@ -872,4 +874,4 @@ fi
 # nav
 # nav bindkeys
 
-# zprof
+[[ $DEBUG_PERF == true ]] && zprof
