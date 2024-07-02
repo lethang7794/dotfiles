@@ -298,7 +298,7 @@ unknown_indicator = 'mystery shell'
 disabled = false
 
 [time]
-disabled = false
+disabled = true
 
 [custom.typescript]
 description = "TypeScript"
