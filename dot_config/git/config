@@ -1,5 +1,6 @@
 [include]
 path = ~/.config/delta/themes.gitconfig
+path = ~/.config/delta/catppuccin.gitconfig
 
 [user]
 email = lethang7794@gmail.com
@@ -22,13 +23,13 @@ conflictstyle = diff3
 colorMoved = default
 
 [delta]
-syntax-theme = DarkNeon
+features = catppuccin-macchiato
 navigate = true
 # side-by-side = true
 
 # difftastic
 [diff]
-external = difft               # use difftastic as your default diff tool
+external = difft # use difftastic as your default diff tool
 tool = difftastic
 [difftool]
 prompt = false
