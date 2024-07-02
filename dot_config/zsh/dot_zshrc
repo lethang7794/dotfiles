@@ -36,18 +36,24 @@ HISTFILE="$XDG_STATE_HOME"/zsh/history
 
 # Completion
 [ -d "$XDG_CACHE_HOME"/zsh ] || mkdir -p "$XDG_CACHE_HOME"/zsh
-autoload -Uz bashcompinit && bashcompinit
-autoload -Uz compinit
+
+## oh-my-zsh's already done this
+# autoload -Uz bashcompinit && bashcompinit 
+# autoload -Uz compinit
+
 # [ -d "$XDG_CACHE_HOME"/zsh/zcompcache ] || mkdir -p "$XDG_CACHE_HOME"/zsh/zcompcache
 # zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
 # compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$HOST-$ZSH_VERSION
+
+# TODO: migrate to this instead of using ZSH_CUSTOM
 # Custon completions
-[ -d "$XDG_DATA_HOME"/zsh/completions ] || mkdir -p "$XDG_DATA_HOME"/zsh/completions
-FPATH="${XDG_DATA_HOME}/zsh/completions:${FPATH}"
+# [ -d "$XDG_DATA_HOME"/zsh/completions ] || mkdir -p "$XDG_DATA_HOME"/zsh/completions
+# FPATH="${XDG_DATA_HOME}/zsh/completions:${FPATH}"
 
 # Path to your oh-my-zsh installation.
 # export ZSH="$HOME/.oh-my-zsh"
 export ZSH=$(antidote path ohmyzsh/ohmyzsh)
+export ZSH_CUSTOM="$XDG_CONFIG_HOME/zsh/zsh_custom"
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
@@ -55,19 +61,24 @@ ZSH_THEME="robbyrussell"
 zstyle ':omz:update' mode disabled
 
 if [[ "$(command -v git)" && -d $ZSH ]]; then
-  ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump-$HOST"
+  # ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump-$HOST" # Oh-my-zsh will use ZDOTDIR
+  # mkdir -p $ZSH_CACHE_DIR
+
+  ZSH_DISABLE_COMPFIX="true"
 
   plugins=(
     # golang # doesn't need this
   )
 
-  mkdir -p $ZSH_CACHE_DIR
-
   source $ZSH/oh-my-zsh.sh
 fi
 
+# TODO: load brew conpletions after:
+# - /usr/share/zsh/site-functions                                                                                                                                         ││
+# - /usr/share/zsh/5.9/functions
+#
 # Brew completions
-FPATH="${FPATH}:$(brew --prefix)/share/zsh/site-functions"
+FPATH="${FPATH}:$(brew --prefix)/share/zsh/site-functions" # CURRENT THIS DOESN'T WORK
 
 ## Completions from command
 # _evalcache kubeadm completion zsh
@@ -106,6 +117,7 @@ export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 # #d alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+## TODO: Move alias to a different file
 ## Aliases
 alias rm="echo Use \'trash\' or \'trash-put\' instead of \'rm\'."
 alias rmdir="echo Use \'trash\' or \'trash-put\' instead of \'rmdir\'."
@@ -122,14 +134,11 @@ alias mk="minikube"
 alias yless="jless --yaml" # How to use? :help, F1
 alias cz="chezmoi"
 
-alias c="code --disable-extensions"
-compdef c=code
-
+alias c="code"
 alias ci="code-insiders --disable-extensions"
-compdef ci=code-insiders
 
 # Globalias
-GLOBALIAS_FILTER_VALUES=(ls which z grep dk open rm rmdir rm-yes-i-know rmdir-yes-i-know mv c ci v)
+GLOBALIAS_FILTER_VALUES=(ls which z grep dk open rm rmdir rm-yes-i-know rmdir-yes-i-know mv)
 
 ## Brew
 if [ -f "$HOMEBREW_BIN" ]; then
@@ -330,7 +339,7 @@ export FZF_CTRL_T_OPTS="
 "
 
 function fzf-path-preview () {
-  fzf "$@" --layout=reverse --preview 'lessfilter {}'
+  fzf "$@" --multi --layout=reverse --preview 'lessfilter {}'
 }
 
 BFS_EXCLUDE="-name .git -or -name .cache -or -name node_modules"
