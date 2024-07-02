@@ -70,6 +70,7 @@ if [[ "$(command -v git)" && -d $ZSH ]]; then
     # golang # doesn't need this
   )
 
+  FPATH="${FPATH}:$(brew --prefix)/share/zsh/site-functions" # CURRENT THIS DOESN'T WORK
   source $ZSH/oh-my-zsh.sh
 fi
 
@@ -78,7 +79,6 @@ fi
 # - /usr/share/zsh/5.9/functions
 #
 # Brew completions
-FPATH="${FPATH}:$(brew --prefix)/share/zsh/site-functions" # CURRENT THIS DOESN'T WORK
 
 ## Completions from command
 # _evalcache kubeadm completion zsh
