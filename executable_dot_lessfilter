@@ -71,7 +71,7 @@ elif [[ "$ext" =~ md|markdown ]]; then
   # glow "$1"
   # mdless "$1"
 
-elif [ "$category" = text ]; then
+elif [ "$category" = text ] || [[ $(file "$1") =~ "ASCII text" ]]; then
   bat --color=always --style=header "$1"
 
 else
