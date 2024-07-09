@@ -81,12 +81,12 @@ $gcloud\
 $openstack\
 $azure\
 $nats\
-$direnv\
 $env_var\
 $crystal\
 $custom\
 $sudo\
 $fill\
+$direnv\
 $cmd_duration\
 $status\
 $time\
@@ -131,6 +131,16 @@ fish_style_pwd_dir_length = 1
 # truncation_length = 5
 # truncate_to_repo = true
 # truncation_symbol = "…/"
+
+[direnv]
+disabled = false
+# symbol="🏞️ "
+# allowed_msg = "🚢"
+# not_allowed_msg = "🙅"
+# denied_msg = "🛑"
+# loaded_msg = "🏗️"
+# unloaded_msg = "⏳"
+# 🏞️ 🏗️ 🚢
 
 [docker_context]
 symbol = " "

@@ -879,6 +879,10 @@ if [ "$(command -v mise)" ]; then
   _evalcache mise activate zsh
 fi
 
+# Direnv
+_evalcache direnv hook zsh
+export DIRENV_LOG_FORMAT= # make `direnv` silent
+
 # nav
 # nav bindkeys
 
