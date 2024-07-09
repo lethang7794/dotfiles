@@ -89,14 +89,16 @@ export ARGC_COMPLETIONS_ROOT="/home/lqt/go/src/github.com/sigoden/argc-completio
 export ARGC_COMPLETIONS_PATH="$ARGC_COMPLETIONS_ROOT/completions"                   #
 # export PATH="$ARGC_COMPLETIONS_ROOT/bin:$PATH"                                    # Use the one from brew
 # To add a subset of completions only, change next line e.g. argc_scripts=( cargo git )
-# argc_scripts=($(ls -p -1 "$ARGC_COMPLETIONS_ROOT/completions" | sed -n 's/\.sh$//p')) # All argc-completions 
-argc_scripts=( 
-  broot
-  fzf
-  kubeadm # Better then the builtin
-  minikube
-  ctrld
-)
+argc_scripts=($(ls -p -1 "$ARGC_COMPLETIONS_ROOT/completions" | sed -n 's/\.sh$//p')) # All argc-completions 
+# argc_scripts=( 
+#   broot
+#   fzf
+#   kubeadm # Better then the builtin
+#   minikube
+#   ctrld
+#   ttab
+#   wmctrl
+# )
 _evalcache argc --argc-completions zsh $argc_scripts
 
 # TODO: migrate away from oh-my-zsh to have full control
