@@ -715,12 +715,14 @@ function upd() {
 
 }
 
+## Kubernetes
 if [ "$(command -v kubecolor)" ]; then
   alias kubectl="kubecolor"
   compdef kubecolor=kubectl
 fi
-
 alias "kube-tree"="kube-lineage"
+mk_running=$(minikube status | grep Running | wc -l)
+(( mk_running > 0 )) && export MINIKUBE="Running" 
 
 # Volta
 # export VOLTA_HOME="$HOME/.volta"

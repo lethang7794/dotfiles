@@ -195,8 +195,16 @@ symbol = " "
 
 [kubernetes]
 disabled = false
-detect_folders = ["infra", "k8s"]
-detect_env_vars = ["k8s"]
+format = '''[󱃾](#316CE6) [$symbol](purple) [$context](red bold)[( \($namespace\))](yellow bold) [$symbol](purple)
+'''
+# detect_folders = ["infra", "k8s"]
+detect_env_vars = ["MINIKUBE"]
+contexts = [
+  { context_pattern = "minikube", style = "green", symbol = "🧪", context_alias = "🧊" },
+  { context_pattern = ".*dev.*", style = "green", symbol = "🟢", context_alias = "dev" },
+  { context_pattern = ".*stg.*", style = "green", symbol = "🟢", context_alias = "stg" },
+  { context_pattern = ".*prod.*-a", style = "red", symbol = "🚨", context_alias = "prod" },
+]
 
 [lua]
 symbol = " "
