@@ -185,10 +185,7 @@ _evalcache thefuck --alias f
 # zle -N f        # Define f as a new widget
 # bindkey "^[f" f # Bind Alt+f to f
 
-# Starship
-if [ "$(command -v starship)" ]; then
-  _evalcache starship init zsh --print-full-init
-fi
+
 
 ## Broot
 # broot launch script ~/.local/share/broot/launcher/bash/1,
@@ -884,5 +881,10 @@ fi
 
 # nav
 # nav bindkeys
+
+# Starship
+if [ "$(command -v starship)" ]; then
+  _evalcache starship init zsh --print-full-init
+fi
 
 [[ $DEBUG_PERF == true ]] && zprof
