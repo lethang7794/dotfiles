@@ -15,6 +15,7 @@ yarn = "4"
 "npm:yo" = "latest"
 gitleaks = "latest"
 pre-commit = "latest"
+"npm:ttab" = "latest"
 
 [settings]
 experimental = true
