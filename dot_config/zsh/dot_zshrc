@@ -15,7 +15,6 @@ if [ -f "$HOMEBREW_BIN" ]; then
   export HOMEBREW_AUTO_UPDATE_SECS="86400"
 fi
 
-
 ## Antidote - zsh packages
 ANTIDOTE_BIN="$HOMEBREW_PREFIX/opt/antidote/share/antidote/antidote.zsh"
 if [ -f "$ANTIDOTE_BIN" ]; then
@@ -46,7 +45,7 @@ HISTFILE="$XDG_STATE_HOME"/zsh/history
 [ -d "$XDG_CACHE_HOME"/zsh ] || mkdir -p "$XDG_CACHE_HOME"/zsh
 
 ## oh-my-zsh's already done this
-# autoload -Uz bashcompinit && bashcompinit 
+# autoload -Uz bashcompinit && bashcompinit
 # autoload -Uz compinit
 
 # [ -d "$XDG_CACHE_HOME"/zsh/zcompcache ] || mkdir -p "$XDG_CACHE_HOME"/zsh/zcompcache
@@ -82,7 +81,7 @@ if [[ "$(command -v git)" && -d $ZSH ]]; then
   )
 
   FPATH="${FPATH}:$(brew --prefix)/share/zsh/site-functions" # CURRENT THIS DOESN'T WORK
-  
+
   # shellcheck disable=SC1091
   source "$ZSH"/oh-my-zsh.sh
 fi
@@ -98,12 +97,12 @@ fi
 
 ## argc-completions: load after oh-my-zsh
 # Load argc-completions first, so they can be override by others                    # ?
-export ARGC_COMPLETIONS_ROOT="/home/lqt/go/src/github.com/sigoden/argc-completions" # 
+export ARGC_COMPLETIONS_ROOT="/home/lqt/go/src/github.com/sigoden/argc-completions" #
 export ARGC_COMPLETIONS_PATH="$ARGC_COMPLETIONS_ROOT/completions"                   #
 # export PATH="$ARGC_COMPLETIONS_ROOT/bin:$PATH"                                    # Use the one from brew
 # To add a subset of completions only, change next line e.g. argc_scripts=( cargo git )
-# argc_scripts=($(ls -p -1 "$ARGC_COMPLETIONS_ROOT/completions" | sed -n 's/\.sh$//p')) # All argc-completions 
-argc_scripts=( 
+# argc_scripts=($(ls -p -1 "$ARGC_COMPLETIONS_ROOT/completions" | sed -n 's/\.sh$//p')) # All argc-completions
+argc_scripts=(
   broot
   fzf
   kubeadm # Better then the builtin
@@ -116,7 +115,7 @@ _evalcache argc --argc-completions zsh "${argc_scripts[*]}"
 
 # TODO: migrate away from oh-my-zsh to have full control
 # Load completions the second time, which will make zsh startup a lot slower
-# compinit -d $ZSH_COMPDUMP 
+# compinit -d $ZSH_COMPDUMP
 
 # Plugins
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
@@ -166,15 +165,15 @@ if [ -f "$HOMEBREW_BIN" ]; then
   fi
 fi
 
-## Bind Alt+R to reload shell config 
+## Bind Alt+R to reload shell config
 function source-shell {
   echo "Source shell configuration"
   # exec -l zsh
-  omz reload  
+  omz reload
 }
 zle -N source-shell        # Define source-shell as a new widget
 bindkey "^[r" source-shell # Bind Alt+R to source-shell
-# TODO: The shell will be closed, not reload the current session 
+# TODO: The shell will be closed, not reload the current session
 
 ## Zsh plugin
 
@@ -201,23 +200,21 @@ _evalcache thefuck --alias f
 # zle -N f        # Define f as a new widget
 # bindkey "^[f" f # Bind Alt+f to f
 
-
-
 ## Broot
 # broot launch script ~/.local/share/broot/launcher/bash/1,
 # - Modified: show git-info, tree, hidden files
 function br {
-    local cmd cmd_file code
-    cmd_file=$(mktemp)
-    if broot --show-git-info --hidden --outcmd "$cmd_file" "$@"; then
-        cmd=$(<"$cmd_file")
-        command rm -f "$cmd_file"
-        eval "$cmd"
-    else
-        code=$?
-        command rm -f "$cmd_file"
-        return "$code"
-    fi
+  local cmd cmd_file code
+  cmd_file=$(mktemp)
+  if broot --show-git-info --hidden --outcmd "$cmd_file" "$@"; then
+    cmd=$(<"$cmd_file")
+    command rm -f "$cmd_file"
+    eval "$cmd"
+  else
+    code=$?
+    command rm -f "$cmd_file"
+    return "$code"
+  fi
 }
 # compdef br=broot # doesn't work
 function cdd {
@@ -305,7 +302,7 @@ export FZF_DEFAULT_OPTS="
   --bind 'f11:change-preview-window:down,99%,~1,+{0}+1/2|down,~1,+{0}+1/2|hidden|'
   --marker='✓'
 "
-  # --pointer='󰋇 '
+# --pointer='󰋇 '
 
 # <Ctrl-/> to toggle small preview window to see the full command
 # <Ctrl-Y> to copy the command into clipboard using xclip
@@ -359,7 +356,7 @@ export FZF_CTRL_T_OPTS="
   --bind 'ctrl-alt-o:execute(EDITOR=\"code --disable-extensions\" chezmoi edit --watch {+}; sleep 1)'
 "
 
-function fzf-path-preview () {
+function fzf-path-preview() {
   fzf "$@" --multi --layout=reverse --preview 'lessfilter {}'
 }
 
@@ -404,24 +401,24 @@ zle -N rg-fzf       # Define rg-fzf as a new widget
 bindkey "^f" rg-fzf # Bind Ctrl+F to rg-fzf
 
 rga-fzf() {
-	RG_PREFIX="rga --files-with-matches --color=always"
-	local file
-	file="$(
-		FZF_DEFAULT_COMMAND="$RG_PREFIX '$1'" \
-			fzf --sort --preview="[[ ! -z {} ]] && rga --pretty --context 5 {q} {}" \
-				--phony -q "$1" \
-        --layout=reverse \
-        --color "label:italic" \
-        --border-label "╢ rga-fzf: Search all files (PDF, epub...) by content ╟" \
-        --prompt '1. 󱩾 rga> ' \
-				--bind "change:reload:$RG_PREFIX {q}" \
-				--preview-window="right" \
-        --bind='alt-z:toggle-preview-wrap' \
-        --bind='ctrl-y:execute-silent(echo -n {} | xclip -selection clipboard)' \
-        --bind='ctrl-s:toggle-sort'
-	)" &&
-	echo "Opening $file" &&
-	open "$file"
+  RG_PREFIX="rga --files-with-matches --color=always"
+  local file
+  file="$(
+    FZF_DEFAULT_COMMAND="$RG_PREFIX '$1'" \
+      fzf --sort --preview="[[ ! -z {} ]] && rga --pretty --context 5 {q} {}" \
+      --phony -q "$1" \
+      --layout=reverse \
+      --color "label:italic" \
+      --border-label "╢ rga-fzf: Search all files (PDF, epub...) by content ╟" \
+      --prompt '1. 󱩾 rga> ' \
+      --bind "change:reload:$RG_PREFIX {q}" \
+      --preview-window="right" \
+      --bind='alt-z:toggle-preview-wrap' \
+      --bind='ctrl-y:execute-silent(echo -n {} | xclip -selection clipboard)' \
+      --bind='ctrl-s:toggle-sort'
+  )" &&
+    echo "Opening $file" &&
+    open "$file"
 }
 zle -N rga-fzf        # Define rga-fzf as a new widget
 bindkey "^[f" rga-fzf # Bind Alt+F to rga-fzf
@@ -438,11 +435,11 @@ function fzf-man-cleanup {
 function fzf-man {
   local query=$1
 
-  export local tldr_cmd="echo $ tldr {1}; tldr --color=always {1} | tail -n +3"
-  export local cheat_cmd="echo $ cheat {1}; echo; cheat --colorize {1}"
-  export local man_cmd="echo $ man {1}; man {1} 2>/dev/null | bat --language=man --plain --color=always"
+  local tldr_cmd="echo $ tldr {1}; tldr --color=always {1} | tail -n +3"
+  local cheat_cmd="echo $ cheat {1}; secho; cheat --colorize {1}"
+  local man_cmd="echo $ man {1}; man {1} 2>/dev/null | bat --language=man --plain --color=always"
   # shellcheck disable=SC2016
-  export local help_cmd='
+  local help_cmd='
     if [ "\$(command -v {1})" ]; then
       if timeout 0.3s bash -c "{1} -h" 1>/dev/null 2>&1; then
         h=$({1} -h 2>/dev/null | bat --color=always -pl help)
@@ -465,10 +462,10 @@ function fzf-man {
     fi
   '
 
-  export local manlist_file="/tmp/fzf-man-manlist"
-  export local cheatlist_file="/tmp/fzf-man-cheatlist"
-  export local tldrlist_file="/tmp/fzf-man-tldrlist"
-  export local compgenlist_file="/tmp/fzf-man-compgenlist"
+  local manlist_file="/tmp/fzf-man-manlist"
+  local cheatlist_file="/tmp/fzf-man-cheatlist"
+  local tldrlist_file="/tmp/fzf-man-tldrlist"
+  local compgenlist_file="/tmp/fzf-man-compgenlist"
 
   local N=22
   local CACHE_TIME="/tmp/fzf-man-cache-time"
@@ -477,36 +474,36 @@ function fzf-man {
   local file=$manlist_file
   if [[ ! -e $file || $file -ot $CACHE_TIME ]]; then
     local manlist=$(man -k . | sort | awk -v cyan="$(tput setaf 6)" -v blue="$(tput setaf 4)" -v res="$(tput sgr0)" -v bld="$(tput bold)" '{ $1=cyan bld $1; $2=res blue;} 1')
-    echo "$manlist" >$file
+    echo "$manlist" >"$file"
   else
-    local manlist=$(cat $file)
+    local manlist=$(cat "$file")
   fi
 
   local file=$cheatlist_file
   if [[ ! -e $file || $file -ot $CACHE_TIME ]]; then
     local cheatlist=$(cheat -l | awk '{printf "\033[1;36m%s\033[0m %s\n", $1, $3}' | tail --lines +2 | sed 's/community\,*//g' | column -t)
-    echo "$cheatlist" >$file
+    echo "$cheatlist" >"$file"
   else
-    local cheatlist=$(cat $file)
+    local cheatlist=$(cat "$file")
   fi
 
   local file=$tldrlist_file
   if [[ ! -e $file || $file -ot $CACHE_TIME ]]; then
     tldr --update >/dev/null 2>&1
     local tldrlist=$(tldr --list)
-    echo "$tldrlist" >$file
-  else 
-    local tldrlist=$(cat $file)
+    echo "$tldrlist" >"$file"
+  else
+    local tldrlist=$(cat "$file")
   fi
 
   local file=$compgenlist_file
   if [[ ! -e $file || $file -ot $CACHE_TIME ]]; then
     local compgenlist=$(compgen -c | sort -u | grep -Ev "^_")
-    echo "$compgenlist" >$file
-  else 
-    local compgenlist=$(cat $file)
+    echo "$compgenlist" >"$file"
+  else
+    local compgenlist=$(cat "$file")
   fi
-  
+
   # shellcheck disable=SC2016
   local executer='
     if [[ $FZF_PROMPT =~ TLDR ]]; then
@@ -520,7 +517,7 @@ function fzf-man {
     fi
   '
 
-  # TLDR -> Cheat --> help --> man 
+  # TLDR -> Cheat --> help --> man
   # shellcheck disable=SC2016
   local transformer='
     if [[ $FZF_PROMPT =~ TLDR ]]; then
@@ -590,10 +587,9 @@ function fzf-chezmoi {
     }
     chezmoi forget {} && backup
   '
-  
 
   # shellcheck disable=SC2016
-  eval "$chezmoi_status_cmd" | awk '{print $2}' | 
+  eval "$chezmoi_status_cmd" | awk '{print $2}' |
     fzf --preview "$default_preview" \
       --cycle \
       --prompt 'Changed Files > ' \
@@ -642,7 +638,7 @@ zstyle ":fzf-tab:*" fzf-flags \
   --color="header:italic" \
   --bind="ctrl-s:toggle-sort" \
   --bind 'alt-/:change-preview-window:right|down' \
-  --bind 'ctrl-/:toggle-preview' 
+  --bind 'ctrl-/:toggle-preview'
 
 zstyle ':fzf-tab:*' continuous-trigger '/'
 
@@ -654,7 +650,8 @@ zstyle ':fzf-tab:complete:*' fzf-bindings \
 zstyle ':completion:*:descriptions' format '[%d]'
 
 # set list-colors to enable filename colorizing
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+# shellcheck disable=SC2296
+zstyle ':completion:*' list-colors "echo $LS_COLORS | tr ':' ' '"
 
 # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
 zstyle ':completion:*' menu no
@@ -713,12 +710,12 @@ export ATAC_MAIN_DIR=~/.config/atac
 
 ## lazygit
 # alias lg="lazygit"
-function lg()    {
-  lazygit "$@" 
+function lg() {
+  lazygit "$@"
 
   if [ -f "$LAZYGIT_NEW_DIR_FILE" ]; then
     cd "$(cat "$LAZYGIT_NEW_DIR_FILE")" || exit
-    rm -f "$LAZYGIT_NEW_DIR_FILE" > /dev/null
+    rm -f "$LAZYGIT_NEW_DIR_FILE" >/dev/null
   fi
 }
 
@@ -727,7 +724,6 @@ function lg()    {
 #   local args=$@
 #   eval "$HOME/.cargo/bin/rip --graveyard $RIP_GRAVEYARD -i $@"
 # }
-
 
 function upd() {
   printf "\n🆕 Update dnf packages"
@@ -751,7 +747,7 @@ if [ "$(command -v kubecolor)" ]; then
 fi
 alias "kube-tree"="kube-lineage"
 mk_running=$(minikube status | grep Running | wc -l)
-(( mk_running > 0 )) && export MINIKUBE="Running" 
+((mk_running > 0)) && export MINIKUBE="Running"
 
 # Volta
 # export VOLTA_HOME="$HOME/.volta"
@@ -805,11 +801,11 @@ export PATH="/home/lqt/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 #   exec tmux
 # fi
 
-tmux-cleanup-sessions () {
-  tmux list-sessions | grep -v attached | awk 'BEGIN{FS=\":\"}{print \"\$1\"}' | xargs -n 1 tmux kill-session -t 2> /dev/null || (echo 'Cleanup unattached sessions!' && tmux ls)
+tmux-cleanup-sessions() {
+  tmux list-sessions | grep -v attached | awk 'BEGIN{FS=\":\"}{print \"\$1\"}' | xargs -n 1 tmux kill-session -t 2>/dev/null || (echo 'Cleanup unattached sessions!' && tmux ls)
 }
-tmux-cleanup-windows () {
-  tmux list-windows | grep -v attached | awk 'BEGIN{FS=\":\"}{print $1}' | xargs -n 1 tmux kill-window -t 2> /dev/null || (echo 'Cleanup unattached windows!' && tmux ls)
+tmux-cleanup-windows() {
+  tmux list-windows | grep -v attached | awk 'BEGIN{FS=\":\"}{print $1}' | xargs -n 1 tmux kill-window -t 2>/dev/null || (echo 'Cleanup unattached windows!' && tmux ls)
 }
 
 # alias open=xdg-open # Linux
@@ -911,8 +907,6 @@ fi
 
 # asdf - Extendable version manager with support for Ruby, Node.js, Elixir, Erlang & more
 # . "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
-
-
 
 # Direnv
 _evalcache direnv hook zsh
