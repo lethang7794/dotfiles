@@ -16,6 +16,7 @@ yarn = "4"
 gitleaks = "latest"
 pre-commit = "latest"
 "npm:ttab" = "latest"
+awscli = "latest"
 
 [settings]
 experimental = true
