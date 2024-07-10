@@ -27,6 +27,10 @@ if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
 fi
 if [ -f ${zsh_plugins}.zsh ]; then
   source ${zsh_plugins}.zsh
+
+# Mise-en-place
+if [ "$(command -v mise)" ]; then
+  _evalcache mise activate zsh
 fi
 
 ## zsh
@@ -876,10 +880,7 @@ fi
 # asdf - Extendable version manager with support for Ruby, Node.js, Elixir, Erlang & more
 # . "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
 
-# Mise-en-place
-if [ "$(command -v mise)" ]; then
-  _evalcache mise activate zsh
-fi
+
 
 # Direnv
 _evalcache direnv hook zsh
