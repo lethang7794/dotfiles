@@ -1,3 +1,5 @@
+# shellcheck disable=SC2155,SC1090
+
 # DEBUG_PERF=true
 [[ $DEBUG_PERF == true ]] && zmodload zsh/zprof
 
@@ -13,20 +15,22 @@ if [ -f "$HOMEBREW_BIN" ]; then
   export HOMEBREW_AUTO_UPDATE_SECS="86400"
 fi
 
+
 ## Antidote - zsh packages
 ANTIDOTE_BIN="$HOMEBREW_PREFIX/opt/antidote/share/antidote/antidote.zsh"
 if [ -f "$ANTIDOTE_BIN" ]; then
-  source $ANTIDOTE_BIN
+  source "$ANTIDOTE_BIN"
 fi
 zstyle ':antidote:bundle' use-friendly-names 'yes'
 zsh_plugins=${ZDOTDIR}/.zsh_plugins
 if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
   (
-    [ "$(command -v antidote)" ] && antidote bundle <${zsh_plugins}.txt >${zsh_plugins}.zsh
+    [ "$(command -v antidote)" ] && antidote bundle <"${zsh_plugins}".txt >"${zsh_plugins}".zsh
   )
 fi
-if [ -f ${zsh_plugins}.zsh ]; then
-  source ${zsh_plugins}.zsh
+if [ -f "${zsh_plugins}".zsh ]; then
+  source "${zsh_plugins}".zsh
+fi
 
 # Mise-en-place
 if [ "$(command -v mise)" ]; then
@@ -60,6 +64,7 @@ export ZSH=$(antidote path ohmyzsh/ohmyzsh)
 export ZSH_CUSTOM="$XDG_CONFIG_HOME/zsh/zsh_custom"
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+# shellcheck disable=SC2034
 ZSH_THEME="robbyrussell"
 
 zstyle ':omz:update' mode disabled
@@ -68,14 +73,18 @@ if [[ "$(command -v git)" && -d $ZSH ]]; then
   # ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump-$HOST" # Oh-my-zsh will use ZDOTDIR
   # mkdir -p $ZSH_CACHE_DIR
 
+  # shellcheck disable=SC2034
   ZSH_DISABLE_COMPFIX="true"
 
+  # shellcheck disable=SC2034
   plugins=(
     # golang # doesn't need this
   )
 
   FPATH="${FPATH}:$(brew --prefix)/share/zsh/site-functions" # CURRENT THIS DOESN'T WORK
-  source $ZSH/oh-my-zsh.sh
+  
+  # shellcheck disable=SC1091
+  source "$ZSH"/oh-my-zsh.sh
 fi
 
 # TODO: load brew conpletions after:
@@ -93,17 +102,17 @@ export ARGC_COMPLETIONS_ROOT="/home/lqt/go/src/github.com/sigoden/argc-completio
 export ARGC_COMPLETIONS_PATH="$ARGC_COMPLETIONS_ROOT/completions"                   #
 # export PATH="$ARGC_COMPLETIONS_ROOT/bin:$PATH"                                    # Use the one from brew
 # To add a subset of completions only, change next line e.g. argc_scripts=( cargo git )
-argc_scripts=($(ls -p -1 "$ARGC_COMPLETIONS_ROOT/completions" | sed -n 's/\.sh$//p')) # All argc-completions 
-# argc_scripts=( 
-#   broot
-#   fzf
-#   kubeadm # Better then the builtin
-#   minikube
-#   ctrld
-#   ttab
-#   wmctrl
-# )
-_evalcache argc --argc-completions zsh $argc_scripts
+# argc_scripts=($(ls -p -1 "$ARGC_COMPLETIONS_ROOT/completions" | sed -n 's/\.sh$//p')) # All argc-completions 
+argc_scripts=( 
+  broot
+  fzf
+  kubeadm # Better then the builtin
+  minikube
+  ctrld
+  ttab
+  wmctrl
+)
+_evalcache argc --argc-completions zsh "${argc_scripts[*]}"
 
 # TODO: migrate away from oh-my-zsh to have full control
 # Load completions the second time, which will make zsh startup a lot slower
@@ -125,6 +134,8 @@ export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 ## TODO: Move alias to a different file
 ## Aliases
+alias type="type -a"
+
 alias rm="echo Use \'trash\' or \'trash-put\' instead of \'rm\'."
 alias rmdir="echo Use \'trash\' or \'trash-put\' instead of \'rmdir\'."
 alias mv="mv -iv"
@@ -144,7 +155,8 @@ alias c="code"
 alias ci="code-insiders"
 
 # Globalias
-GLOBALIAS_FILTER_VALUES=(ls which z grep dk open rm rmdir rm-yes-i-know rmdir-yes-i-know mv)
+# shellcheck disable=SC2034
+GLOBALIAS_FILTER_VALUES=(ls which type z grep open rm rmdir rm-yes-i-know rmdir-yes-i-know mv)
 
 ## Brew
 if [ -f "$HOMEBREW_BIN" ]; then
@@ -216,7 +228,8 @@ function treee {
 }
 
 ## AWS https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-completion.html#cli-command-completion-linux
-# complete -C '/usr/bin/aws_completer' aws
+# complete -C "$(which aws_completer)" aws
+complete -C "$HOME/.local/share/mise/installs/awscli/latest/bin/aws_completer" aws
 
 ## zoxide: smarter cd
 # https://github.com/ajeetdsouza/zoxide/blob/main/src/cmd/query.rs
@@ -239,6 +252,7 @@ export _ZO_FZF_OPTS="
   --preview='tree -C --dirsfirst -L 1 {2..}'
   --preview-window=right
   --bind='alt-z:toggle-preview-wrap'
+  --bind 'alt-x:toggle-wrap'
   --bind='ctrl-y:execute-silent(echo -n {2..} | xclip -selection clipboard)'
   --bind='ctrl-s:toggle-sort'
   --bind 'ctrl-/:toggle-preview'
@@ -252,7 +266,7 @@ bindkey "^[z" zi # Bind Alt+z to zi
 # Walk https://github.com/antonmedv/walk
 export WALK_REMOVE_CMD=trash
 function lk {
-  cd "$(walk --icons --fuzzy --preview "$@")"
+  cd "$(walk --icons --fuzzy --preview "$@")" || exit
 }
 
 # List the shell functions with highlight, fuzzy search
@@ -282,6 +296,8 @@ export FZF_DEFAULT_OPTS="
   --info=inline-right
   --preview-window=right,57%,~1,+{0}+1/2
   --bind='alt-z:toggle-preview-wrap'
+  --bind 'alt-x:toggle-wrap'
+  --wrap-sign '    '
   --bind='ctrl-y:execute-silent(echo -n {} | xclip -selection clipboard)'
   --bind='ctrl-s:toggle-sort'
   --bind 'ctrl-/:toggle-preview'
@@ -306,6 +322,7 @@ export FZF_CTRL_R_OPTS="
 "
 
 export FZF_ALT_T_COMMAND="fd --color=always --hidden --type=file '' '$HOME'"
+# shellcheck disable=SC2016
 typeTransformerAltT='
   if [[ ! $FZF_PROMPT =~ Files ]]; then
     echo "change-prompt( Files> )+reload(fd --color=always --hidden --type=file {q} '$HOME')"
@@ -314,6 +331,7 @@ typeTransformerAltT='
   fi
 '
 export FZF_CTRL_T_COMMAND="fd --color=always --hidden --type=file"
+# shellcheck disable=SC2016
 typeTransformerCtrlT='
   if [[ ! $FZF_PROMPT =~ Files ]]; then
     echo "change-prompt( Files> )+reload(fd --color=always --hidden --type=file)"
@@ -363,6 +381,7 @@ function rg-fzf {
   RG_PREFIX="rg --line-number --no-heading --color=always --smart-case --colors=path:style:underline --colors=line:style:underline --colors=line:fg:white --colors=match:style:nobold --colors=match:fg:197,209,222 --colors=match:bg:45,88,156"
   INITIAL_QUERY="${*:-}"
 
+  # shellcheck disable=SC2016
   : | fzf --ansi --disabled --query "$INITIAL_QUERY" \
     --bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \
     --bind 'ctrl-f:transform:[[ ! $FZF_PROMPT =~ ripgrep ]] &&
@@ -422,6 +441,7 @@ function fzf-man {
   export local tldr_cmd="echo $ tldr {1}; tldr --color=always {1} | tail -n +3"
   export local cheat_cmd="echo $ cheat {1}; echo; cheat --colorize {1}"
   export local man_cmd="echo $ man {1}; man {1} 2>/dev/null | bat --language=man --plain --color=always"
+  # shellcheck disable=SC2016
   export local help_cmd='
     if [ "\$(command -v {1})" ]; then
       if timeout 0.3s bash -c "{1} -h" 1>/dev/null 2>&1; then
@@ -456,8 +476,8 @@ function fzf-man {
 
   local file=$manlist_file
   if [[ ! -e $file || $file -ot $CACHE_TIME ]]; then
-    local manlist=$(man -k . | sort | awk -v cyan=$(tput setaf 6) -v blue=$(tput setaf 4) -v res=$(tput sgr0) -v bld=$(tput bold) '{ $1=cyan bld $1; $2=res blue;} 1')
-    echo $manlist >$file
+    local manlist=$(man -k . | sort | awk -v cyan="$(tput setaf 6)" -v blue="$(tput setaf 4)" -v res="$(tput sgr0)" -v bld="$(tput bold)" '{ $1=cyan bld $1; $2=res blue;} 1')
+    echo "$manlist" >$file
   else
     local manlist=$(cat $file)
   fi
@@ -465,7 +485,7 @@ function fzf-man {
   local file=$cheatlist_file
   if [[ ! -e $file || $file -ot $CACHE_TIME ]]; then
     local cheatlist=$(cheat -l | awk '{printf "\033[1;36m%s\033[0m %s\n", $1, $3}' | tail --lines +2 | sed 's/community\,*//g' | column -t)
-    echo $cheatlist >$file
+    echo "$cheatlist" >$file
   else
     local cheatlist=$(cat $file)
   fi
@@ -474,7 +494,7 @@ function fzf-man {
   if [[ ! -e $file || $file -ot $CACHE_TIME ]]; then
     tldr --update >/dev/null 2>&1
     local tldrlist=$(tldr --list)
-    echo $tldrlist >$file
+    echo "$tldrlist" >$file
   else 
     local tldrlist=$(cat $file)
   fi
@@ -482,11 +502,12 @@ function fzf-man {
   local file=$compgenlist_file
   if [[ ! -e $file || $file -ot $CACHE_TIME ]]; then
     local compgenlist=$(compgen -c | sort -u | grep -Ev "^_")
-    echo $compgenlist >$file
+    echo "$compgenlist" >$file
   else 
     local compgenlist=$(cat $file)
   fi
   
+  # shellcheck disable=SC2016
   local executer='
     if [[ $FZF_PROMPT =~ TLDR ]]; then
       tldr {1}
@@ -500,6 +521,7 @@ function fzf-man {
   '
 
   # TLDR -> Cheat --> help --> man 
+  # shellcheck disable=SC2016
   local transformer='
     if [[ $FZF_PROMPT =~ TLDR ]]; then
       echo "change-prompt(󰬊 Cheat > )+reload(cat $cheatlist_file)+change-preview($cheat_cmd)"
@@ -512,13 +534,14 @@ function fzf-man {
     fi
   '
 
-  echo $tldrlist |
+  echo "$tldrlist" |
     fzf \
       -q "$query" \
       --ansi \
       --border none \
       --tiebreak=begin \
-      --prompt='󰬛 TLDR > ' \
+      --prompt='󰬛 TL  # shellcheck disable=SC2124
+DR > ' \
       --bind "alt-1:change-prompt(󰬛 TLDR > )+reload(cat $tldrlist_file)+change-preview($tldr_cmd)" \
       --bind "alt-2:change-prompt(󰬊 Cheat > )+reload(cat $cheatlist_file)+change-preview($cheat_cmd)" \
       --bind "alt-3:change-prompt(󰬏 Help > )+reload(cat $compgenlist_file)+change-preview($help_cmd)" \
@@ -538,7 +561,7 @@ function fzf-man {
 }
 
 function fzf-man-widget {
-  fzf-man $LBUFFER
+  fzf-man "$LBUFFER"
 }
 
 # `Alt-H` keybinding to launch the widget (this widget works only on zsh, don't know how to do it on bash and fish (additionaly pressing`ctrl-backspace` will trigger the widget to be executed too because both share the same keycode)
@@ -550,6 +573,7 @@ function fzf-chezmoi {
   local chezmoi_status_cmd="chezmoi status --path-style=absolute"
 
   # Use ANSI C quoting, $'..' to escape single quote with '\'' for awk
+  # shellcheck disable=SC2016
   local transformer=$'
     if [[ $FZF_PROMPT =~ Changed ]]; then
       echo "change-prompt(All Managed Files > )+reload(chezmoi managed --path-style=absolute)"
@@ -568,8 +592,9 @@ function fzf-chezmoi {
   '
   
 
-  eval $chezmoi_status_cmd | awk '{print $2}' | 
-    fzf --preview $default_preview \
+  # shellcheck disable=SC2016
+  eval "$chezmoi_status_cmd" | awk '{print $2}' | 
+    fzf --preview "$default_preview" \
       --cycle \
       --prompt 'Changed Files > ' \
       --preview-window 'right' \
@@ -629,12 +654,13 @@ zstyle ':fzf-tab:complete:*' fzf-bindings \
 zstyle ':completion:*:descriptions' format '[%d]'
 
 # set list-colors to enable filename colorizing
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
 # force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
 zstyle ':completion:*' menu no
 
 # preview directory's content with eza when completing cd
+# shellcheck disable=SC2016
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'tree -C --dirsfirst -L 1 $realpath | head -200'
 
 # zstyle ':fzf-tab:*' single-group color header
@@ -690,9 +716,9 @@ export ATAC_MAIN_DIR=~/.config/atac
 function lg()    {
   lazygit "$@" 
 
-  if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
-    cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
-    rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
+  if [ -f "$LAZYGIT_NEW_DIR_FILE" ]; then
+    cd "$(cat "$LAZYGIT_NEW_DIR_FILE")" || exit
+    rm -f "$LAZYGIT_NEW_DIR_FILE" > /dev/null
   fi
 }
 
@@ -704,17 +730,16 @@ function lg()    {
 
 
 function upd() {
-  echo "\n🆕 Update dnf packages"
+  printf "\n🆕 Update dnf packages"
   sudo dnf upgrade -y --refresh
-  # sudo dnf upgrade -y
 
-  echo "\n🆕 Update zsh plugins"
+  printf "\n🆕 Update zsh plugins"
   antidote update
 
-  echo "\n🆕 Update flatpak packages"
+  printf "\n🆕 Update flatpak packages"
   flatpak update -y
 
-  echo "\n🆕 Update Homebrew packages"
+  printf "\n🆕 Update Homebrew packages"
   brew update && brew upgrade
 
 }
@@ -750,11 +775,11 @@ alias awsume=". awsume"
 # Go cover https://dave.cheney.net/2013/11/14/more-simple-test-coverage-in-go-1-2
 go-cover() {
   t=$(mktemp)
-  go test $COVERFLAGS -coverprofile=$t $@ && go tool cover -func=$t && unlink $t
+  go test "$COVERFLAGS" -coverprofile="$t" "$@" && go tool cover -func="$t" && unlink "$t"
 }
 go-cover-web() {
   t=$(mktemp)
-  go test $COVERFLAGS -coverprofile=$t $@ && go tool cover -html=$t && unlink $t
+  go test "$COVERFLAGS" -coverprofile="$t" "$@" && go tool cover -html="$t" && unlink "$t"
 }
 
 # JetBrains
@@ -780,8 +805,12 @@ export PATH="/home/lqt/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 #   exec tmux
 # fi
 
-alias tmux-cleanup-sessions="tmux list-sessions | grep -v attached | awk 'BEGIN{FS=\":\"}{print $1}' | xargs -n 1 tmux kill-session -t 2> /dev/null || (echo 'Cleanup unattached sessions!' && tmux ls)"
-alias tmux-cleanup-windows="tmux list-windows | grep -v attached | awk 'BEGIN{FS=\":\"}{print $1}' | xargs -n 1 tmux kill-window -t 2> /dev/null || (echo 'Cleanup unattached windows!' && tmux ls)"
+tmux-cleanup-sessions () {
+  tmux list-sessions | grep -v attached | awk 'BEGIN{FS=\":\"}{print \"\$1\"}' | xargs -n 1 tmux kill-session -t 2> /dev/null || (echo 'Cleanup unattached sessions!' && tmux ls)
+}
+tmux-cleanup-windows () {
+  tmux list-windows | grep -v attached | awk 'BEGIN{FS=\":\"}{print $1}' | xargs -n 1 tmux kill-window -t 2> /dev/null || (echo 'Cleanup unattached windows!' && tmux ls)
+}
 
 # alias open=xdg-open # Linux
 function open() {
@@ -799,9 +828,9 @@ function touchfile() {
 
 REPOS="$HOME/go/src/github.com/lethang7794"
 GITHUB="$HOME/go/src/github.com"
-alias repos="cd $REPOS"
+alias repos="cd \$REPOS"
 # alias gh="cd $GITHUB"
-alias github="cd $GITHUB"
+alias github="cd \$GITHUB"
 
 function ghclone() {
   local repo="$1"
@@ -812,7 +841,8 @@ function ghclone() {
   fi
 
   shift 1
-  local rest="$@"
+  # shellcheck disable=SC2124
+  local rest=$@
 
   if [[ -z "${repo}" ]]; then
     echo "Usage: ghclone ORG/REPO"
@@ -825,19 +855,21 @@ function ghclone() {
   if [ -d "$dest" ] && [ -d "$dest/.git" ]; then
     echo "You've already cloned this repo at: $dest"
     echo "Happy hacking, again! 🎮 ૮ ˶ᵔ ᵕ ᵔ˶ ა"
-    cd "$dest"
+    cd "$dest" || exit
     return 1
   fi
 
   # Clone the repository
   echo "Cloning 󰊤  /$repo"
-  git clone $rest "$clone_url" "$dest" && echo "Happy hacking! 🚀 (づ｡◕‿‿◕｡)づ" && cd "$dest"
+  git clone "$rest" "$clone_url" "$dest" && echo "Happy hacking! 🚀 (づ｡◕‿‿◕｡)づ"
+  cd "$dest" || exit
 }
 # compdef ghclone="git" # How to use completions of git clone?
 
 timezsh() {
   shell=${1-$SHELL}
-  for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
+  # shellcheck disable=SC2034
+  for i in $(seq 1 10); do /usr/bin/time "$shell" -i -c exit; done
 }
 
 # Created by `pipx` on 2024-04-01 17:04:47
@@ -848,7 +880,7 @@ function yy() {
   local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
   yazi "$@" --cwd-file="$tmp"
   if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-    cd -- "$cwd"
+    cd -- "$cwd" || exit
   fi
   /usr/bin/rm -f -- "$tmp"
 }
