@@ -101,16 +101,23 @@ export ARGC_COMPLETIONS_ROOT="/home/lqt/go/src/github.com/sigoden/argc-completio
 export ARGC_COMPLETIONS_PATH="$ARGC_COMPLETIONS_ROOT/completions"                   #
 # export PATH="$ARGC_COMPLETIONS_ROOT/bin:$PATH"                                    # Use the one from brew
 # To add a subset of completions only, change next line e.g. argc_scripts=( cargo git )
-# argc_scripts=($(ls -p -1 "$ARGC_COMPLETIONS_ROOT/completions" | sed -n 's/\.sh$//p')) # All argc-completions
-argc_scripts=(
-  broot
-  fzf
-  kubeadm # Better then the builtin
-  minikube
-  ctrld
-  ttab
-  wmctrl
-)
+# argc_scripts=(
+#   broot
+#   fzf
+#   kubeadm # Better then the builtin
+#   minikube
+#   ctrld
+#   ttab
+#   wmctrl
+#   packer
+# )
+# shellcheck disable=SC2207,SC2012
+argc_scripts_include=($(ls -p -1 "$ARGC_COMPLETIONS_ROOT/completions" | sed -n 's/\.sh$//p')) # All argc-completions
+argc_scripts_exclude=(docker)
+argc_scripts_exclude_pattern=$(printf "|%s" "${argc_scripts_exclude[@]}")
+argc_scripts_exclude_pattern=${argc_scripts_exclude_pattern:1} # Remove the leading '|'
+argc_scripts_items=$(printf "%s\n" "${argc_scripts_include[@]}" | grep -v -E "${argc_scripts_exclude_pattern}")
+argc_scripts=$(echo "$argc_scripts_items" | tr "\n" " ")
 _evalcache argc --argc-completions zsh "${argc_scripts[*]}"
 
 # TODO: migrate away from oh-my-zsh to have full control
