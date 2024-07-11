@@ -726,16 +726,16 @@ function lg() {
 # }
 
 function upd() {
-  printf "\n🆕 Update dnf packages"
+  printf "\n🆕 Update dnf packages\n"
   sudo dnf upgrade -y --refresh
 
-  printf "\n🆕 Update zsh plugins"
+  printf "\n🆕 Update zsh plugins\n"
   antidote update
 
-  printf "\n🆕 Update flatpak packages"
+  printf "\n🆕 Update flatpak packages\n"
   flatpak update -y
 
-  printf "\n🆕 Update Homebrew packages"
+  printf "\n🆕 Update Homebrew packages\n"
   brew update && brew upgrade
 
 }
