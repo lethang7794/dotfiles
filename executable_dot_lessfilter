@@ -67,7 +67,7 @@ elif [ "$kind" = x-executable ] || [ "$kind" = octet-stream ]; then
   hexyl "$1"
 
 elif [[ "$ext" =~ md|markdown ]]; then
-  paper --margin=4 --v-margin=1 "$1"
+  paper --h-margin=3 --v-margin=1 --width=80 --tab-length=2 --syncat --hide-urls "$1" 
   # glow "$1"
   # mdless "$1"
 
