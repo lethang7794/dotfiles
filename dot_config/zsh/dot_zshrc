@@ -544,8 +544,7 @@ function fzf-man {
       --ansi \
       --border none \
       --tiebreak=begin \
-      --prompt='󰬛 TL  # shellcheck disable=SC2124
-DR > ' \
+      --prompt='󰬛 TLDR > ' \
       --bind "alt-1:change-prompt(󰬛 TLDR > )+reload(cat $tldrlist_file)+change-preview($tldr_cmd)" \
       --bind "alt-2:change-prompt(󰬊 Cheat > )+reload(cat $cheatlist_file)+change-preview($cheat_cmd)" \
       --bind "alt-3:change-prompt(󰬏 Help > )+reload(cat $compgenlist_file)+change-preview($help_cmd)" \
