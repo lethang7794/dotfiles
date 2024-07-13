@@ -17,6 +17,9 @@ gitleaks = "latest"
 pre-commit = "latest"
 "npm:ttab" = "latest"
 awscli = "latest"
+packer = "latest"
+terraform = "latest"
+opentofu = "latest"
 
 [settings]
 experimental = true
