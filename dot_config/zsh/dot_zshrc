@@ -442,11 +442,11 @@ function fzf-man-cleanup {
 function fzf-man {
   local query=$1
 
-  local tldr_cmd="echo $ tldr {1}; tldr --color=always {1} | tail -n +3"
-  local cheat_cmd="echo $ cheat {1}; secho; cheat --colorize {1}"
-  local man_cmd="echo $ man {1}; man {1} 2>/dev/null | bat --language=man --plain --color=always"
+  export tldr_cmd="echo $ tldr {1}; tldr --color=always {1} | tail -n +3"
+  export cheat_cmd="echo $ cheat {1}; echo; cheat --colorize {1}"
+  export man_cmd="echo $ man {1}; man {1} 2>/dev/null | bat --language=man --plain --color=always"
   # shellcheck disable=SC2016
-  local help_cmd='
+  export help_cmd='
     if [ "\$(command -v {1})" ]; then
       if timeout 0.3s bash -c "{1} -h" 1>/dev/null 2>&1; then
         h=$({1} -h 2>/dev/null | bat --color=always -pl help)
@@ -469,10 +469,10 @@ function fzf-man {
     fi
   '
 
-  local manlist_file="/tmp/fzf-man-manlist"
-  local cheatlist_file="/tmp/fzf-man-cheatlist"
-  local tldrlist_file="/tmp/fzf-man-tldrlist"
-  local compgenlist_file="/tmp/fzf-man-compgenlist"
+  export manlist_file="/tmp/fzf-man-manlist"
+  export cheatlist_file="/tmp/fzf-man-cheatlist"
+  export tldrlist_file="/tmp/fzf-man-tldrlist"
+  export compgenlist_file="/tmp/fzf-man-compgenlist"
 
   local N=22
   local CACHE_TIME="/tmp/fzf-man-cache-time"
