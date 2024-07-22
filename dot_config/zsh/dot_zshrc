@@ -95,6 +95,8 @@ fi
 ## Completions from command
 # _evalcache kubeadm completion zsh
 
+## Other completions
+
 ## argc-completions: load after oh-my-zsh
 # Load argc-completions first, so they can be override by others                    # ?
 export ARGC_COMPLETIONS_ROOT="/home/lqt/go/src/github.com/sigoden/argc-completions" #
@@ -316,7 +318,7 @@ export FZF_DEFAULT_OPTS="
 export FZF_CTRL_R_OPTS="
   --color label:italic
   --border-label='╢ Ctrl+R: Search history ╟'
-  --preview 'echo {2..} | bat --color=always -pl sh' 
+  --preview 'echo {2..} | bat --color=always -pl sh'
   --preview-window up:5:hidden:wrap
   --color header:italic
   --header '<Ctrl-Y> Copy\\t<Ctrl-/> Preview\\t<Ctrl-S> Sort'
@@ -859,14 +861,15 @@ function ghclone() {
   if [ -d "$dest" ] && [ -d "$dest/.git" ]; then
     echo "You've already cloned this repo at: $dest"
     echo "Happy hacking, again! 🎮 ૮ ˶ᵔ ᵕ ᵔ˶ ა"
-    cd "$dest" || exit
+    cd "$dest" || return
     return 1
   fi
 
   # Clone the repository
   echo "Cloning 󰊤  /$repo"
-  git clone "$rest" "$clone_url" "$dest" && echo "Happy hacking! 🚀 (づ｡◕‿‿◕｡)づ"
-  cd "$dest" || exit
+  # shellcheck disable=SC2086
+  git clone $rest "$clone_url" "$dest" && cd "$dest" && echo "Happy hacking! 🚀 (づ｡◕‿‿◕｡)づ"
+
 }
 # compdef ghclone="git" # How to use completions of git clone?
 
