@@ -733,7 +733,7 @@ function lg() {
 
 function upd() {
   printf "\n🆕 Update dnf packages\n"
-  sudo dnf upgrade -y --refresh
+  sudo dnf5 upgrade -y --refresh
 
   printf "\n🆕 Update zsh plugins\n"
   antidote update
@@ -741,9 +741,11 @@ function upd() {
   printf "\n🆕 Update flatpak packages\n"
   flatpak update -y
 
+  printf "\n🆕 Update Gnome-Software packages\n"
+  pkcon refresh && pkcon update
+
   printf "\n🆕 Update Homebrew packages\n"
   brew update && brew upgrade
-
 }
 
 ## Kubernetes
