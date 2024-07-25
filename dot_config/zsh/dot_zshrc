@@ -520,7 +520,7 @@ function fzf-man {
     elif [[ $FZF_PROMPT =~ Cheat ]]; then
       cheat {1}
     elif [[ $FZF_PROMPT =~ Man ]]; then
-      man {1}
+      man {1} 2>/dev/null | bat --language=man --plain --color=always
     else
       :
     fi
