@@ -26,7 +26,17 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = { "vim", "lua", "vimdoc", "html", "css" }
-    }
+    },
+    config = function()
+      require "configs.nvim-treesitter"
+    end
+  },
+  {
+    "lewis6991/gitsigns.nvim",
+    event = "VeryLazy",
+    config = function()
+      require "configs.gitsigns"
+    end
   },
   { "junegunn/goyo.vim",                   event = "VeryLazy" },
   { 'echasnovski/mini.icons',              event = "VeryLazy", },
@@ -34,5 +44,4 @@ return {
   { "sindrets/diffview.nvim",              event = "VeryLazy", },
   { "preservim/vim-pencil",                event = "VeryLazy", },
   { "lukas-reineke/indent-blankline.nvim", event = "VeryLazy", main = "ibl", opts = {} },
-  { "lewis6991/gitsigns.nvim",             event = "VeryLazy" },
 }
