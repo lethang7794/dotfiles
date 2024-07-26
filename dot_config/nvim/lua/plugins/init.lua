@@ -6,7 +6,7 @@ return {
       require "configs.conform"
     end
   },
-  { "junegunn/goyo.vim" },
+  { "junegunn/goyo.vim",      event = "VeryLazy" },
   {
     "neovim/nvim-lspconfig",
     config = function()
@@ -105,7 +105,7 @@ return {
       },
     },
   },
-  { 'echasnovski/mini.icons', version = false },
+  { 'echasnovski/mini.icons', version = false,   event = "VeryLazy", },
   {
     "doctorfree/cheatsheet.nvim",
     event = "VeryLazy",
@@ -141,5 +141,10 @@ return {
         },
       })
     end,
-  }
+  },
+  { "nvim-tree/nvim-web-devicons",         version = false, event = "VeryLazy", },
+  { "sindrets/diffview.nvim",              version = false, event = "VeryLazy", },
+  { "preservim/vim-pencil",                version = false, event = "VeryLazy", },
+  { "lukas-reineke/indent-blankline.nvim", version = false, event = "VeryLazy", main = "ibl", opts = {} },
+  { "lewis6991/gitsigns.nvim",             version = false, event = "VeryLazy" },
 }
