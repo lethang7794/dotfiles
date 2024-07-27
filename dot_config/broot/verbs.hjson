@@ -64,7 +64,7 @@
     },
     {
       "invocation": "edit",
-      "shortcut": "ctrl-e",
+      "key": "ctrl-e",
       "execution": "$EDITOR {file}",
       "leave_broot": false
     },
