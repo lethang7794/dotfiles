@@ -21,6 +21,7 @@ yarn = "4"
 "npm:pm2" = "latest"
 "npm:ttab" = "latest"
 "npm:yo" = "latest"
+"npm:prettier" = "latest"
 
 [settings]
 experimental = true
