@@ -54,8 +54,8 @@
 	//     "prettier_cli_path": "%USERPROFILE%\\bin\\prettier.cmd"
 	// ----------------------------------------------------------------------
 
-	"prettier_cli_path": "~/.volta/bin/prettier",
-
+	"prettier_cli_path": "/home/lqt/.local/share/mise/installs/npm-prettier/latest/bin/prettier",
+	// "prettier_cli_path": "/home/linuxbrew/.linuxbrew/bin/prettierd",
 	// ----------------------------------------------------------------------
 	// Node Path
 	// ----------------------------------------------------------------------
