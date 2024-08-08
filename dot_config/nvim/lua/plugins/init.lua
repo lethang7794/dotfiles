@@ -45,4 +45,5 @@ return {
   { "sindrets/diffview.nvim",              event = "VeryLazy", },
   { "preservim/vim-pencil",                event = "VeryLazy", },
   { "lukas-reineke/indent-blankline.nvim", event = "VeryLazy", main = "ibl", opts = {} },
+  { "HiPhish/rainbow-delimiters.nvim",     event = "VeryLazy" }
 }
