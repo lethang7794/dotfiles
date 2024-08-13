@@ -175,13 +175,13 @@ if [ -f "$HOMEBREW_BIN" ]; then
 fi
 
 ## Bind Alt+R to reload shell config
-function source-shell {
-  echo "Source shell configuration"
-  # exec -l zsh
-  omz reload
-}
-zle -N source-shell        # Define source-shell as a new widget
-bindkey "^[r" source-shell # Bind Alt+R to source-shell
+# function source-shell {
+#   echo "Source shell configuration"
+#   # exec -l zsh
+#   omz reload
+# }
+# zle -N source-shell        # Define source-shell as a new widget
+# bindkey "^[r" source-shell # Bind Alt+R to source-shell
 # TODO: The shell will be closed, not reload the current session
 
 ## Zsh plugin
@@ -331,22 +331,22 @@ export FZF_ALT_T_COMMAND="fd --color=always --hidden --type=file '' '$HOME'"
 # shellcheck disable=SC2016
 typeTransformerAltT='
   if [[ ! $FZF_PROMPT =~ Files ]]; then
-    echo "change-prompt( Files> )+reload(fd --color=always --hidden --type=file {q} '$HOME')"
+    echo "change-border-label@╢ Alt+T: Search files in \$HOME (absolute path) ╟@+change-prompt( Files> )+reload(fd --color=always --hidden --type=file {q} '$HOME')"
   else
-    echo "change-prompt( Directories> )+reload(fd --color=always --hidden --type=directory {q} '$HOME')"
+    echo "change-border-label@╢ Alt+T: Search files in \$HOME (absolute path) ╟@+change-prompt( Directories> )+reload(fd --color=always --hidden --type=directory {q} '$HOME')"
   fi
 '
 export FZF_CTRL_T_COMMAND="fd --color=always --hidden --type=file"
 # shellcheck disable=SC2016
 typeTransformerCtrlT='
   if [[ ! $FZF_PROMPT =~ Files ]]; then
-    echo "change-prompt( Files> )+reload(fd --color=always --hidden --type=file)"
+    echo "change-border-label(╢ Ctrt+T: Search files relative to \$PWD ╟)+change-prompt( Files> )+reload(fd --color=always --hidden --type=file)"
   else
-    echo "change-prompt( Directories> )+reload(fd --color=always --hidden --type=directory)"
+    echo "change-border-label(╢ Ctrt+T: Search files relative to \$PWD ╟)+change-prompt( Directories> )+reload(fd --color=always --hidden --type=directory)"
   fi
 '
 export FZF_CTRL_T_OPTS="
-  --border-label='╢ Ctr+T: Search files by path ╟'
+  --border-label='╢ Ctrt+T / Alt+T: Search files ╟'
   --prompt ' Files> '
   --color header:italic
   --color label:italic
