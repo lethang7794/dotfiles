@@ -17,6 +17,7 @@
   "kitty-scrollback.nvim": { "branch": "main", "commit": "dc101d0a8356db9c7290dfbfa82c27ec35e3b55a" },
   "lazy.nvim": { "branch": "main", "commit": "077102c5bfc578693f12377846d427f49bc50076" },
   "lazygit.nvim": { "branch": "main", "commit": "dc56df433bfbf107fee0139e187eb9750878fa84" },
+  "markmap.nvim": { "branch": "main", "commit": "b26c6d544c8d588eda1ac3045d62d4dcf85d07a7" },
   "mason.nvim": { "branch": "main", "commit": "e2f7f9044ec30067bc11800a9e266664b88cda22" },
   "mini.icons": { "branch": "main", "commit": "fe63fe080e76d80713557e5f0c65bc15b14b152d" },
   "nvim-autopairs": { "branch": "master", "commit": "4a39f2dcbe1967ddc3a0f76f863540dd3aa7871a" },
