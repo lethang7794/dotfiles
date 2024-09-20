@@ -21,11 +21,11 @@ yarn = "4"
 "npm:ttab" = "latest"
 "npm:yo" = "latest"
 "npm:prettier" = "latest"
-pnpm = "latest"
 "npm:@vscode/vsce" = "latest"
 node = "18"
 "npm:markmap-cli" = "latest"
 "npm:concurrently" = "latest"
+pnpm = "9.10.0"
 
 [settings]
 experimental = true

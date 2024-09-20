@@ -244,4 +244,27 @@
       "file": "skins/white.hjson"
     }
   ]
+
+###############################################################
+# Transformers
+#
+  "preview_transformers": [
+    // {
+    //   input_extensions: [ "pdf" ] 
+    //   output_extension: png
+    //   mode: image
+    //   command: [ "mutool", "draw", "-w", "1000", "-o", "{output-path}", "{input-path}" ]
+    // }
+    // {
+    //     input_extensions: [ "xls", "xlsx", "doc", "docx", "ppt", "pptx", "ods", "odt", "odp" ]
+    //     output_extension: png
+    //     mode: image
+    //     command: [
+    //         "libreoffice", "--headless",
+    //         "--convert-to", "png",
+    //         "--outdir", "{output-dir}",
+    //         "{input-path}"
+    //     ]
+    // }
+  ]
 }
