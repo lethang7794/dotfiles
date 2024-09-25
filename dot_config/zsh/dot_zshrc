@@ -453,20 +453,27 @@ function fzf-man {
       if timeout 0.3s bash -c "{1} -h" 1>/dev/null 2>&1; then
         h=$({1} -h 2>/dev/null | bat --color=always -pl help)
       fi
-      if timeout 0.3s bash -c "{1} --h" 1>/dev/null 2>&1; then
+      if timeout 0.3s bash -c "{1} --help" 1>/dev/null 2>&1; then
         help=$({1} --help 2>/dev/null | bat --color=always -pl help)
+      fi
+      if timeout 0.3s bash -c "{1} help" 1>/dev/null 2>&1; then
+        help_sub=$({1} help 2>/dev/null | bat --color=always -pl help)
       fi
       if [[ -n "$h" ]] ; then
         echo \$ {1} -h
         echo $h
       fi
-      if [[ -n "$help" ]] && [[ "$h" != "$help" ]] ; then
+      if [[ -n "$help" ]] && [[ "$help" != "$h" ]] ; then
         echo
         echo \$ {1} --help
         echo $help
       fi
+      if [[ -n "$help_sub" ]] && [[ "$help_sub" != "$h" ]] ; then
+        echo \$ {1} help
+        echo "$help_sub"
+      fi
       if [[ -z "$h" ]] && [[ -z "$help" ]] ; then
-        echo \$ {1}: -h or --help are not available
+        echo \$ {1}: -h, --help or help are not available
       fi
     fi
   '
