@@ -45,9 +45,13 @@ export GOROOT="$HOME/.gobrew/current/go"
 # export RIP_GRAVEYARD="$XDG_DATA_HOME/Trash" # ~/.local/share/Trash
 
 ## Setup PATH
+export PATH="$HOME/go/bin:$PATH"                                # Golang's binary
 export PATH="$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:$PATH" # gobrew
-export PATH="$PATH:$HOME/go/bin"                                # Golang's binary
 
 ## Other setup
 # Cargo - Rust
 . "$HOME/.cargo/env"
+
+
+## Brew
+export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin${PATH+:$PATH}"
