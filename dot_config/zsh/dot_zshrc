@@ -115,7 +115,7 @@ export ARGC_COMPLETIONS_PATH="$ARGC_COMPLETIONS_ROOT/completions"               
 # )
 # shellcheck disable=SC2207,SC2012
 argc_scripts_include=($(ls -p -1 "$ARGC_COMPLETIONS_ROOT/completions" | sed -n 's/\.sh$//p')) # All argc-completions
-argc_scripts_exclude=(docker gem kubectl go brew npm pnpm)
+argc_scripts_exclude=(docker gem kubectl go brew npm pnpm openssl)
 argc_scripts_exclude_pattern=$(printf "|%s" "${argc_scripts_exclude[@]}")
 argc_scripts_exclude_pattern=${argc_scripts_exclude_pattern:1} # Remove the leading '|'
 argc_scripts_items=$(printf "%s\n" "${argc_scripts_include[@]}" | grep -v -E "${argc_scripts_exclude_pattern}")

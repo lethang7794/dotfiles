@@ -1,3 +1,6 @@
+# "$schema" = "https://mise.jdx.dev/schema/mise.json"
+
+
 [tools]
 argocd = "latest"
 awscli = "latest"
@@ -22,10 +25,14 @@ yarn = "4"
 "npm:yo" = "latest"
 "npm:prettier" = "latest"
 "npm:@vscode/vsce" = "latest"
-node = "18"
 "npm:markmap-cli" = "latest"
 "npm:concurrently" = "latest"
-pnpm = "9.10.0"
+istioctl = "latest"
+node = "latest"
+pnpm = "latest"
 
 [settings]
 experimental = true
+
+
+
