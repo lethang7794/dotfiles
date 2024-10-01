@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=k9s
+Comment=View and manage Kubernetes clusters
+Terminal=false
+Exec=alacritty --class=k9s --title=k9s -e zsh -c 'k9s; read -n 1 -s'
+Icon=/home/lqt/.local/share/icons/applications/k9s.png

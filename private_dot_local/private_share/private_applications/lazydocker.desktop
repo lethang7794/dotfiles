@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=lazydocker
+Comment=Docker in the CLI
+Keywords=docker
+Icon=/home/lqt/.local/share/icons/applications/lazydocker.png
+Exec=alacritty --class=lazydocker --title=lazydocker -e zsh -c 'lazydocker; read -n 1 -s'

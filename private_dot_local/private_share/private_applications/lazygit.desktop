@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=lazygit
+Comment=Git in the CLI
+Keywords=git
+Icon=/home/lqt/.local/share/icons/applications/lazygit.png
+Terminal=false
+Exec=alacritty --class=lazygit --title=lazygit -e zsh -c 'lazygit; read -n 1 -s'
