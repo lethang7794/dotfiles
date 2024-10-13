@@ -448,7 +448,13 @@ function fzf-man-cleanup {
 }
 
 function fzf-man {
-  local query=$1
+  local input=$1
+
+  if [[ "${input}" == *"|"* ]]; then
+    local cmd="${input##*| }"
+  else
+    local cmd=$input
+  fi
 
   export tldr_cmd="echo $ tldr {1}; tldr --color=always {1} | tail -n +3"
   export cheat_cmd="echo $ cheat {1}; echo; cheat --colorize {1}"
@@ -555,7 +561,7 @@ function fzf-man {
 
   echo "$tldrlist" |
     fzf \
-      -q "$query" \
+      -q "$cmd" \
       --ansi \
       --border none \
       --tiebreak=begin \
