@@ -15,6 +15,9 @@ if [ -f "$HOMEBREW_BIN" ]; then
   export HOMEBREW_AUTO_UPDATE_SECS="86400"
 fi
 
+## fzf-mark
+export FZF_MARKS_JUMP="^[g"
+
 ## Antidote - zsh packages
 ANTIDOTE_BIN="$HOMEBREW_PREFIX/opt/antidote/share/antidote/antidote.zsh"
 if [ -f "$ANTIDOTE_BIN" ]; then
@@ -268,6 +271,9 @@ export _ZO_FZF_OPTS="
 _evalcache zoxide init zsh
 zle -N zi        # Define zi as a new widget
 bindkey "^[z" zi # Bind Alt+z to zi
+
+zle -N lg       # Define lg as a new widget
+bindkey "^g" lg # Bind ctrl+g to lg
 
 # Walk https://github.com/antonmedv/walk
 export WALK_REMOVE_CMD=trash
