@@ -52,6 +52,5 @@ export PATH="$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:$PATH" # gobrew
 # Cargo - Rust
 . "$HOME/.cargo/env"
 
-
 ## Brew
 export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin${PATH+:$PATH}"

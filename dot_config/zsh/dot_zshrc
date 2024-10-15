@@ -461,14 +461,14 @@ function fzf-man {
   export man_cmd="echo $ man {1}; man {1} 2>/dev/null | bat --language=man --plain --color=always"
   # shellcheck disable=SC2016
   export help_cmd='
-    if [ "\$(command -v {1})" ]; then
-      if timeout 0.3s bash -c "{1} -h" 1>/dev/null 2>&1; then
+    if command -v {1} >/dev/null 2>&1; then
+      if timeout 1.5s bash -c "{1} -h" 1>/dev/null 2>&1; then
         h=$({1} -h 2>/dev/null | bat --color=always -pl help)
       fi
-      if timeout 0.3s bash -c "{1} --help" 1>/dev/null 2>&1; then
+      if timeout 1.5s bash -c "{1} --help" 1>/dev/null 2>&1; then
         help=$({1} --help 2>/dev/null | bat --color=always -pl help)
       fi
-      if timeout 0.3s bash -c "{1} help" 1>/dev/null 2>&1; then
+      if timeout 1.5s bash -c "{1} help" 1>/dev/null 2>&1; then
         help_sub=$({1} help 2>/dev/null | bat --color=always -pl help)
       fi
       if [[ -n "$h" ]] ; then
@@ -485,8 +485,10 @@ function fzf-man {
         echo "$help_sub"
       fi
       if [[ -z "$h" ]] && [[ -z "$help" ]] && [[ -z "$help_sub" ]] ; then
-        echo \$ {1}: -h, --help or help are not available
+        echo \$ {1}: failed trying to execute with -h, --help or help
       fi
+    else
+      echo \$ command not found: {1}
     fi
   '
 
