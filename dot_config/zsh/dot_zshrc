@@ -151,8 +151,8 @@ alias rm="echo Use \'trash\' or \'trash-put\' instead of \'rm\'."
 alias rmdir="echo Use \'trash\' or \'trash-put\' instead of \'rmdir\'."
 alias mv="mv -iv"
 
-alias rm-yes-i-know="/usr/bin/rm -iv"
-alias rmdir-yes-i-know="/usr/bin/rmdir -iv"
+alias rm-yes="/usr/bin/rm -iv"
+alias rmdir-yes="/usr/bin/rmdir -iv"
 
 alias p="pnpm"
 alias v="nvim"
