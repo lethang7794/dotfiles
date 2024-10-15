@@ -480,11 +480,11 @@ function fzf-man {
         echo \$ {1} --help
         echo $help
       fi
-      if [[ -n "$help_sub" ]] && [[ "$help_sub" != "$h" ]] ; then
+      if [[ -n "$help_sub" ]] && [[ "$help_sub" != "$h" ]]  && [[ "$help_sub" != "$help" ]] ; then
         echo \$ {1} help
         echo "$help_sub"
       fi
-      if [[ -z "$h" ]] && [[ -z "$help" ]] ; then
+      if [[ -z "$h" ]] && [[ -z "$help" ]] && [[ -z "$help_sub" ]] ; then
         echo \$ {1}: -h, --help or help are not available
       fi
     fi
