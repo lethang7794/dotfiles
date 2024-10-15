@@ -567,16 +567,16 @@ function fzf-man {
       --tiebreak=begin \
       --track \
       --prompt='󰬛 TLDR > ' \
-      --bind "alt-1:change-prompt(󰬛 TLDR > )+reload(cat $tldrlist_file)+change-preview($tldr_cmd)" \
-      --bind "alt-2:change-prompt(󰬊 Cheat > )+reload(cat $cheatlist_file)+change-preview($cheat_cmd)" \
-      --bind "alt-3:change-prompt(󰬏 Help > )+reload(cat $compgenlist_file)+change-preview($help_cmd)" \
-      --bind "alt-4:change-prompt(󰬔 Man > )+reload(cat $manlist_file)+change-preview($man_cmd)" \
+      --bind "alt-a:change-prompt(󰬛 TLDR > )+reload(cat $tldrlist_file)+change-preview($tldr_cmd)" \
+      --bind "alt-s:change-prompt(󰬊 Cheat > )+reload(cat $cheatlist_file)+change-preview($cheat_cmd)" \
+      --bind "alt-d:change-prompt(󰬏 Help > )+reload(cat $compgenlist_file)+change-preview($help_cmd)" \
+      --bind "alt-f:change-prompt(󰬔 Man > )+reload(cat $manlist_file)+change-preview($man_cmd)" \
       --bind "alt-h:transform:$transformer" \
       --bind "enter:become($executer)" \
       --preview "$tldr_cmd" \
       --preview-window '70%,noborder,~2,+{1}+2/3' \
       --color header:italic \
-      --header $'<Ctrl-/> Toggle Preview    <Alt-/>, <F11> Change Preview mode    <Ctrl+S> Toggle Sort\n<Alt-H> Next mode    <Alt-1> tldr    <Alt-2> Cheat    <Alt-3> Help    <Alt-4> Man' \
+      --header $'<Ctrl-/> Toggle Preview    <Alt-/>, <F11> Change Preview mode    <Ctrl+S> Toggle Sort\n<Alt-H> Next mode    <Alt-A> tldr    <Alt-S> Cheat    <Alt-D> Help    <Alt-F> Man' \
       --bind 'alt-/:change-preview-window:down,99%,~2,+{1}+2/3|down,~2,+{1}+2/3|hidden|' \
       --bind 'f11:change-preview-window:down,99%,~2,+{1}+2/3|down,~2,+{1}+2/3|hidden|' \
       --bind 'ctrl-/:toggle-preview' \
