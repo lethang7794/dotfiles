@@ -1,23 +1,6 @@
-import = ["~/.config/alacritty/themes/themes/catppuccin_frappe.toml"]
-
-# [shell]
-# program = "/bin/zsh"
-# args = ["-l", "-c", "tmux new-session -A -s 1"]
-
-[shell]
-program = "/usr/bin/zsh"
-args = ["-l", "-c", "zellij attach --index 0 || zellij"]
-
-[font]
-size = 14
-normal = { family = "SauceCodePro Nerd Font", style = "Regular" }
-
-[window]
-opacity = 0.95
-
-# [selection]
-# save_to_clipboard = true
-
-# [cursor]
-# style = { shape = "beam", blinking = "Always" }
-# unfocused_hollow = true
+import = [
+  "~/.config/alacritty/share/default.toml",
+  "~/.config/alacritty/theme.toml",
+  "~/.config/alacritty/font.toml",
+  "~/.config/alacritty/font-size.toml",
+]
