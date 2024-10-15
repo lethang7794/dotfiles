@@ -954,7 +954,8 @@ fi
 # . "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
 
 # Direnv
-_evalcache direnv hook zsh
+eval "$(direnv hook zsh)"
+# _evalcache direnv hook zsh
 export DIRENV_LOG_FORMAT= # make `direnv` silent
 
 # nav
