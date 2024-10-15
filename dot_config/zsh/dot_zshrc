@@ -565,6 +565,7 @@ function fzf-man {
       --ansi \
       --border none \
       --tiebreak=begin \
+      --track \
       --prompt='󰬛 TLDR > ' \
       --bind "alt-1:change-prompt(󰬛 TLDR > )+reload(cat $tldrlist_file)+change-preview($tldr_cmd)" \
       --bind "alt-2:change-prompt(󰬊 Cheat > )+reload(cat $cheatlist_file)+change-preview($cheat_cmd)" \
