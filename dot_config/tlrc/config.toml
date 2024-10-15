@@ -14,13 +14,13 @@ compact = false
 raw_markdown = false
 
 [indent]
-title = 2
-description = 2
-bullet = 2
-example = 4
+title = 0
+description = 0
+bullet = 0
+example = 2
 
 [style.title]
-color = "magenta"
+color = "blue"
 background = "default"
 bold = true
 underline = false
@@ -29,16 +29,16 @@ dim = false
 strikethrough = false
 
 [style.description]
-color = "magenta"
+color = "green"
 background = "default"
-bold = false
+bold = true
 underline = false
 italic = false
 dim = false
 strikethrough = false
 
 [style.bullet]
-color = "green"
+color = { rgb = [166, 227, 161] }
 background = "default"
 bold = false
 underline = false
@@ -47,7 +47,7 @@ dim = false
 strikethrough = false
 
 [style.example]
-color = "cyan"
+color = { rgb = [137, 180, 250] }
 background = "default"
 bold = false
 underline = false
@@ -56,16 +56,16 @@ dim = false
 strikethrough = false
 
 [style.url]
-color = "red"
+color = "white"
 background = "default"
 bold = false
 underline = false
 italic = true
-dim = false
+dim = true
 strikethrough = false
 
 [style.inline_code]
-color = "yellow"
+color = "blue"
 background = "default"
 bold = false
 underline = false
@@ -74,10 +74,10 @@ dim = false
 strikethrough = false
 
 [style.placeholder]
-color = "red"
+color = "white"
 background = "default"
 bold = false
-underline = false
+underline = true
 italic = true
 dim = false
 strikethrough = false
