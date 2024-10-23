@@ -1,0 +1,15 @@
+appindicatorsupport@rgcjonas.gmail.com
+apps-menu@gnome-shell-extensions.gcampax.github.com
+auto-move-windows@gnome-shell-extensions.gcampax.github.com
+BingWallpaper@ineffable-gmail.com
+dash-to-dock@micxgx.gmail.com
+focused-window-dbus@flexagoon.com
+gnome-fuzzy-app-search@gnome-shell-extensions.Czarlie.gitlab.com
+huanghaohhoa@163.com
+Move_Clock@rmy.pobox.com
+pano@elhan.io
+pip-on-top@rafostar.github.com
+quake-terminal@diegodario88.github.io
+reboottouefi@ubaygd.com
+steal-my-focus-window@steal-my-focus-window
+Vitals@CoreCoding.com

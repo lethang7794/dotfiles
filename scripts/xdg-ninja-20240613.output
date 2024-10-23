@@ -1,0 +1,440 @@
+
+[1m[3mStarting to check your [36m$HOME[0m.
+
+[[1m[31masdf-vm[0m]: [1m[3m/home/lqt/.asdf[0m
+
+Export the following environment variables:
+
+export ASDF_DATA_DIR="$XDG_DATA_HOME"/asdf
+
+[[1m[31maws-cli[0m]: [1m[3m/home/lqt/.aws[0m
+
+Export the following environment variables:
+
+export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME"/aws/credentials
+export AWS_CONFIG_FILE="$XDG_CONFIG_HOME"/aws/config
+
+[[1m[33mbash[0m]: [1m[3m/home/lqt/.bash_profile[0m
+
+Currently unsupported.
+
+*Relevant issue:* https://savannah.gnu.org/support/?108134
+
+[[1m[31mbash[0m]: [1m[3m/home/lqt/.bash_history[0m
+
+Export the following environment variables:
+
+export HISTFILE="${XDG_STATE_HOME}"/bash/history
+
+[[1m[33mboto[0m]: [1m[3m/home/lqt/.boto[0m
+
+Currently unsupported. No information found.
+
+[[1m[31mcargo[0m]: [1m[3m/home/lqt/.cargo[0m
+
+Export the following environment variables:
+
+export CARGO_HOME="$XDG_DATA_HOME"/cargo
+
+[[1m[31mdocker[0m]: [1m[3m/home/lqt/.docker[0m
+
+Export the following environment variables:
+
+export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
+
+[[1m[31mdotnet[0m]: [1m[3m/home/lqt/.dotnet[0m
+
+Export the following environment variables:
+
+export DOTNET_CLI_HOME="$XDG_DATA_HOME"/dotnet
+
+[[1m[33mDropbox[0m]: [1m[3m/home/lqt/.dropbox[0m
+
+Currently unsupported.
+
+*Relevant issue*: https://github.com/dropbox/nautilus-dropbox/issues/5
+
+[[1m[33mDropbox[0m]: [1m[3m/home/lqt/.dropbox-dist[0m
+
+Currently unsupported.
+
+*Relevant issue*: https://github.com/dropbox/nautilus-dropbox/issues/5
+
+[[1m[33mFirefox[0m]: [1m[3m/home/lqt/.mozilla[0m
+
+Currently unsupported.
+
+*Relevant issue:* https://bugzilla.mozilla.org/show_bug.cgi?id=259356
+
+[[1m[33mFlatpak[0m]: [1m[3m/home/lqt/.var[0m
+
+Currently unsupported.
+
+*Relevant issue:* https://github.com/flatpak/flatpak/issues/3997
+
+[[1m[31mfzf[0m]: [1m[3m/home/lqt/.fzf.zsh[0m
+
+Follow instructions for moving `.fzf`
+
+[[1m[31mfzf[0m]: [1m[3m/home/lqt/.fzf.bash[0m
+
+Follow instructions for moving `.fzf`
+
+[[1m[31mgit[0m]: [1m[3m/home/lqt/.gitconfig[0m
+
+XDG is supported out-of-the-box, so we can simply move the file to
+*$XDG_CONFIG_HOME/git/config*.
+
+[[1m[31mgnupg[0m]: [1m[3m/home/lqt/.gnupg[0m
+
+Export the following environment variables:
+
+export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+
+*Note: from the archwiki:*
+
+│ If you use non-default GnuPG Home directory, you will need to edit all
+│ socket files to use the values of gpgconf --list-dirs.
+│ If you set your SSH_AUTH_SOCK manually, keep in mind that your socket
+│ location may be different if you are using a custom GNUPGHOME
+
+[[1m[31mgo[0m]: [1m[3m/home/lqt/go[0m
+
+Export the following environment variables:
+
+export GOPATH="$XDG_DATA_HOME"/go
+
+[[1m[31mipython[0m]: [1m[3m/home/lqt/.ipython[0m
+
+Supported since *8.0.0*.
+
+You can move the file to *$XDG_CONFIG_HOME/ipython*.
+
+Or set the following environment variable:
+
+export IPYTHONDIR="$XDG_CONFIG_HOME/ipython"
+
+[[1m[33mkubernetes[0m]: [1m[3m/home/lqt/.kube[0m
+
+Currently unsupported.
+
+*Relevant issue:* https://github.com/kubernetes/kubernetes/issues/56402
+
+[[1m[33mlens[0m]: [1m[3m/home/lqt/.k8slens[0m
+
+Currently unsupported.
+
+*Relevant issue:* https://github.com/lensapp/lens/issues/2494
+
+[[1m[33mLibrewolf[0m]: [1m[3m/home/lqt/.librewolf[0m
+
+Currently unsupported.
+
+*Relevant issue:* https://bugzilla.mozilla.org/show_bug.cgi?id=259356
+
+[[1m[31mminikube[0m]: [1m[3m/home/lqt/.minikube[0m
+
+Export the following environment variables:
+
+export MINIKUBE_HOME="$XDG_DATA_HOME"/minikube
+
+[[1m[33mnix[0m]: [1m[3m/home/lqt/.nix-defexpr[0m
+
+New nix command line interface supports XDG Base Directory but Old Commands
+will still create these directories.
+
+To use the XDG spec with the old command line, add to `/etc/nix/nix.conf`:
+
+`use-xdg-base-directories = true`
+
+You also have to manually move the the file to **XDG_STATE_HOME**:
+
+`mv "$HOME/.nix-defexpr" "$XDG_STATE_HOME/nix/defexpr"`
+
+*See the Manual*: https://nixos.org/manual/nix/stable/command-ref/conf-
+file#conf-use-xdg-base-directories
+
+[[1m[31mnodejs[0m]: [1m[3m/home/lqt/.node_repl_history[0m
+
+Export the following environment variables:
+
+export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node_repl_history
+
+[[1m[31mnpm[0m]: [1m[3m/home/lqt/.npm[0m
+
+You need to put the following into your npmrc:
+
+prefix=${XDG_DATA_HOME}/npm
+cache=${XDG_CACHE_HOME}/npm
+init-module=${XDG_CONFIG_HOME}/npm/config/npm-init.js
+tmp=${XDG_RUNTIME_DIR}/npm
+
+*Note: the tmp option has been removed in more recent versions of npm,
+including it will generate a warning.*
+
+[[1m[33mnss[0m]: [1m[3m/home/lqt/.pki[0m
+
+**Disclaimer: XDG is supported, but directory may be created again by some
+programs.**
+
+XDG is supported out-of-the-box, so we can simply move directory to
+*"$XDG_DATA_HOME"/pki*.
+
+*Note: some apps (chromium, for example) hardcode path to "$HOME"/.pki, so
+directory may appear again, see*
+https://bugzilla.mozilla.org/show_bug.cgi?id=818686#c11*.*
+
+[[1m[31mohmyzsh[0m]: [1m[3m/home/lqt/.oh-my-zsh[0m
+
+See the relevant issue https://github.com/ohmyzsh/ohmyzsh/issues/9543.
+
+Export the following environment variables:
+
+export ZSH="$XDG_DATA_HOME"/oh-my-zsh
+
+[[1m[33mopenjdk[0m]: [1m[3m/home/lqt/.java[0m
+
+**Disclaimer: some applications don't respect this setting.**
+
+Export the following environment variable:
+
+export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
+
+See ticket https://bugs.java.com/bugdatabase/view_bug?bug_id=8290140
+
+[[1m[33mopenssh[0m]: [1m[3m/home/lqt/.ssh[0m
+
+Assumed to be present by many ssh daemons and clients such as **DropBear**
+and **OpenSSH**.
+
+[[1m[31mpass[0m]: [1m[3m/home/lqt/.password-store[0m
+
+Export the following environment variables:
+
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
+
+[[1m[31mprofile[0m]: [1m[3m/home/lqt/.profile[0m
+
+There are shells and window managers that don't need this file and won't
+create it, depending on your config, this file might be deleted or moved.
+
+If you do not know, please do not move this file as it could lead to errors.
+
+[[1m[31mrbenv[0m]: [1m[3m/home/lqt/.rbenv[0m
+
+Export the following environment variables:
+
+export RBENV_ROOT="$XDG_DATA_HOME"/rbenv
+
+[[1m[31mruby bundler[0m]: [1m[3m/home/lqt/.bundle[0m
+
+Export the following environment variables:
+
+export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME"/bundle
+export BUNDLE_USER_CACHE="$XDG_CACHE_HOME"/bundle
+export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME"/bundle
+
+[[1m[31mrustup[0m]: [1m[3m/home/lqt/.rustup[0m
+
+Export the following environment variables:
+
+export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
+
+[[1m[31msubversion[0m]: [1m[3m/home/lqt/.subversion[0m
+
+Alias svn to use a custom configuration location:
+
+alias svn="svn --config-dir $XDG_CONFIG_HOME/subversion"
+
+[[1m[31mtmux[0m]: [1m[3m/home/lqt/.tmux.conf[0m
+
+Supported since *v3.2* (Partial support since *v3.1*).
+
+You can move the file to *$XDG_CONFIG_HOME/tmux/tmux.conf*.
+
+[[1m[31mtmux[0m]: [1m[3m/home/lqt/.tmux[0m
+
+Set this in your tmux.conf:
+
+`set-environment -g TMUX_PLUGIN_MANAGER_PATH '~/.local/share/tmux/plugins'`
+
+Then update the path to tpm to:
+
+`run '~/.local/share/tmux/plugins/tpm/tpm'`
+
+Now move .tmux to *XDG_CONFIG_HOME*/tmux.
+
+[[1m[31mvolta[0m]: [1m[3m/home/lqt/.volta[0m
+
+Export the following environment variables:
+
+export VOLTA_HOME="$XDG_DATA_HOME"/volta
+
+[[1m[33mvisual studio code[0m]: [1m[3m/home/lqt/.vscode[0m
+
+Currently unsupported.
+
+*Relevant issue:* https://github.com/microsoft/vscode/issues/3884
+
+[[1m[33mvisual studio code[0m]: [1m[3m/home/lqt/.vscode-insiders[0m
+
+Currently unsupported.
+
+*Relevant issue:* https://github.com/microsoft/vscode/issues/3884
+
+[[1m[33mvisual studio code[0m]: [1m[3m/home/lqt/.vscode-server[0m
+
+Currently only partially supported.
+
+Each of vscode's remote development extensions will create and use a `vscode-
+server` directory in a user's home folder each time a host is connected to.
+
+Unfortunately, the SSH extension is the only extension that has a setting
+that can change the location of `vscode-server`. Both the container extension
+and the WSL extension are missing the option of changing their `vscode-
+server` directories.
+
+Even so, the SSH extension only allows you to define paths for individual
+hosts. It doesn't allow for a default path for all ssh connections.
+
+To edit the host paths, you either need to change your remote SSH settings
+in the vscode application itself, or edit your vscode user settings json
+file.
+
+Any changes you make need to be made on the machine you use to connect to a
+host, not the remote host itself.
+
+*Method 1: using the vscode application*
+
+Open vscode and open your settings menu by pressing `Ctrl+,`.
+
+In the search bar, type `Server Install Path` or
+`remote.SSH.serverInstallPath`.
+
+A setting called `Remote.SSH: Server Install Path` should appear with a map
+of items and values underneath its description.
+
+With the hostname as the item and the value as `$HOME/.local/share/vscode-
+server`, enter each SSH remote you want to have changed.
+
+Ex.
+
+ITEM    │              VALUE
+────────────┼───────────────────────────────────
+hostname  │ $HOME/.local/share/vscode-server
+hostname2 │ $HOME/.local/share/vscode-server
+
+*Method 2: editing the user settings file (settings.json)*
+
+Find and open your vscode user settings file. Depending on your platform,
+your user settings file can be in one of three different places:
+
+• Windows - `%APPDATA%\\Code\\User\\settings.json`
+• macOS - `$HOME/Library/Application\\ Support/Code/User/settings.json`
+• Linux - `$HOME/.config/Code/User/settings.json`
+
+Same to the application method, you need to define each individual host with
+its directory path in your settings file.
+
+To add your hosts, add a map to the file with the title as
+`remote.SSH.serverInstallPath`, your hostnames as the items, and
+`$HOME/.local/share/vscode-server` as the values.
+
+Ex.
+
+"remote.SSH.serverInstallPath": {
+"hostname": "$HOME/.local/share/vscode-server",
+"hostname2": "$HOME/.local/share/vscode-server"
+}
+
+*Relevant issue:* https://github.com/microsoft/vscode-remote-
+release/issues/6837
+
+[[1m[31mw3m[0m]: [1m[3m/home/lqt/.w3m[0m
+
+Export the following environment variables:
+
+export W3M_DIR="$XDG_DATA_HOME"/w3m
+
+[[1m[31mwget[0m]: [1m[3m/home/lqt/.wget-hsts[0m
+
+Alias wget to use a custom hsts cache file location:
+
+alias wget=wget --hsts-file="$XDG_DATA_HOME/wget-hsts"
+
+[[1m[31mwine[0m]: [1m[3m/home/lqt/.wine[0m
+
+Export the following environment variables:
+
+export WINEPREFIX="$XDG_DATA_HOME"/wine
+
+[[1m[31mxdg-utils[0m]: [1m[3m/home/lqt/.gnome[0m
+
+This directory is created by old versions of `xdg-utils` and is no longer
+needed since GNOME 2.10. It can simply be deleted.
+
+[[1m[33myarn[0m]: [1m[3m/home/lqt/.yarn[0m
+
+Changing this is currently not supported.
+
+[[1m[33mZAP Proxy[0m]: [1m[3m/home/lqt/.ZAP[0m
+
+Currently unsupported.
+
+*Relevant issue:* https://github.com/zaproxy/zaproxy/issues/7718
+
+[[1m[31mz[0m]: [1m[3m/home/lqt/.z[0m
+
+Export the following environment variables:
+
+export _Z_DATA="$XDG_DATA_HOME/z"
+
+[[1m[31mzsh[0m]: [1m[3m/home/lqt/.zcompdump-ZB03883-host-5.9[0m
+
+Set this in your zshrc:
+
+compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
+
+You must manually create the *$XDG_CACHE_HOME/zsh* directory if it doesn't
+exist yet.
+
+[[1m[31mzsh[0m]: [1m[3m/home/lqt/.zsh_history[0m
+
+Set this in your zshrc:
+
+export HISTFILE="$XDG_STATE_HOME"/zsh/history
+
+You must manually create the *$XDG_STATE_HOME/zsh* directory if it doesn't
+exist yet.
+
+[[1m[31mzsh[0m]: [1m[3m/home/lqt/.zprofile[0m
+
+Move the file to *"$HOME"/.config/zsh/.zprofile* and export the following
+environment variable:
+
+export ZDOTDIR="$HOME"/.config/zsh
+
+You can do this in */etc/zshenv* (Or */etc/zsh/zshenv*, on some distros).
+
+[[1m[31mzsh[0m]: [1m[3m/home/lqt/.zshenv[0m
+
+Move the file to *"$HOME"/.config/zsh/.zshenv* and export the following
+environment variable:
+
+export ZDOTDIR="$HOME"/.config/zsh
+
+You can do this in */etc/zshenv* (Or */etc/zsh/zshenv*, on some distros).
+
+[[1m[31mzsh[0m]: [1m[3m/home/lqt/.zshrc[0m
+
+Move the file to *"$HOME"/.config/zsh/.zshrc* and export the following
+environment variable:
+
+export ZDOTDIR="$HOME"/.config/zsh
+
+You can do this in */etc/zshenv* (Or */etc/zsh/zshenv*, on some distros).
+
+[1m[3mDone checking your [36m$HOME.[0m
+
+[3mIf you have files in your [36m$HOME[0m[3m that shouldn't be there, but weren't recognised by xdg-ninja, please consider creating a configuration file for it and opening a pull request on github.[0m
+
