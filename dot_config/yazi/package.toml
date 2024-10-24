@@ -1,0 +1,20 @@
+[plugin]
+deps = [
+  { use = "yazi-rs/plugins:max-preview", rev = "4f1d0ae" },
+  { use = "yazi-rs/plugins:git", rev = "4f1d0ae" },
+  { use = "yazi-rs/plugins:full-border", rev = "4f1d0ae" },
+  # { use = "Reledia/glow", rev = "f52b382" },
+  # { use = "GrzegorzKozub/mdcat", rev = "1706af4" },
+  # { use = "Reledia/miller", rev = "40e0265" },
+  { use = "Sonico98/exifaudio", rev = "855ff05" },
+  { use = "Ape/mediainfo", rev = "c69314e" },
+  { use = "ndtoan96/ouch", rev = "251da69" },
+  { use = "sharklasers996/eza-preview", rev = "7ca4c25" },
+  { use = "AnirudhG07/rich-preview", rev = "fe43219" },
+  { use = "KKV9/command", rev = "dc9b483" },
+  { use = "pirafrank/what-size", rev = "f08f7f2" },
+  # { use = "Sonico98/allmytoes", rev = "e532913" },
+]
+
+[flavor]
+deps = []

@@ -1,0 +1,43 @@
+[[plugin.prepend_fetchers]]
+id = "git"
+name = "*"
+run = "git"
+
+[[plugin.prepend_fetchers]]
+id = "git"
+name = "*/"
+run = "git"
+
+# [plugin]
+# prepend_previewers = [
+# { mime = "text/csv", run = "miller"},
+# ]
+
+[plugin]
+prepend_preloaders = [
+    # { mime = "image/*", run = "allmytoes"},
+]
+
+prepend_previewers = [
+    # Multimedia
+    { mime = "audio/*", run = "exifaudio" },
+    # { mime = "audio/*", run = "mediainfo"},
+    { mime = "image/*", run = "mediainfo" },
+    # { mime = "image/*", run = "allmytoes"},
+    { mime = "video/*", run = "mediainfo" },
+    { mime = "application/x-subrip", run = "mediainfo" },
+
+    # Folder
+    { name = "*/", run = "eza-preview" },
+
+    # Archive
+    { mime = "application/*zip", run = "ouch" },
+    { mime = "application/x-tar", run = "ouch" },
+    { mime = "application/x-bzip2", run = "ouch" },
+    { mime = "application/x-7z-compressed", run = "ouch" },
+    { mime = "application/x-rar", run = "ouch" },
+    { mime = "application/x-xz", run = "ouch" },
+
+    # CSV
+    # { name = "*.csv", run = "rich-preview"},
+]
