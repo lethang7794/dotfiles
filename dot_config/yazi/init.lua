@@ -10,6 +10,9 @@ require("full-border"):setup {
 -- Preview directories using eza tree mode (List mode is the default)
 -- require("eza-preview"):setup()
 
+-- Starship prompt
+require("starship"):setup()
+
 -- Show user/group of files in status bar
 Status:children_add(function()
 	local h = cx.active.current.hovered

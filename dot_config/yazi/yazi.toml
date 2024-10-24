@@ -1,43 +1,39 @@
+# Docs: https://yazi-rs.github.io/docs/configuration/yazi
+
+"$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
+
 [[plugin.prepend_fetchers]]
-id = "git"
+id   = "git"
 name = "*"
-run = "git"
+run  = "git"
 
 [[plugin.prepend_fetchers]]
-id = "git"
+id   = "git"
 name = "*/"
-run = "git"
-
-# [plugin]
-# prepend_previewers = [
-# { mime = "text/csv", run = "miller"},
-# ]
+run  = "git"
 
 [plugin]
 prepend_preloaders = [
-    # { mime = "image/*", run = "allmytoes"},
+  # { mime = "image/*", run = "allmytoes" },
 ]
-
 prepend_previewers = [
-    # Multimedia
-    { mime = "audio/*", run = "exifaudio" },
-    # { mime = "audio/*", run = "mediainfo"},
-    { mime = "image/*", run = "mediainfo" },
-    # { mime = "image/*", run = "allmytoes"},
-    { mime = "video/*", run = "mediainfo" },
-    { mime = "application/x-subrip", run = "mediainfo" },
+  # Multimedia
+  { mime = "audio/*", run = "exifaudio" },
+  { mime = "image/*", run = "mediainfo" },
+  { mime = "video/*", run = "mediainfo" },
+  { mime = "application/x-subrip", run = "mediainfo" },
 
-    # Folder
-    { name = "*/", run = "eza-preview" },
+  # Folder
+  { name = "*/", run = "eza-preview" },
 
-    # Archive
-    { mime = "application/*zip", run = "ouch" },
-    { mime = "application/x-tar", run = "ouch" },
-    { mime = "application/x-bzip2", run = "ouch" },
-    { mime = "application/x-7z-compressed", run = "ouch" },
-    { mime = "application/x-rar", run = "ouch" },
-    { mime = "application/x-xz", run = "ouch" },
+  # Archive
+  { mime = "application/*zip", run = "ouch" },
+  { mime = "application/x-tar", run = "ouch" },
+  { mime = "application/x-bzip2", run = "ouch" },
+  { mime = "application/x-7z-compressed", run = "ouch" },
+  { mime = "application/x-rar", run = "ouch" },
+  { mime = "application/x-xz", run = "ouch" },
 
-    # CSV
-    # { name = "*.csv", run = "rich-preview"},
+  # CSV
+  # { name = "*.csv", run = "rich-preview"},
 ]
