@@ -165,6 +165,8 @@ alias cz="chezmoi"
 alias c="code"
 alias ci="code-insiders"
 
+alias tf="touchfile"
+
 # Globalias
 # shellcheck disable=SC2034
 GLOBALIAS_FILTER_VALUES=(ls which type z grep open rm rmdir rm-yes rmdir-yes mv)
@@ -864,7 +866,8 @@ export WHERE=.zshrc
 function touchfile() {
   local file="$1"
   mkdir -p -- "$(dirname -- "$file")" &&
-    touch -- "$file"
+    touch -- "$file" &&
+    nvim "$file"
 }
 
 REPOS="$HOME/go/src/github.com/lethang7794"
