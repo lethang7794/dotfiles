@@ -925,7 +925,10 @@ function yy() {
     cd -- "$cwd" || exit
   fi
   /usr/bin/rm -f -- "$tmp"
+  zle && zle reset-prompt
 }
+zle -N yy            # Define yy as a new widget
+bindkey '^[[1;3B' yy # Bind Alt + Down to yy widget
 
 # Temp workaround to disable punycode deprecation logging to stderr
 # https://github.com/bitwarden/clients/issues/6689
@@ -961,6 +964,9 @@ export DIRENV_LOG_FORMAT= # make `direnv` silent
 
 # nav
 # nav bindkeys
+bindkey '^[[1;3A' nav-up      # alt + up
+bindkey '^[[1;3C' nav-forward # alt + right
+bindkey '^[[1;3D' nav-back    # alt + left
 
 # Starship
 if [ "$(command -v starship)" ]; then
