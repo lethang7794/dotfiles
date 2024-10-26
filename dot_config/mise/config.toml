@@ -1,38 +1,35 @@
 # "$schema" = "https://mise.jdx.dev/schema/mise.json"
 
-
 [tools]
-argocd = "latest"
+# argocd = "latest"
 awscli = "latest"
-dagger = "latest"
-dapr = "latest"
-flux2 = "latest"
+# dagger = "latest"
+# dapr = "latest"
+# flux2 = "latest"
 gitleaks = "latest"
+# istioctl = "latest"
 kubectl = "latest"
-nodejs = "latest"
+node = "latest"
 opentofu = "latest"
-packer = "latest"
+# packer = "latest"
+pnpm = "latest"
 pre-commit = "latest"
-stern = "latest"
-tekton-cli = "latest"
-terraform = "latest"
+# stern = "latest"
+# tekton-cli = "latest"
+# terraform = "latest"
 yarn = "4"
 
-"npm:extension" = "1.5.0"
+"npm:@vscode/vsce" = "latest"
+"npm:concurrently" = "latest"
+# "npm:extension" = "1.5.0"
+"npm:markmap-cli" = "latest"
 "npm:npkill" = "latest"
 "npm:pm2" = "latest"
+"npm:prettier" = "latest"
 "npm:ttab" = "latest"
 "npm:yo" = "latest"
-"npm:prettier" = "latest"
-"npm:@vscode/vsce" = "latest"
-"npm:markmap-cli" = "latest"
-"npm:concurrently" = "latest"
-istioctl = "latest"
-node = "latest"
-pnpm = "latest"
+"npm:taze" = "latest"
+"npm:wipeclean" = "latest"
 
 [settings]
 experimental = true
-
-
-
