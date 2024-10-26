@@ -36,8 +36,9 @@ elif [ -d "$1" ]; then
 elif [[ "$kind" == "zip" ]]; then
   7z l "$1" | tail -n +15
 
-elif [[ "$kind" == *"epub"* ]] || [[ "$kind" = "zip" ]]; then
+elif [[ "$kind" == *"epub"* ]]; then
   pandoc "$1"
+  # pandoc -f epub -t html "$1" | elinks -dump -dump-color-mode 1 | less -R
 
 elif [ "$kind" = pdf ]; then
   echo "$1"
@@ -47,7 +48,15 @@ elif [ "$kind" = pdf ]; then
 
 elif [ "$category" = image ]; then
   echo "$1"
-  kitten icat --clear --transfer-mode=stream --unicode-placeholder --align=center --stdin=no --place="${FZF_PREVIEW_COLUMNS}x$((FZF_PREVIEW_LINES - 1))@0x0" "$1"
+
+  if [[ $TERMINAL == "xterm-kitty" ]]; then
+    kitten icat --clear --transfer-mode=stream --unicode-placeholder --align=center --stdin=no --place="${FZF_PREVIEW_COLUMNS}x$((FZF_PREVIEW_LINES - 1))@0x0" "$1"
+  elif [[ $TERM_PROGRAM == "WezTerm" ]]; then
+    :
+    # TODO: fzf doesn't support wezterm imgcat
+    # wezterm imgcat --width "${FZF_PREVIEW_COLUMNS}" --height $((FZF_PREVIEW_LINES - 1)) "$1"
+  fi
+
   printf "%s" "$(hr -)"
   mediainfo "$1" | bat --color=always -plyaml
   printf "%s\n\n" "$(hr -)"
@@ -67,7 +76,7 @@ elif [ "$kind" = x-executable ] || [ "$kind" = octet-stream ]; then
   hexyl "$1"
 
 elif [[ "$ext" =~ md|markdown ]]; then
-  paper --h-margin=3 --v-margin=1 --width=80 --tab-length=2 --syncat --hide-urls "$1" 
+  paper --h-margin=3 --v-margin=1 --width=80 --tab-length=2 --syncat --hide-urls "$1"
   # glow "$1"
   # mdless "$1"
 
