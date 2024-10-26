@@ -51,6 +51,7 @@ export PATH="$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:$PATH" # gobrew
 ## Other setup
 # Cargo - Rust
 . "$HOME/.cargo/env"
+export PKG_CONFIG_PATH="/usr/lib64/pkgconfig"
 
 ## Brew
 export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin${PATH+:$PATH}"
