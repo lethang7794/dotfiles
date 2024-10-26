@@ -14,6 +14,7 @@ ohmyzsh/ohmyzsh path:plugins/docker-compose kind:defer
 ### Github repos
 
 ## MISC
+mattmc3/zfunctions kind:defer
 yuhonas/zsh-ansimotd kind:defer
 mdumitru/fancy-ctrl-z kind:defer
 urbainvaes/fzf-marks kind:defer
