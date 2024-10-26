@@ -28,9 +28,9 @@ if [ "$kind" = json ]; then
 
 elif [ -d "$1" ]; then
   if has_cmd eza; then
-    eza -h --git --color=always --icons "$1" --tree --level=1
+    eza --color=always --icons --tree --level=1 "$1"
   elif has_cmd exa; then
-    exa -hl --color=always --icons "$1"
+    exa --color=always --icons -hl "$1"
   fi
 
 elif [[ "$kind" == "zip" ]]; then
