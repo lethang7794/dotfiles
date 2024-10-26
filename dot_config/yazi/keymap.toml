@@ -19,10 +19,10 @@ run  = "plugin --sync max-preview"
 desc = "Maximize or restore preview"
 
 # Show size of selection or cwd
-[[manager.prepend_keymap]]
-on   = [ ".", "s" ]
-run  = "plugin what-size"
-desc = "Calc size of selection or cwd"
+# [[manager.prepend_keymap]]
+# on   = [ ".", "s" ]
+# run  = "plugin what-size"
+# desc = "Calc size of selection or cwd"
 
 # Close input by once Esc press
 [[input.prepend_keymap]]
