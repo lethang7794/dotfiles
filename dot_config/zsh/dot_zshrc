@@ -498,15 +498,16 @@ function fzf-man {
   export tldrlist_file="/tmp/fzf-man-tldrlist"
   export compgenlist_file="/tmp/fzf-man-compgenlist"
 
-  local N=22
+  local N=160 # Update every weeks
   local CACHE_TIME="/tmp/fzf-man-cache-time"
   touch -d "$N hours ago" $CACHE_TIME
 
   local file=$manlist_file
   if [[ ! -e $file || $file -ot $CACHE_TIME ]]; then
+    echo
     echo "$ fzf-man"
     echo "Updating list of manuals"
-    local manlist=$(man -k . | sort | awk -v cyan="$(tput setaf 6)" -v blue="$(tput setaf 4)" -v res="$(tput sgr0)" -v bld="$(tput bold)" '{ $1=cyan bld $1; $2=res blue;} 1')
+    local manlist=$(man -k --sections=1,8 . | sort | awk -v cyan="$(tput setaf 6)" -v blue="$(tput setaf 4)" -v res="$(tput sgr0)" -v bld="$(tput bold)" '{ $1=cyan bld $1; $2=res blue;} 1')
     echo "$manlist" >"$file"
   else
     local manlist=$(cat "$file")
@@ -544,11 +545,11 @@ function fzf-man {
   # shellcheck disable=SC2016
   local executer='
     if [[ $FZF_PROMPT =~ TLDR ]]; then
-      echo \$ tldr {1}; tldr {1}
+      echo \$ tldr {1} | bat -pl bash; tldr {1}
     elif [[ $FZF_PROMPT =~ Cheat ]]; then
-      echo \$ cheat {1}; cheat {1}
+      echo \$ cheat {1} | bat -pl bash; cheat {1}
     elif [[ $FZF_PROMPT =~ Man ]]; then
-      echo \$ man {1}; man {1} 2>/dev/null | bat --language=man --plain --color=always
+      echo "$ man {1}" | bat -pl bash; echo; man {1} 2>/dev/null | bat --language=man --plain --color=always
     else
       :
     fi
