@@ -1,7 +1,7 @@
 mroth/evalcache
 
 ### Oh-my-zsh plugins: https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins
-ohmyzsh/ohmyzsh path:plugins/last-working-dir
+# ohmyzsh/ohmyzsh path:plugins/last-working-dir
 ohmyzsh/ohmyzsh path:plugins/git kind:defer
 ohmyzsh/ohmyzsh path:plugins/sudo kind:defer
 ohmyzsh/ohmyzsh path:plugins/kubectl kind:defer
@@ -14,8 +14,13 @@ ohmyzsh/ohmyzsh path:plugins/docker-compose kind:defer
 ### Github repos
 
 ## MISC
+yuhonas/zsh-ansimotd kind:defer
 mdumitru/fancy-ctrl-z kind:defer
 urbainvaes/fzf-marks kind:defer
+zshzoo/iwd kind:defer
+# zshzoo/cd-ls kind:defer
+zshzoo/magic-enter kind:defer
+betafcc/nav kind:defer
 # bilelmoussaoui/flatpak-zsh-completion kind:defer # not working
 # betafcc/nav
 # djui/alias-tips
