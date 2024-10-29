@@ -466,17 +466,6 @@ fi
 # atac
 export ATAC_MAIN_DIR=~/.config/atac
 
-## lazygit
-# alias lg="lazygit"
-function lg() {
-  lazygit "$@"
-
-  if [ -f "$LAZYGIT_NEW_DIR_FILE" ]; then
-    cd "$(cat "$LAZYGIT_NEW_DIR_FILE")" || exit
-    rm -f "$LAZYGIT_NEW_DIR_FILE" >/dev/null
-  fi
-}
-
 ## rip2: a safer rm # rip2 is not compatible with XDG
 # function rip {
 #   local args=$@

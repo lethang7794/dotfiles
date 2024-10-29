@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+#
+# lazygit launch script:
+# - When you exit lazygit (using `Q`), the shell will change to the last repo that lazygit was in.
+# - To override this behaviour, use `Shift+Q`
+
+export LAZYGIT_NEW_DIR_FILE=/tmp/lazygit-newdir
+
+lazygit "$@"
+
+if [ -f "$LAZYGIT_NEW_DIR_FILE" ]; then
+  cd "$(cat "$LAZYGIT_NEW_DIR_FILE")" || return
+  rm -f "$LAZYGIT_NEW_DIR_FILE" >/dev/null
+fi
