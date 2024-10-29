@@ -805,7 +805,7 @@ extract() {
     *) echo "don't know how to extract '$1'..." ;;
     esac
   else
-    echo "'$1' is not a valid file!"
+    ouch decompress "$1"
   fi
 }
 
