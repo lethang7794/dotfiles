@@ -3,16 +3,6 @@
 --]]
 
 return {
-  -- "nvim-lua/plenary.nvim",
-
-  -- { "nvchad/volt", lazy = true },
-  -- { "nvchad/menu", lazy = true },
-
-  -- {
-  --   "nvchad/minty",
-  --   cmd = { "Shades", "Huefy" },
-  -- },
-
   {
     "stevearc/conform.nvim",
     event = "BufWritePre",
@@ -42,12 +32,6 @@ return {
   },
   {
     "nvim-treesitter/nvim-treesitter",
-    -- opts = {
-    --   ensure_installed = { "vim", "lua", "vimdoc", "html", "css" },
-    -- },
-    -- config = function()
-    --   require "configs.nvim-treesitter"
-    -- end,
     opts = function()
       return require "configs.nvim-treesitter"
     end,
@@ -55,26 +39,14 @@ return {
       require("nvim-treesitter.configs").setup(opts)
     end,
   },
-  -- included by nvchad
-  -- {
-  --   "lewis6991/gitsigns.nvim",
-  --   event = "VeryLazy",
-  --   config = function()
-  --     require "configs.gitsigns"
-  --   end,
-  -- },
   { "junegunn/goyo.vim",               event = "VeryLazy" },
   { "echasnovski/mini.icons",          event = "VeryLazy" },
-  -- { "nvim-tree/nvim-web-devicons", event = "VeryLazy" }, included by nvchad
   { "sindrets/diffview.nvim",          event = "VeryLazy" },
   { "preservim/vim-pencil",            event = "VeryLazy" },
-  -- { "lukas-reineke/indent-blankline.nvim", event = "VeryLazy", main = "ibl", opts = {} }, -- included by nvchad
   { "HiPhish/rainbow-delimiters.nvim", event = "VeryLazy" },
 
-  --  [markdown markmap]
-  --  https://github.com/Zeioth/markmap.nvim
   {
-    "Zeioth/markmap.nvim",
+    "Zeioth/markmap.nvim", --  https://github.com/Zeioth/markmap.nvim
     build = "yarn global add markmap-cli",
     cmd = { "MarkmapOpen", "MarkmapSave", "MarkmapWatch", "MarkmapWatchStop" },
     opts = {
