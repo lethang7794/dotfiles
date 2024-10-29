@@ -266,14 +266,6 @@ function lk {
   cd "$(walk --icons --fuzzy --preview "$@")" || exit
 }
 
-# List the shell functions with highlight, fuzzy search
-function funcs {
-  declare -f | perl -0777 -pe 's/^}\n/}\0/gm' |
-    bat --plain --language bash --color always |
-    fzf --read0 --ansi --reverse --multi --highlight-line --query "$1" |
-    bat --plain --language bash --color always
-}
-
 #==========================================================================================================================
 #                                                     fzf
 #==========================================================================================================================
