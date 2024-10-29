@@ -14,17 +14,14 @@ if [ "$#" -ne 1 ]; then
   return 1
 fi
 
+# If path has trailing slash, it's a directory
 if [[ "$file" == */ ]]; then
-  # Path has trailing slash, it's a directory
-
   # Trip trailing slash
   dir=${file%/}
 
   # Create new directory
   mkdir -p "$dir"
-else
-  # Path doesn't has trailing slash, it's a file
-
+else # It's a file
   # Create the parent directory
   mkdir -p -- "$(dirname -- "$file")"
 
