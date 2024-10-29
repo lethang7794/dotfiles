@@ -374,28 +374,8 @@ export FZF_ALT_C_OPTS="
 zle -N fzf-rg       # Define fzf-rg as a new widget
 bindkey "^f" fzf-rg # Bind Ctrl+F to fzf-rg
 
-rga-fzf() {
-  RG_PREFIX="rga --files-with-matches --color=always"
-  local file
-  file="$(
-    FZF_DEFAULT_COMMAND="$RG_PREFIX '$1'" \
-      fzf --sort --preview="[[ ! -z {} ]] && rga --pretty --context 5 {q} {}" \
-      --phony -q "$1" \
-      --layout=reverse \
-      --color "label:italic" \
-      --border-label "╢ rga-fzf: Search all files (PDF, epub...) by content ╟" \
-      --prompt '1. 󱩾 rga> ' \
-      --bind "change:reload:$RG_PREFIX {q}" \
-      --preview-window="right" \
-      --bind='alt-z:toggle-preview-wrap' \
-      --bind='ctrl-y:execute-silent(echo -n {} | xclip -selection clipboard)' \
-      --bind='ctrl-s:toggle-sort'
-  )" &&
-    echo "Opening $file" &&
-    open "$file"
-}
-zle -N rga-fzf        # Define rga-fzf as a new widget
-bindkey "^[f" rga-fzf # Bind Alt+F to rga-fzf
+zle -N fzf-rga        # Define fzf-rga as a new widget
+bindkey "^[f" fzf-rga # Bind Alt+F to fzf-rga
 
 function fzf-man-widget {
   fzf-man "$LBUFFER"
