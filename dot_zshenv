@@ -55,3 +55,7 @@ export PKG_CONFIG_PATH="/usr/lib64/pkgconfig"
 
 ## Brew
 export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin${PATH+:$PATH}"
+
+if [ -f "$HOME/.zshsecret" ]; then
+  . "$HOME/.zshsecret"
+fi

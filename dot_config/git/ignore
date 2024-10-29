@@ -6,6 +6,10 @@
 # Obsidian
 .obsidian
 
+# zsh
+.zshsecret
+dot_zshsecret # chezmoi
+
 # Created by https://www.toptal.com/developers/gitignore/api/macos,linux,windows,jetbrains,visualstudiocode,sublimetext,go,react,node,ruby
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,linux,windows,jetbrains,visualstudiocode,sublimetext,go,react,node,ruby
 
