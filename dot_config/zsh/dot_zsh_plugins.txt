@@ -19,11 +19,12 @@ yuhonas/zsh-ansimotd kind:defer
 mdumitru/fancy-ctrl-z kind:defer
 urbainvaes/fzf-marks kind:defer
 zshzoo/iwd kind:defer
-# zshzoo/cd-ls kind:defer
 zshzoo/magic-enter kind:defer
 betafcc/nav kind:defer
+mattmc3/zman kind:defer
+
+# zshzoo/cd-ls kind:defer
 # bilelmoussaoui/flatpak-zsh-completion kind:defer # not working
-# betafcc/nav
 # djui/alias-tips
 # MichaelAquilina/zsh-you-should-use kind:defer
 
