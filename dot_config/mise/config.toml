@@ -30,6 +30,7 @@ yarn = "4"
 "npm:yo" = "latest"
 "npm:taze" = "latest"
 "npm:wipeclean" = "latest"
+"ubi:goreleaser/goreleaser" = "latest"
 
 [settings]
 experimental = true
