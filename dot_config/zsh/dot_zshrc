@@ -422,55 +422,6 @@ function fzf-man-widget {
 zle -N fzf-man-widget
 bindkey '^[h' fzf-man-widget
 
-function fzf-chezmoi {
-  local default_preview="chezmoi diff --reverse {}"
-  local chezmoi_status_cmd="chezmoi status --path-style=absolute"
-
-  # Use ANSI C quoting, $'..' to escape single quote with '\'' for awk
-  # shellcheck disable=SC2016
-  local transformer=$'
-    if [[ $FZF_PROMPT =~ Changed ]]; then
-      echo "change-prompt(All Managed Files > )+reload(chezmoi managed --path-style=absolute)"
-    else
-      echo "change-prompt(Changed Files > )+reload(chezmoi status --path-style=absolute | awk '\''{print \$2}'\'')"
-    fi
-  '
-
-  local forgetTarget='
-    function backup {
-      if [ -f {} ]; then
-        mv {} {}.bak
-      fi
-    }
-    chezmoi forget {} && backup
-  '
-
-  # shellcheck disable=SC2016
-  eval "$chezmoi_status_cmd" | awk '{print $2}' |
-    fzf --preview "$default_preview" \
-      --cycle \
-      --prompt 'Changed Files > ' \
-      --preview-window 'right' \
-      --bind 'alt-a:execute-silent(chezmoi add {})+change-preview(echo "{+} is added to source dir. \n\nReload (Ctrl-R) to see other diff.")' \
-      --bind 'alt-d:execute(echo "Merging {}"; chezmoi merge {})+change-preview(echo "Run chezmoi add {} to add any diff to source dir\n"; chezmoi diff {})' \
-      --bind 'alt-r:execute-silent(chezmoi apply {})+change-preview(echo "{+} is applied from source dir. \n\nReload (Ctrl-R) to see other diff.")' \
-      --bind "alt-backspace:execute-silent($forgetTarget)+change-preview(echo '{+} is removed from source dir. \n\nReload (Ctrl-R) to see other diff.')" \
-      --bind "alt-m:transform:$transformer" \
-      --bind "alt-l:change-preview(lessfilter {})" \
-      --bind "alt-k:change-preview($default_preview)" \
-      --bind "ctrl-r:change-prompt(Changed Files > )+reload(eval $chezmoi_status_cmd | awk '{print \$2}')+change-preview($default_preview)" \
-      --bind "alt-e:execute|line=\`chezmoi diff {+} | grep -oP '(?<=:)\d+(?= @)' | head -n 1\`; code --disable-extensions -g {+}:\$line; sleep 1|" \
-      --bind 'alt-g:execute(smerge $(chezmoi source-path))' \
-      --bind "ctrl-e:execute|line=\`chezmoi diff {+} | grep -oP '(?<=:)\d+(?= @)' | head -n 1\`; $EDITOR {+} +\$line|" \
-      --bind 'alt-enter:execute(chezmoi managed --path-style absolute --include nodirs | grep -vE " " | xargs code --new-window)' \
-      --bind 'ctrl-g:execute(lazygit -p $(chezmoi source-path))' \
-      --bind ctrl-z:ignore \
-      --color header:italic \
-      --header $'<Alt-M> Toggle all files      <Ctrl+E> Edit dotfile\n<Alt-A> chezmoi add           <Alt-D>  chezmoi merge    <Alt-R>  chezmoi apply        <Alt-Backspace> chezmoi forget \n       (dotfiles -> source)                                     (dotfiles <- source)\n                              <Ctrl-R> Reload           <Ctrl+G> Open lazygit' \
-      --layout reverse \
-      --color "label:italic" \
-      --border-label "╢ fzf-chezmoi: Sync dotfiles and chezmoi's source ╟"
-}
 
 function fzf-chezmoi-widget {
   LBUFFER="${LBUFFER}$(fzf-chezmoi)"
