@@ -704,14 +704,6 @@ function open() {
 
 export WHERE=.zshrc
 
-## Functions
-function touchfile() {
-  local file="$1"
-  mkdir -p -- "$(dirname -- "$file")" &&
-    touch -- "$file" &&
-    nvim "$file"
-}
-
 REPOS="$HOME/go/src/github.com/lethang7794"
 GITHUB="$HOME/go/src/github.com"
 alias repos="cd \$REPOS"
