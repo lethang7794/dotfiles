@@ -388,9 +388,9 @@ export FZF_ALT_C_OPTS="
   --bind 'alt-/:change-preview-window:right|down'
 "
 
-# rg-fzf: Switch files by content using Ripgrep then filter the results with fzf (Alt-F)
-function rg-fzf {
-  /usr/bin/rm -f /tmp/rg-fzf-{r,f}
+# fzf-rg: Switch files by content using Ripgrep then filter the results with fzf (Alt-F)
+function fzf-rg {
+  /usr/bin/rm -f /tmp/fzf-rg-{r,f}
 
   RG_PREFIX="rg --line-number --no-heading --color=always --smart-case --colors=path:style:underline --colors=line:style:underline --colors=line:fg:white --colors=match:style:nobold --colors=match:fg:197,209,222 --colors=match:bg:45,88,156"
   INITIAL_QUERY="${*:-}"
@@ -399,12 +399,12 @@ function rg-fzf {
   : | fzf --ansi --disabled --query "$INITIAL_QUERY" \
     --bind "change:reload:sleep 0.1; $RG_PREFIX {q} || true" \
     --bind 'ctrl-f:transform:[[ ! $FZF_PROMPT =~ ripgrep ]] &&
-              echo "rebind(change)+change-prompt(1. 󱩾 ripgrep> )+disable-search+transform-query:echo \{q} > /tmp/rg-fzf-f; cat /tmp/rg-fzf-r" ||
-              echo "unbind(change)+change-prompt(2. 󰈲 fzf> )+enable-search+transform-query:echo \{q} > /tmp/rg-fzf-r; cat /tmp/rg-fzf-f"' \
+              echo "rebind(change)+change-prompt(1. 󱩾 ripgrep> )+disable-search+transform-query:echo \{q} > /tmp/fzf-rg-f; cat /tmp/fzf-rg-r" ||
+              echo "unbind(change)+change-prompt(2. 󰈲 fzf> )+enable-search+transform-query:echo \{q} > /tmp/fzf-rg-r; cat /tmp/fzf-rg-f"' \
     --color "header:italic,hl:-1:underline,hl+:-1:underline:reverse" \
     --color "pointer:white" \
     --color "label:italic" \
-    --border-label "╢ rg-fzf: Search files by content ╟" \
+    --border-label "╢ fzf-rg: Search files by content ╟" \
     --prompt '1. 󱩾 ripgrep> ' \
     --delimiter : \
     --layout=reverse \
@@ -414,8 +414,8 @@ function rg-fzf {
     --bind 'enter:execute(nvim {1} +{2})' \
     --bind 'alt-enter:execute(code --disable-extensions -g {1}:{2}; sleep 1)'
 }
-zle -N rg-fzf       # Define rg-fzf as a new widget
-bindkey "^f" rg-fzf # Bind Ctrl+F to rg-fzf
+zle -N fzf-rg       # Define fzf-rg as a new widget
+bindkey "^f" fzf-rg # Bind Ctrl+F to fzf-rg
 
 rga-fzf() {
   RG_PREFIX="rga --files-with-matches --color=always"
