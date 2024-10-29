@@ -348,10 +348,6 @@ export FZF_CTRL_T_OPTS="
   --bind 'ctrl-alt-o:execute(EDITOR=\"code --disable-extensions\" chezmoi edit --watch {+}; sleep 1)'
 "
 
-function fzf-path-preview() {
-  fzf "$@" --multi --layout=reverse --preview 'lessfilter {}'
-}
-
 BFS_EXCLUDE="-name .git -or -name .cache -or -name node_modules"
 export FZF_ALT_C_COMMAND="bfs -color -type d -unique -exclude \( $BFS_EXCLUDE \) 2>/dev/null | sed 's|./||'"
 export FZF_ALT_C_OPTS="

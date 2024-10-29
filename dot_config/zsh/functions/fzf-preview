@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+#
+# fzf-preview: Preview a list of paths with lessfilter
+# - Press Tab to select a path
+#
+# e.g.
+#
+# echo $PATH | tr ':' '\n' | fzf-preview
+# echo $FPATH | tr ':' '\n' | fzf-preview
+# echo $MANPATH | tr ':' '\n' | fzf-preview
+#
+# echo $PATH | tr ':' '\n' | fzf-preview | xargs $EDITOR
+#
+# locate plocate | fzf-preview
+
+fzf "$@" --multi --layout=reverse --preview 'lessfilter {}'
