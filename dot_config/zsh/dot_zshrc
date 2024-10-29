@@ -619,16 +619,6 @@ timezsh() {
 # Created by `pipx` on 2024-04-01 17:04:47
 export PATH="$PATH:/home/lqt/.local/bin"
 
-## yazi: Blazing fast terminal file manager
-function yy() {
-  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-  yazi "$@" --cwd-file="$tmp"
-  if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-    cd -- "$cwd" || exit
-  fi
-  /usr/bin/rm -f -- "$tmp"
-  zle && zle reset-prompt
-}
 zle -N yy            # Define yy as a new widget
 bindkey '^[[1;3B' yy # Bind Alt + Down to yy widget
 
