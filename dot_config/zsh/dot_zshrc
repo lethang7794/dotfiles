@@ -214,23 +214,6 @@ _evalcache thefuck --alias f
 # zle -N f        # Define f as a new widget
 # bindkey "^[f" f # Bind Alt+f to f
 
-## Broot
-# broot launch script ~/.local/share/broot/launcher/bash/1,
-# - Modified: show git-info, tree, hidden files
-function br {
-  local cmd cmd_file code
-  cmd_file=$(mktemp)
-  if broot --show-git-info --hidden --outcmd "$cmd_file" "$@"; then
-    cmd=$(<"$cmd_file")
-    command rm -f "$cmd_file"
-    eval "$cmd"
-  else
-    code=$?
-    command rm -f "$cmd_file"
-    return "$code"
-  fi
-}
-# compdef br=broot # doesn't work
 function cdd {
   br --only-folders
 }
@@ -421,7 +404,6 @@ function fzf-man-widget {
 # `Alt-H` keybinding to launch the widget (this widget works only on zsh, don't know how to do it on bash and fish (additionaly pressing`ctrl-backspace` will trigger the widget to be executed too because both share the same keycode)
 zle -N fzf-man-widget
 bindkey '^[h' fzf-man-widget
-
 
 function fzf-chezmoi-widget {
   LBUFFER="${LBUFFER}$(fzf-chezmoi)"

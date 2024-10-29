@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# broot launch script
+# - Source: ~/.local/share/broot/launcher/bash/1
+# - Modifications: Show git-info, tree, hidden files
+
+cmd_file=$(mktemp)
+if broot --show-git-info --hidden --outcmd "$cmd_file" "$@"; then
+  cmd=$(<"$cmd_file")
+  command rm -f "$cmd_file"
+  eval "$cmd"
+else
+  code=$?
+  command rm -f "$cmd_file"
+  return "$code"
+fi
