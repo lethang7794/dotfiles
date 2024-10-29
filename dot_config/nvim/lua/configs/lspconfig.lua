@@ -1,3 +1,7 @@
+--[[
+nvchad: https://github.com/NvChad/NvChad/blob/v2.5/lua/nvchad/configs/lspconfig.lua
+]]
+
 -- load defaults i.e lua_lsp
 require("nvchad.configs.lspconfig").defaults()
 
