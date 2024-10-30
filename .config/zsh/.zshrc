@@ -25,9 +25,9 @@ alias zprofrc="ZPROFRC=1 zsh"
 #
 
 # Set prompt theme
-typeset -ga ZSH_THEME
-zstyle -a ':zephyr:plugin:prompt' theme ZSH_THEME ||
-ZSH_THEME=(starship mmc)
+# typeset -ga ZSH_THEME
+# zstyle -a ':zephyr:plugin:prompt' theme ZSH_THEME ||
+# ZSH_THEME=(starship mmc)
 
 # Set helpers for antidote.
 is-theme-p10k()     { [[ "$ZSH_THEME" == (p10k|powerlevel10k)* ]] }
@@ -53,19 +53,15 @@ unset zlib
 
 # Uncomment to manually initialize completion system, or let Zephyr
 # do it automatically in the zshrc-post hook.
-# ZSH_COMPDUMP=${XDG_CACHE_HOME:-$HOME/.cache}/zsh/compdump
-# [[ -d $ZSH_COMPDUMP:h ]] || mkdir -p $ZSH_COMPDUMP:h
-# autoload -Uz compinit && compinit -i -d $ZSH_COMPDUMP
+ZSH_COMPDUMP=${XDG_CACHE_HOME:-$HOME/.cache}/zsh/compdump
+[[ -d $ZSH_COMPDUMP:h ]] || mkdir -p $ZSH_COMPDUMP:h
+autoload -Uz compinit && compinit -i -d $ZSH_COMPDUMP
 
 #
 # Prompt
 #
-
-# Uncomment to manually set your prompt, or let Zephyr do it automatically in the
-# zshrc-post hook. Note that some prompts like powerlevel10k may not work well
-# with post_zshrc.
-# setopt prompt_subst transient_rprompt
-# autoload -Uz promptinit && promptinit
+setopt prompt_subst transient_rprompt
+autoload -Uz promptinit && promptinit
 # prompt "$ZSH_THEME[@]"
 
 ###############################################################################
@@ -147,7 +143,7 @@ export ZSH_CUSTOM="$XDG_CONFIG_HOME/zsh/zsh_custom"
 
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 # shellcheck disable=SC2034
-ZSH_THEME="robbyrussell"
+# ZSH_THEME="robbyrussell"
 
 zstyle ':omz:update' mode disabled
 
@@ -166,7 +162,7 @@ if [[ "$(command -v git)" && -d $ZSH ]]; then
   FPATH="${FPATH}:$(brew --prefix)/share/zsh/site-functions" # CURRENT THIS DOESN'T WORK
 
   # shellcheck disable=SC1091
-  source "$ZSH"/oh-my-zsh.sh
+  # source "$ZSH"/oh-my-zsh.sh
 fi
 
 # TODO: load brew completions after:
@@ -303,7 +299,7 @@ function treee {
 
 ## AWS https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-completion.html#cli-command-completion-linux
 # complete -C "$(which aws_completer)" aws
-complete -C "$HOME/.local/share/mise/installs/awscli/latest/bin/aws_completer" aws
+# complete -C "$HOME/.local/share/mise/installs/awscli/latest/bin/aws_completer" aws
 
 ## zoxide: smarter cd
 # https://github.com/ajeetdsouza/zoxide/blob/main/src/cmd/query.rs
