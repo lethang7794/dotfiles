@@ -194,10 +194,6 @@ function lk {
   cd "$(walk --icons --fuzzy --preview "$@")" || exit
 }
 
-#==========================================================================================================================
-#                                                     fzf
-#==========================================================================================================================
-
 # fzf-rg
 zle -N fzf-rg       # Define fzf-rg as a new widget
 bindkey "^f" fzf-rg # Bind Ctrl+F to fzf-rg
@@ -227,49 +223,6 @@ bindkey '^[m' fzf-chezmoi-widget
 bindkey '^Xh' _complete_help
 zle -N enable-fzf-tab
 bindkey '^Xx' enable-fzf-tab
-
-zstyle ":fzf-tab:*" fzf-flags \
-  --multi \
-  --bind 'alt-a:select-all' \
-  --bind 'alt-t:toggle-all' \
-  --height="90%" \
-  --header="<Ctrl-Y> Copy to clipboard    <Ctrl-/> Toggle preview    <Ctrl-S/> Sort" \
-  --color="header:italic" \
-  --bind="ctrl-s:toggle-sort" \
-  --bind 'alt-/:change-preview-window:right|down' \
-  --bind 'ctrl-/:toggle-preview'
-
-zstyle ':fzf-tab:*' continuous-trigger '/'
-
-zstyle ':fzf-tab:complete:*' fzf-bindings \
-  'ctrl-/:toggle-preview' \
-  'ctrl-y:execute-silent(echo -n {2..} | xclip -selection clipboard)'
-
-# set descriptions format to enable group support
-zstyle ':completion:*:descriptions' format '[%d]'
-
-# set list-colors to enable filename colorizing
-# shellcheck disable=SC2296
-zstyle ':completion:*' list-colors "echo $LS_COLORS | tr ':' ' '"
-
-# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
-zstyle ':completion:*' menu no
-
-# preview directory's content with eza when completing cd
-# shellcheck disable=SC2016
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'tree -C --dirsfirst -L 1 $realpath | head -200'
-
-# zstyle ':fzf-tab:*' single-group color header
-
-# switch group using `<` and `>` (instead of F1, F2)
-zstyle ':fzf-tab:*' switch-group '<' '>'
-
-# Turn off sort for all completions
-zstyle ':completion:*' sort false
-# Show git sub-commands, git objects in original order
-# zstyle ':completion:*:git:*' sort false   # Show the git subcommands in group
-# zstyle ':completion:*:git-*:*' sort false # Show the git objects in created-time order
-# zstyle ':completion:*:docker-*:*' sort false
 
 unalias run-help  # Remove the default of run-help being aliased to man
 autoload run-help # Use zsh's run-help, which will display information for zsh builtins.
