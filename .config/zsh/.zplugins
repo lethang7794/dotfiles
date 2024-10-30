@@ -45,6 +45,7 @@ ohmyzsh/ohmyzsh path:plugins/macos conditional:is-macos
 romkatv/zsh-bench kind:path
 
 # Completion plugins
+# mattmc3/ez-compinit 
 aloxaf/fzf-tab
 zsh-users/zsh-completions path:src kind:fpath
 
