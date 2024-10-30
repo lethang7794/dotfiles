@@ -5,6 +5,17 @@
 
 # Inherit PATH from bash
 export PATH=$HOME/bin:/usr/local/bin:$PATH
+#
+# dotfiles: Manage dotfiles with bare repository
+#
+# Usage:
+# - dotty $IDE ~
+# - dotty git status
+# - dotfiles status
+#
+alias dotty='GIT_WORK_TREE=$HOME GIT_DIR=$HOME/.dotfiles'
+alias dotfiles='git --work-tree=$HOME --git-dir=$HOME/.dotfiles'
+export IDE=${VISUAL:-${EDITOR:-vim}}
 
 ## Brew
 HOMEBREW_BIN=/home/linuxbrew/.linuxbrew/bin/brew
@@ -169,7 +180,7 @@ alias tf="touchfile"
 
 # Globalias
 # shellcheck disable=SC2034
-GLOBALIAS_FILTER_VALUES=(ls which type z grep open rm rmdir rm-yes rmdir-yes mv)
+GLOBALIAS_FILTER_VALUES=(ls which type z grep open rm rmdir rm-yes rmdir-yes mv dotty dotfiles)
 
 ## Brew
 if [ -f "$HOMEBREW_BIN" ]; then
