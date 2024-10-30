@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-#
-# .zshrc - Run on interactive Zsh session.
-#
+##
+## .zshrc - Run on interactive Zsh session.
+##
 
 # shellcheck disable=SC2155,SC1090
 
@@ -99,20 +99,20 @@ fi
 export FZF_MARKS_JUMP="^[g"
 
 ## Antidote - zsh packages
-ANTIDOTE_BIN="$HOMEBREW_PREFIX/opt/antidote/share/antidote/antidote.zsh"
-if [ -f "$ANTIDOTE_BIN" ]; then
-  source "$ANTIDOTE_BIN"
-fi
-zstyle ':antidote:bundle' use-friendly-names 'yes'
-zsh_plugins=${ZDOTDIR}/.zsh_plugins
-if [[ ! ${zsh_plugins}.zsh -nt ${zsh_plugins}.txt ]]; then
-  (
-    [ "$(command -v antidote)" ] && antidote bundle <"${zsh_plugins}".txt >"${zsh_plugins}".zsh
-  )
-fi
-if [ -f "${zsh_plugins}".zsh ]; then
-  source "${zsh_plugins}".zsh
-fi
+# ANTIDOTE_BIN="$HOMEBREW_PREFIX/opt/antidote/share/antidote/antidote.zsh"
+# if [ -f "$ANTIDOTE_BIN" ]; then
+#   source "$ANTIDOTE_BIN"
+# fi
+# zstyle ':antidote:bundle' use-friendly-names 'yes'
+# zsh_plugins=${ZDOTDIR}/.zplugins
+# if [[ ! ${zplugins}.zsh -nt ${zplugins}.txt ]]; then
+#   (
+#     [ "$(command -v antidote)" ] && antidote bundle <"${zplugins}" >"${zplugins}".zsh
+#   )
+# fi
+# if [ -f "${zplugins}".zsh ]; then
+#   source "${zplugins}".zsh
+# fi
 
 # Mise-en-place
 if [ "$(command -v mise)" ]; then

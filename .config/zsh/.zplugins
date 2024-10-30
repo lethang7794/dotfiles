@@ -1,0 +1,47 @@
+mroth/evalcache
+
+### Oh-my-zsh plugins: https://github.com/ohmyzsh/ohmyzsh/wiki/Plugins
+# ohmyzsh/ohmyzsh path:plugins/last-working-dir
+ohmyzsh/ohmyzsh path:plugins/git kind:defer
+ohmyzsh/ohmyzsh path:plugins/sudo kind:defer
+ohmyzsh/ohmyzsh path:plugins/kubectl kind:defer
+ohmyzsh/ohmyzsh path:plugins/globalias kind:defer
+ohmyzsh/ohmyzsh path:plugins/docker-compose kind:defer
+
+## ohmyzsh/ohmyzsh path:plugins/colored-man-pages # Use bat instead
+## ohmyzsh/ohmyzsh path:plugins/z
+
+### Github repos
+
+## MISC
+mattmc3/zfunctions kind:defer
+yuhonas/zsh-ansimotd kind:defer
+mdumitru/fancy-ctrl-z kind:defer
+urbainvaes/fzf-marks kind:defer
+zshzoo/iwd kind:defer
+zshzoo/magic-enter kind:defer
+betafcc/nav kind:defer
+mattmc3/zman kind:defer
+
+# zshzoo/cd-ls kind:defer
+# bilelmoussaoui/flatpak-zsh-completion kind:defer # not working
+# djui/alias-tips
+# MichaelAquilina/zsh-you-should-use kind:defer
+
+## Completions
+zsh-users/zsh-completions             # Additonal completions
+Aloxaf/fzf-tab kind:defer             # 🌟🌟🌟
+lethang7794/fzf-tab-source kind:defer # 🌟🌟
+lethang7794/fzf-git.sh kind:defer     #
+
+# Freed-Wu/fzf-tab-source                  # Use my fork
+# junegunn/fzf-git.sh                      # Use my fork
+# chitoku-k/fzf-zsh-completions kind:defer # So slow
+
+## Suggestions
+zsh-users/zsh-autosuggestions kind:defer # 🌟🌟🌟
+
+## Syntax-highlight
+# zsh-users/zsh-syntax-highlighting                    # ?
+# zdharma-continuum/fast-syntax-highlighting kind:defer # ?
+z-shell/F-Sy-H kind:defer
