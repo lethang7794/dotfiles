@@ -94,75 +94,9 @@ fi
 ## fzf-mark
 export FZF_MARKS_JUMP="^[g"
 
-## Antidote - zsh packages
-# ANTIDOTE_BIN="$HOMEBREW_PREFIX/opt/antidote/share/antidote/antidote.zsh"
-# if [ -f "$ANTIDOTE_BIN" ]; then
-#   source "$ANTIDOTE_BIN"
-# fi
-# zstyle ':antidote:bundle' use-friendly-names 'yes'
-# zsh_plugins=${ZDOTDIR}/.zplugins
-# if [[ ! ${zplugins}.zsh -nt ${zplugins}.txt ]]; then
-#   (
-#     [ "$(command -v antidote)" ] && antidote bundle <"${zplugins}" >"${zplugins}".zsh
-#   )
-# fi
-# if [ -f "${zplugins}".zsh ]; then
-#   source "${zplugins}".zsh
-# fi
-
 # Mise-en-place
 if [ "$(command -v mise)" ]; then
   cached-eval 'mise' mise activate zsh
-fi
-
-## zsh
-# History
-[ -d "$XDG_STATE_HOME"/zsh ] || mkdir -p "$XDG_STATE_HOME"/zsh
-HISTFILE="$XDG_STATE_HOME"/zsh/history
-
-# Completion
-[ -d "$XDG_CACHE_HOME"/zsh ] || mkdir -p "$XDG_CACHE_HOME"/zsh
-
-## oh-my-zsh's already done this
-# autoload -Uz bashcompinit && bashcompinit
-# autoload -Uz compinit
-
-# [ -d "$XDG_CACHE_HOME"/zsh/zcompcache ] || mkdir -p "$XDG_CACHE_HOME"/zsh/zcompcache
-# zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
-# compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$HOST-$ZSH_VERSION
-
-# TODO: migrate to this instead of using ZSH_CUSTOM
-# Custom completions
-# [ -d "$XDG_DATA_HOME"/zsh/completions ] || mkdir -p "$XDG_DATA_HOME"/zsh/completions
-# FPATH="${XDG_DATA_HOME}/zsh/completions:${FPATH}"
-
-# Path to your oh-my-zsh installation.
-# export ZSH="$HOME/.oh-my-zsh"
-export ZSH=$(antidote path ohmyzsh/ohmyzsh)
-export ZSH_CUSTOM="$XDG_CONFIG_HOME/zsh/zsh_custom"
-
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# shellcheck disable=SC2034
-# ZSH_THEME="robbyrussell"
-
-zstyle ':omz:update' mode disabled
-
-if [[ "$(command -v git)" && -d $ZSH ]]; then
-  # ZSH_COMPDUMP="$ZSH_CACHE_DIR/.zcompdump-$HOST" # Oh-my-zsh will use ZDOTDIR
-  # mkdir -p $ZSH_CACHE_DIR
-
-  # shellcheck disable=SC2034
-  ZSH_DISABLE_COMPFIX="true"
-
-  # shellcheck disable=SC2034
-  plugins=(
-    # golang # doesn't need this
-  )
-
-  FPATH="${FPATH}:$(brew --prefix)/share/zsh/site-functions" # CURRENT THIS DOESN'T WORK
-
-  # shellcheck disable=SC1091
-  # source "$ZSH"/oh-my-zsh.sh
 fi
 
 # TODO: load brew completions after:
