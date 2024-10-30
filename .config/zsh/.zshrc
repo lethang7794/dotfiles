@@ -149,13 +149,6 @@ if [ -f "$HOMEBREW_BIN" ]; then
   fi
 fi
 
-
-
-# Thefuck
-# cached-eval 'thefuck' thefuck --alias f
-# zle -N f        # Define f as a new widget
-# bindkey "^[f" f # Bind Alt+f to f
-
 function cdd {
   br --only-folders
 }
