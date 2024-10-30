@@ -149,21 +149,6 @@ if [ -f "$HOMEBREW_BIN" ]; then
   fi
 fi
 
-## Bind Alt+R to reload shell config
-# function source-shell {
-#   echo "Source shell configuration"
-#   # exec -l zsh
-#   omz reload
-# }
-# zle -N source-shell        # Define source-shell as a new widget
-# bindkey "^[r" source-shell # Bind Alt+R to source-shell
-# TODO: The shell will be closed, not reload the current session
-
-## Zsh plugin
-
-# MichaelAquilina/zsh-you-should-use
-# export YSU_MESSAGE_FORMAT="$(tput setaf 1)Hey! I found this %alias_type for %command: %alias$(tput sgr0)"
-
 # Atuin
 if [ "$(command -v atuin)" ]; then
   export ATUIN_NOBIND="true"
@@ -195,7 +180,6 @@ function treee {
 # complete -C "$(which aws_completer)" aws
 # complete -C "$HOME/.local/share/mise/installs/awscli/latest/bin/aws_completer" aws
 
-# cached-eval "zoxide init zsh"
 zle -N zi        # Define zi as a new widget
 bindkey "^[z" zi # Bind Alt+z to zi
 
