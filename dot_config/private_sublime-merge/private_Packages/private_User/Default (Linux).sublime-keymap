@@ -1,8 +1,0 @@
-[
-  { "keys": ["ctrl+r"], "command": "quick_switch_repository" },
-  {
-    "keys": ["ctrl+t"],
-    "command": "show_command_palette",
-    "args": { "command": "file_history" }
-  }
-]
