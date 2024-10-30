@@ -116,7 +116,7 @@ export FZF_MARKS_JUMP="^[g"
 
 # Mise-en-place
 if [ "$(command -v mise)" ]; then
-  _evalcache mise activate zsh
+  cached-eval 'mise' mise activate zsh
 fi
 
 ## zsh
@@ -176,7 +176,7 @@ fi
 # Brew completions
 
 ## Completions from command
-# _evalcache kubeadm completion zsh
+# cached-eval 'kubeadm' kubeadm completion zsh
 
 ## Other completions
 
@@ -203,7 +203,7 @@ argc_scripts_exclude_pattern=$(printf "|%s" "${argc_scripts_exclude[@]}")
 argc_scripts_exclude_pattern=${argc_scripts_exclude_pattern:1} # Remove the leading '|'
 argc_scripts_items=$(printf "%s\n" "${argc_scripts_include[@]}" | grep -v -E "${argc_scripts_exclude_pattern}")
 argc_scripts=$(echo "$argc_scripts_items" | tr "\n" " ")
-_evalcache argc --argc-completions zsh "${argc_scripts[*]}"
+source <(argc --argc-completions zsh ${argc_scripts[*]})
 
 # TODO: migrate away from oh-my-zsh to have full control
 # Load completions the second time, which will make zsh startup a lot slower
@@ -277,7 +277,7 @@ fi
 # Atuin
 if [ "$(command -v atuin)" ]; then
   export ATUIN_NOBIND="true"
-  _evalcache atuin init zsh
+  cached-eval 'atuin' atuin init zsh
   # eval "$(atuin init zsh --disable-up-arrow)"
   # eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
 
@@ -290,7 +290,7 @@ if [ "$(command -v atuin)" ]; then
 fi
 
 # Thefuck
-_evalcache thefuck --alias f
+# cached-eval 'thefuck' thefuck --alias f
 # zle -N f        # Define f as a new widget
 # bindkey "^[f" f # Bind Alt+f to f
 
@@ -333,7 +333,7 @@ export _ZO_FZF_OPTS="
   --bind 'alt-/:change-preview-window:right|down'
   --bind 'f11:change-preview-window:right|down'
 "
-_evalcache zoxide init zsh
+# cached-eval "zoxide init zsh"
 zle -N zi        # Define zi as a new widget
 bindkey "^[z" zi # Bind Alt+z to zi
 
@@ -622,7 +622,7 @@ export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"
 
 # rbenv
 if [ "$(command -v rbenv)" ]; then
-  _evalcache rbenv init - zsh
+  cached-eval 'rbenv' rbenv init - zsh
 fi
 
 # Mojo
@@ -743,7 +743,7 @@ bindkey '^[[1;3D' nav-back    # alt + left
 
 # Starship
 if [ "$(command -v starship)" ]; then
-  _evalcache starship init zsh --print-full-init
+  cached-eval 'starship' starship init zsh
 fi
 
 ###############################################################################
