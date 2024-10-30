@@ -1,4 +1,5 @@
-#!/bin/zsh
+#!/usr/bin/env bash
+
 #
 # .zshrc - Run on interactive Zsh session.
 #
@@ -90,7 +91,7 @@ HOMEBREW_BIN=/home/linuxbrew/.linuxbrew/bin/brew
 if [ -f "$HOMEBREW_BIN" ]; then
   eval "$($HOMEBREW_BIN shellenv)"
 
-  # Brew autoupdate
+  # Brew auto-update
   export HOMEBREW_AUTO_UPDATE_SECS="86400"
 fi
 
@@ -135,7 +136,7 @@ HISTFILE="$XDG_STATE_HOME"/zsh/history
 # compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-$HOST-$ZSH_VERSION
 
 # TODO: migrate to this instead of using ZSH_CUSTOM
-# Custon completions
+# Custom completions
 # [ -d "$XDG_DATA_HOME"/zsh/completions ] || mkdir -p "$XDG_DATA_HOME"/zsh/completions
 # FPATH="${XDG_DATA_HOME}/zsh/completions:${FPATH}"
 
@@ -168,7 +169,7 @@ if [[ "$(command -v git)" && -d $ZSH ]]; then
   source "$ZSH"/oh-my-zsh.sh
 fi
 
-# TODO: load brew conpletions after:
+# TODO: load brew completions after:
 # - /usr/share/zsh/site-functions                                                                                                                                         ││
 # - /usr/share/zsh/5.9/functions
 #
