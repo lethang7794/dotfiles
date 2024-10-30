@@ -1,3 +1,9 @@
+#!/usr/bin/env zsh
+
+# Load .zshenv from ZDOTDIR
+export ZDOTDIR="${ZDOTDIR:-$HOME/.config/zsh}"
+[[ -r $ZDOTDIR/.zshenv ]] && . $ZDOTDIR/.zshenv
+
 # print "🪝$0: loading .zshenv"
 # if [[ -o login ]]; then
 #   print "  Login shell"
