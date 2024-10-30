@@ -149,20 +149,7 @@ if [ -f "$HOMEBREW_BIN" ]; then
   fi
 fi
 
-# Atuin
-if [ "$(command -v atuin)" ]; then
-  export ATUIN_NOBIND="true"
-  cached-eval 'atuin' atuin init zsh
-  # eval "$(atuin init zsh --disable-up-arrow)"
-  # eval "$(atuin init zsh --disable-up-arrow --disable-ctrl-r)"
 
-  # bindkey '^r' atuin-search
-  bindkey '^r' atuin-search
-
-  # bind to the up key, which depends on terminal mode
-  bindkey '^[[A' atuin-up-search
-  bindkey '^[OA' atuin-up-search
-fi
 
 # Thefuck
 # cached-eval 'thefuck' thefuck --alias f
