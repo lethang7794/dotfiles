@@ -99,3 +99,30 @@ alias t="todo.sh"
 alias todos="$VISUAL $HOME/Desktop/todo.txt"
 
 # vim: ft=zsh sw=2 ts=2 et
+
+# Misc
+alias type="type -a"
+
+alias rm="echo Use \'trash\' or \'trash-put\' instead of \'rm\'."
+alias rmdir="echo Use \'trash\' or \'trash-put\' instead of \'rmdir\'."
+alias mv="mv -iv"
+
+alias rm-yes="/usr/bin/rm -iv"
+alias rmdir-yes="/usr/bin/rmdir -iv"
+
+alias p="pnpm"
+alias v="nvim"
+alias vi="nvim"
+alias vim="nvim"
+alias mnk="minikube"
+alias yless="jless --yaml" # How to use? :help, F1
+alias cz="chezmoi"
+
+alias c="code"
+alias ci="code-insiders"
+
+alias tf="touchfile"
+
+alias "kube-tree"="kube-lineage"
+
+alias awsume=". awsume"

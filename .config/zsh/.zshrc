@@ -137,41 +137,6 @@ source <(argc --argc-completions zsh ${argc_scripts[*]})
 # Plugins
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
-# User configuration
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example Aliases
-# #d alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-## TODO: Move alias to a different file
-## Aliases
-alias type="type -a"
-
-alias rm="echo Use \'trash\' or \'trash-put\' instead of \'rm\'."
-alias rmdir="echo Use \'trash\' or \'trash-put\' instead of \'rmdir\'."
-alias mv="mv -iv"
-
-alias rm-yes="/usr/bin/rm -iv"
-alias rmdir-yes="/usr/bin/rmdir -iv"
-
-alias p="pnpm"
-alias v="nvim"
-alias vi="nvim"
-alias vim="nvim"
-alias mnk="minikube"
-alias yless="jless --yaml" # How to use? :help, F1
-alias cz="chezmoi"
-
-alias c="code"
-alias ci="code-insiders"
-
-alias tf="touchfile"
-
 # Globalias
 # shellcheck disable=SC2034
 GLOBALIAS_FILTER_VALUES=(ls which type z grep open rm rmdir rm-yes rmdir-yes mv dotty dotfiles)
@@ -503,7 +468,6 @@ if [ "$(command -v kubecolor)" ]; then
   alias kubectl="kubecolor"
   compdef kubecolor=kubectl
 fi
-alias "kube-tree"="kube-lineage"
 mk_running=$(minikube status | grep Running | wc -l)
 ((mk_running > 0)) && export MINIKUBE="Running"
 
@@ -523,8 +487,7 @@ mk_running=$(minikube status | grep Running | wc -l)
 # esac
 # pnpm end
 
-# awsume
-alias awsume=". awsume"
+
 
 # Go cover https://dave.cheney.net/2013/11/14/more-simple-test-coverage-in-go-1-2
 go-cover() {
