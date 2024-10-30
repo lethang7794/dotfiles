@@ -536,48 +536,6 @@ function open() {
 
 export WHERE=.zshrc
 
-REPOS="$HOME/go/src/github.com/lethang7794"
-GITHUB="$HOME/go/src/github.com"
-alias repos="cd \$REPOS"
-# alias gh="cd $GITHUB"
-alias github="cd \$GITHUB"
-
-function ghclone() {
-  local repo="$1"
-
-  if (($# == 0)); then
-    echo "Usage: ghclone ORG/REPO"
-    return 1
-  fi
-
-  shift 1
-  # shellcheck disable=SC2124
-  local rest=$@
-
-  if [[ -z "${repo}" ]]; then
-    echo "Usage: ghclone ORG/REPO"
-  fi
-
-  local clone_url="git@github.com:$repo"
-  local dest="$GITHUB/$repo"
-
-  # Check if destination directory already exists
-  if [ -d "$dest" ] && [ -d "$dest/.git" ]; then
-    echo "You've already cloned this repo at: $dest"
-    echo "Happy hacking, again! 🎮 ૮ ˶ᵔ ᵕ ᵔ˶ ა"
-    cd "$dest" || return
-    return 1
-  fi
-
-  # Clone the repository
-  echo "Cloning 󰊤  /$repo"
-  # shellcheck disable=SC2086
-  # mkdir -p "$dest"
-  git clone --depth=1 "$clone_url" "$dest" && cd "$dest" && echo "Happy hacking! 🚀 (づ｡◕‿‿◕｡)づ"
-
-}
-# compdef ghclone="git" # How to use completions of git clone?
-
 timezsh() {
   shell=${1-$SHELL}
   # shellcheck disable=SC2034
