@@ -575,10 +575,6 @@ fi
 # asdf - Extendable version manager with support for Ruby, Node.js, Elixir, Erlang & more
 # . "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
 
-# Direnv
-eval "$(direnv hook zsh)"
-export DIRENV_LOG_FORMAT= # make `direnv` silent
-
 # nav
 # nav bindkeys
 zle -N gitop # Define gitop as a new widget
