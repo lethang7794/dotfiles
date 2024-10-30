@@ -94,11 +94,6 @@ fi
 ## fzf-mark
 export FZF_MARKS_JUMP="^[g"
 
-# Mise-en-place
-if [ "$(command -v mise)" ]; then
-  cached-eval 'mise' mise activate zsh
-fi
-
 # TODO: load brew completions after:
 # - /usr/share/zsh/site-functions                                                                                                                                         ││
 # - /usr/share/zsh/5.9/functions
