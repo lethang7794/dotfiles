@@ -1,0 +1,6 @@
+import = [
+  "~/.config/alacritty/share/default.toml",
+  "~/.config/alacritty/theme.toml",
+  "~/.config/alacritty/font.toml",
+  "~/.config/alacritty/font-size.toml",
+]

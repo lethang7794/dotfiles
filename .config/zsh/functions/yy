@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+#
+# yy: yazi launch script
+#
+
+tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+
+yazi "$@" --cwd-file="$tmp"
+if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+  cd -- "$cwd" || exit
+fi
+
+/usr/bin/rm -f -- "$tmp"
+
+# If yazi is used as a zsh widget, reset the prompt
+zle && zle reset-prompt

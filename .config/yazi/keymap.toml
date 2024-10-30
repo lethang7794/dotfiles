@@ -1,0 +1,37 @@
+# https://yazi-rs.github.io/docs/configuration/keymap
+
+# Displays a command prompt for yazi commands
+[[manager.prepend_keymap]]
+on   = [ "c", "p" ]
+run  = "plugin command"
+desc = "Yazi command prompt"
+
+# Toggle directory tree/list preview
+[[manager.prepend_keymap]]
+on   = "E"
+run  = "plugin eza-preview"
+desc = "Toggle tree/list dir preview"
+
+# Maximize or restore the preview pane
+[[manager.prepend_keymap]]
+on   = "T"
+run  = "plugin --sync max-preview"
+desc = "Maximize or restore preview"
+
+# Show size of selection or cwd
+# [[manager.prepend_keymap]]
+# on   = [ ".", "s" ]
+# run  = "plugin what-size"
+# desc = "Calc size of selection or cwd"
+
+# Close input by once Esc press
+[[input.prepend_keymap]]
+on   = "<Esc>"
+run  = "close"
+desc = "Cancel input"
+
+# Dropping to the shell
+# [[manager.prepend_keymap]]
+# on   = "!"
+# run  = 'shell "$SHELL" --block --confirm'
+# desc = "Open shell here"

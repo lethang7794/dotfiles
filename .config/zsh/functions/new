@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+#
+# new: create new file or directory
+#
+
+##? new: create new file or directory
+
+file="$1"
+
+# Ensure exactly 1 argument are passed
+if [ "$#" -ne 1 ]; then
+  echo "Usage: $0 <path_to_file_or_directory>"
+  return 1
+fi
+
+# If path has trailing slash, it's a directory
+if [[ "$file" == */ ]]; then
+  # Trip trailing slash
+  dir=${file%/}
+
+  # Create new directory
+  mkdir -p "$dir"
+else # It's a file
+  # Create the parent directory
+  mkdir -p -- "$(dirname -- "$file")"
+
+  # Create new file
+  touch -- "$file"
+
+  # Open the created file with default editor
+  # $EDITOR "$file"
+fi
