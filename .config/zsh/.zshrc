@@ -213,38 +213,10 @@ if [ "$(command -v bat)" ]; then
   function man() {
     /usr/bin/man "$@" | bat -pl help
   }
-
-  # alias -g -- -h='-h 2>&1 | bat -pl help'
-  # alias -g -- --help='--help 2>&1 | bat -pl help'
-
-  # pre_validation() {
-  #   local command="$1"
-
-  #   # Check if the first argument is "help"
-  #   if [[ "$command" == *'help'* ]]; then
-  #     # Pipe the output of the command to cat
-  #     eval $command | bat -pl help
-  #     echo "🚨🚨🚨 Press Ctrl+C to exit 🚨🚨🚨"
-  #     read -sk key
-  #   fi
-  # }
-
-  # # Enable the preexec hook
-  # autoload -Uz add-zsh-hook
-  # add-zsh-hook preexec pre_validation
 fi
-
-# fx
-# source <(fx --comp zsh) # Need to disable argc-complete for fx; Not so smooth when first release (v33)
 
 # atac
 export ATAC_MAIN_DIR=~/.config/atac
-
-## rip2: a safer rm # rip2 is not compatible with XDG
-# function rip {
-#   local args=$@
-#   eval "$HOME/.cargo/bin/rip --graveyard $RIP_GRAVEYARD -i $@"
-# }
 
 function upd() {
   printf "\n🆕 Update dnf packages\n"
@@ -275,24 +247,6 @@ fi
 mk_running=$(minikube status | grep Running | wc -l)
 ((mk_running > 0)) && export MINIKUBE="Running"
 
-# Volta
-# export VOLTA_HOME="$HOME/.volta"
-# export PATH="$VOLTA_HOME/bin:$PATH"
-
-# NVMD
-# export NVMD_DIR="$HOME/.nvmd"
-# export PATH="$NVMD_DIR/bin:$PATH"
-
-# pnpm
-# export PNPM_HOME="/home/lqt/.local/share/pnpm"
-# case ":$PATH:" in
-# *":$PNPM_HOME:"*) ;;
-# *) export PATH="$PNPM_HOME:$PATH" ;;
-# esac
-# pnpm end
-
-
-
 # Go cover https://dave.cheney.net/2013/11/14/more-simple-test-coverage-in-go-1-2
 go-cover() {
   t=$(mktemp)
@@ -316,10 +270,6 @@ export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"
 if [ "$(command -v rbenv)" ]; then
   cached-eval 'rbenv' rbenv init - zsh
 fi
-
-# Mojo
-export MODULAR_HOME="/home/lqt/.modular"
-export PATH="/home/lqt/.modular/pkg/packages.modular.com_mojo/bin:$PATH"
 
 # tmux
 # if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
