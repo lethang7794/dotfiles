@@ -7,6 +7,7 @@
 mattmc3/zephyr path:plugins/helper
 mattmc3/zephyr path:plugins/color
 mattmc3/zephyr path:plugins/completion
+mattmc3/zephyr path:plugins/compstyle
 mattmc3/zephyr path:plugins/confd
 mattmc3/zephyr path:plugins/zfunctions
 mattmc3/zephyr path:plugins/editor

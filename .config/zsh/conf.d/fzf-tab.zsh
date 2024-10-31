@@ -3,7 +3,7 @@
 #
 
 # https://github.com/Aloxaf/fzf-tab
-if (( $+commands[fzf-tab-complete] )); then
+if [[ -n $FZF_TAB_HOME ]]; then
   zstyle ":fzf-tab:*" fzf-flags \
     --multi \
     --bind 'alt-a:select-all' \
@@ -23,6 +23,7 @@ if (( $+commands[fzf-tab-complete] )); then
 
   # set descriptions format to enable group support
   zstyle ':completion:*:descriptions' format '[%d]'
+  zstyle ':completion:*' format ' %d '
 
   # set list-colors to enable filename colorizing
   # shellcheck disable=SC2296
