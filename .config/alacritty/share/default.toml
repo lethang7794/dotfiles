@@ -1,0 +1,14 @@
+[shell]
+program = "/usr/bin/zsh"
+args = ["-l", "-c", "zellij attach --index 0 || zellij"]
+
+[window]
+opacity = 0.93
+dimensions.columns = 80
+dimensions.lines = 24
+
+[cursor]
+style = { blinking = "Always" }
+
+[keyboard]
+bindings = [{ key = "F11", action = "ToggleFullscreen" }]

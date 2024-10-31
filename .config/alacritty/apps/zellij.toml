@@ -1,0 +1,6 @@
+import = ["~/.config/alacritty/share/pane.toml"]
+
+[window]
+padding.x = 0
+padding.y = 0
+decorations = "None"

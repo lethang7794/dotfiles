@@ -3,5 +3,5 @@ Type=Application
 Name=k9s
 Comment=View and manage Kubernetes clusters
 Terminal=false
-Exec=alacritty --config-file /home/lqt/.config/alacritty/apps/k9s.toml --class=k9s --title=k9s -e zsh -c 'k9s; read -n 1 -s'
+Exec=alacritty --config-file /home/lqt/.config/alacritty/apps/k9s.toml --class=k9s --title=k9s -e zsh -c 'k9s'
 Icon=/home/lqt/.local/share/icons/applications/k9s.png
