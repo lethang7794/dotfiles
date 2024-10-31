@@ -5,6 +5,8 @@
 
 # zephyr
 mattmc3/zephyr path:plugins/helper
+mattmc3/zephyr path:plugins/zfunctions
+
 mattmc3/zephyr path:plugins/color
 mattmc3/zephyr path:plugins/completion
 mattmc3/zephyr path:plugins/compstyle
@@ -16,14 +18,13 @@ mattmc3/zephyr path:plugins/editor
 # mattmc3/zephyr path:plugins/homebrew
 # mattmc3/zephyr path:plugins/macos
 # mattmc3/zephyr path:plugins/prompt
-mattmc3/zephyr path:plugins/utility
-mattmc3/zephyr path:plugins/zfunctions
+mattmc3/zephyr path:plugins/utility post:post-zephyr-utility
 
 # Make functions available
 # mattmc3/zfunctions
 
 # Let's go ahead and use all of Oh My Zsh's lib directory.
-# ohmyzsh/ohmyzsh path:lib
+ohmyzsh/ohmyzsh path:lib
 
 # Now, let's pick our Oh My Zsh utilty plugins
 ohmyzsh/ohmyzsh path:plugins/colored-man-pages
@@ -53,7 +54,7 @@ romkatv/zsh-bench kind:path
 
 # Completion plugins
 # mattmc3/ez-compinit
-aloxaf/fzf-tab kind:defer                     #
+aloxaf/fzf-tab kind:defer post:post-fzf-tab   #
 lethang7794/fzf-tab-source kind:defer         # 🌟🌟
 zsh-users/zsh-completions path:src kind:fpath #
 
@@ -72,9 +73,9 @@ mattmc3/zman
 betafcc/nav kind:defer
 
 # Add core plugins that make Zsh a bit more like Fish
-zdharma-continuum/fast-syntax-highlighting
-zsh-users/zsh-autosuggestions
-zsh-users/zsh-history-substring-search
+zdharma-continuum/fast-syntax-highlighting kind:defer
+zsh-users/zsh-autosuggestions kind:defer
+zsh-users/zsh-history-substring-search kind:defer
 
 # conf.d
 # mattmc3/zshrc.d

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# https://github.com/mattmc3/zephyr/tree/main/plugins/utility
+
+# Use handlr-regex, which supports open multiple files
+#
+# https://github.com/Anomalocaridid/handlr-regex
+if [ "$(command -v handlr)" ]; then
+  alias open="handlr open"
+fi
+
+# pbcopy/pbpaste: pb means pasteboard (from MacOS)

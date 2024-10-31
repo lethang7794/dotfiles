@@ -1,8 +1,9 @@
+#!/usr/bin/env bash
 #
 # fzf-tab: Configure fzf-tab.
 #
-
 # https://github.com/Aloxaf/fzf-tab
+
 if [[ -n $FZF_TAB_HOME ]]; then
   zstyle ":fzf-tab:*" fzf-flags \
     --multi \
