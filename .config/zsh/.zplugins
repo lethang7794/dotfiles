@@ -66,7 +66,7 @@ romkatv/zsh-no-ps2
 # ${ZDOTDIR:-$HOME}/.p10k.zsh
 
 # Aliases
-# ${ZDOTDIR:-$HOME}/.zaliases
+"${ZDOTDIR:-$HOME}"/.zaliases
 
 # Utils
 mattmc3/zman

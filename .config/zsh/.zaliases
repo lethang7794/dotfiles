@@ -93,6 +93,7 @@ alias autorotate="jhead -autorot"
 alias dotty='GIT_WORK_TREE=~ GIT_DIR=$DOTFILES'
 alias dotty-local='GIT_WORK_TREE=~ GIT_DIR=$DOTFILES.local'
 alias dotfiles='command git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
+compdef dotfiles=git
 
 # dotfiles
 alias cdot='cd "$DOTFILES"'

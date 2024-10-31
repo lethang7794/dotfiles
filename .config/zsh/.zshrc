@@ -39,18 +39,6 @@ is-theme-starship() { [[ "$ZSH_THEME" == starship* ]] }
 unset zlib
 
 #
-# Aliases
-#
-[[ -r ${ZDOTDIR:-$HOME}/.zaliases ]] && source ${ZDOTDIR:-$HOME}/.zaliases
-
-#
-# Completions
-#
-ZSH_COMPDUMP=${XDG_CACHE_HOME:-$HOME/.cache}/zsh/compdump
-[[ -d $ZSH_COMPDUMP:h ]] || mkdir -p $ZSH_COMPDUMP:h
-autoload -Uz compinit && compinit -i -d $ZSH_COMPDUMP
-
-#
 # Prompt
 #
 setopt prompt_subst transient_rprompt
