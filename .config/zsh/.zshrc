@@ -202,8 +202,8 @@ bindkey '^Xh' _complete_help
 zle -N enable-fzf-tab
 bindkey '^Xx' enable-fzf-tab
 
-unalias run-help  # Remove the default of run-help being aliased to man
-autoload run-help # Use zsh's run-help, which will display information for zsh builtins.
+# unalias run-help  # Remove the default of run-help being aliased to man
+# autoload run-help # Use zsh's run-help, which will display information for zsh builtins.
 
 # bat: color man. help
 if [ "$(command -v bat)" ]; then
