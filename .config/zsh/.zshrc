@@ -97,11 +97,7 @@ fi
 # atac
 export ATAC_MAIN_DIR=~/.config/atac
 
-## Kubernetes
-if [ "$(command -v kubecolor)" ]; then
-  alias kubectl="kubecolor"
-  compdef kubecolor=kubectl
-fi
+
 
 mk_running=$(minikube status | grep Running | wc -l)
 ((mk_running > 0)) && export MINIKUBE="Running"
