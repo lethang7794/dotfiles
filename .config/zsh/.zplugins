@@ -62,6 +62,7 @@ romkatv/zsh-no-ps2
 
 # Utils
 mattmc3/zman
+betafcc/nav kind:defer
 
 # Add core plugins that make Zsh a bit more like Fish
 zdharma-continuum/fast-syntax-highlighting

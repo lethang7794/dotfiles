@@ -278,8 +278,6 @@ timezsh() {
 # Created by `pipx` on 2024-04-01 17:04:47
 export PATH="$PATH:/home/lqt/.local/bin"
 
-zle -N yy            # Define yy as a new widget
-bindkey '^[[1;3B' yy # Bind Alt + Down to yy widget
 
 # Temp workaround to disable punycode deprecation logging to stderr
 # https://github.com/bitwarden/clients/issues/6689
@@ -304,17 +302,6 @@ else
   alias copy="xclip -sel clip"
   alias paste="xclip -sel clip -o"
 fi
-
-# asdf - Extendable version manager with support for Ruby, Node.js, Elixir, Erlang & more
-# . "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
-
-# nav
-# nav bindkeys
-zle -N gitop # Define gitop as a new widget
-bindkey '^[[1;4A' gitop
-bindkey '^[[1;3A' nav-up      # alt + up
-bindkey '^[[1;3C' nav-forward # alt + right
-bindkey '^[[1;3D' nav-back    # alt + left
 
 ###############################################################################
 ###############################################################################
