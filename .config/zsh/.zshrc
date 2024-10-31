@@ -91,31 +91,6 @@ export FZF_MARKS_JUMP="^[g"
 
 ## Other completions
 
-## argc-completions: load after oh-my-zsh
-# Load argc-completions first, so they can be override by others                    # ?
-export ARGC_COMPLETIONS_ROOT="/home/lqt/go/src/github.com/sigoden/argc-completions" #
-export ARGC_COMPLETIONS_PATH="$ARGC_COMPLETIONS_ROOT/completions"                   #
-# export PATH="$ARGC_COMPLETIONS_ROOT/bin:$PATH"                                    # Use the one from brew
-# To add a subset of completions only, change next line e.g. argc_scripts=( cargo git )
-# argc_scripts=(
-#   broot
-#   fzf
-#   kubeadm # Better then the builtin
-#   minikube
-#   ctrld
-#   ttab
-#   wmctrl
-#   packer
-# )
-# shellcheck disable=SC2207,SC2012
-argc_scripts_include=($(ls -p -1 "$ARGC_COMPLETIONS_ROOT/completions" | sed -n 's/\.sh$//p')) # All argc-completions
-argc_scripts_exclude=(docker gem kubectl go brew npm pnpm openssl git make just cargo task)
-argc_scripts_exclude_pattern=$(printf "|%s" "${argc_scripts_exclude[@]}")
-argc_scripts_exclude_pattern=${argc_scripts_exclude_pattern:1} # Remove the leading '|'
-argc_scripts_items=$(printf "%s\n" "${argc_scripts_include[@]}" | grep -v -E "${argc_scripts_exclude_pattern}")
-argc_scripts=$(echo "$argc_scripts_items" | tr "\n" " ")
-source <(argc --argc-completions zsh ${argc_scripts[*]})
-
 # TODO: migrate away from oh-my-zsh to have full control
 # Load completions the second time, which will make zsh startup a lot slower
 # compinit -d $ZSH_COMPDUMP
