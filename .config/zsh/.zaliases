@@ -126,11 +126,15 @@ alias rm-yes="/usr/bin/rm -iv"
 alias rmdir-yes="/usr/bin/rmdir -iv"
 
 alias p="pnpm"
+
 alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
-alias mnk="minikube"
+
+alias j=jless
 alias yless="jless --yaml" # How to use? :help, F1
+alias y=yless
+
 alias cz="chezmoi"
 
 alias c="code"
@@ -138,6 +142,8 @@ alias ci="code-insiders"
 
 alias tf="touchfile"
 
+alias k="kubectl"
 alias kube-tree="kube-lineage"
+alias mnk="minikube"
 
 alias awsume=". awsume"
