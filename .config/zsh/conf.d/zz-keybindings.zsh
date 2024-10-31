@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ##
-## .zkeys: Custom keys bind to widgets.
+## keybindings.zsh: Custom keybindings to zsh widgets.
 ##
 
 # zoxide
