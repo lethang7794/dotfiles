@@ -82,7 +82,13 @@ alias print-functions='print -l ${(k)functions[(I)[^_]*]} | sort'
 # auto-orient images based on exif tags
 alias autorotate="jhead -autorot"
 
-# dotfiles - bare repos
+# dotfiles: Manage dotfiles with bare repository
+#
+# Usage:
+# - dotty $IDE ~
+# - dotty git status
+# - dotfiles status
+#
 : "${DOTFILES:=$HOME/.dotfiles}" # Set default value to an environment variable
 alias dotty='GIT_WORK_TREE=~ GIT_DIR=$DOTFILES'
 alias dotty-local='GIT_WORK_TREE=~ GIT_DIR=$DOTFILES.local'

@@ -68,17 +68,6 @@ autoload -Uz promptinit && promptinit
 ###############################################################################
 ###############################################################################
 
-# dotfiles: Manage dotfiles with bare repository
-#
-# Usage:
-# - dotty $IDE ~
-# - dotty git status
-# - dotfiles status
-#
-alias dotty='GIT_WORK_TREE=$HOME GIT_DIR=$HOME/.dotfiles'
-alias dotfiles='git --work-tree=$HOME --git-dir=$HOME/.dotfiles'
-export IDE=${VISUAL:-${EDITOR:-vim}}
-
 ## Brew
 HOMEBREW_BIN=/home/linuxbrew/.linuxbrew/bin/brew
 if [ -f "$HOMEBREW_BIN" ]; then
