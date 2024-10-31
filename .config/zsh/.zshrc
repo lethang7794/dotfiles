@@ -68,8 +68,6 @@ autoload -Uz promptinit && promptinit
 ###############################################################################
 ###############################################################################
 
-# Inherit PATH from bash
-export PATH=$HOME/bin:/usr/local/bin:$PATH
 #
 # dotfiles: Manage dotfiles with bare repository
 #
@@ -236,9 +234,6 @@ go-cover-web() {
   go test "$COVERFLAGS" -coverprofile="$t" "$@" && go tool cover -html="$t" && unlink "$t"
 }
 
-# JetBrains
-export PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"
-
 # VS Code
 # VSCODE_PROFILE=Fedora
 # function code {
@@ -274,10 +269,6 @@ timezsh() {
   # shellcheck disable=SC2034
   for i in $(seq 1 10); do /usr/bin/time "$shell" -i -c exit; done
 }
-
-# Created by `pipx` on 2024-04-01 17:04:47
-export PATH="$PATH:/home/lqt/.local/bin"
-
 
 # Temp workaround to disable punycode deprecation logging to stderr
 # https://github.com/bitwarden/clients/issues/6689

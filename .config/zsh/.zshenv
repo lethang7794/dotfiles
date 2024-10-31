@@ -64,13 +64,8 @@ export BAT_THEME="Catppuccin Macchiato" # Use by other apps
 ###############################################################################
 ##
 ## Golang
-##
-# Golang bin 
-export PATH="$HOME/.gobrew/bin:$PATH"    # Gobrew bin 
-export GOROOT="$HOME/.gobrew/current/go" # Current Golang bin 
-# Programs build with Golang
-export PATH="$HOME/go/bin:$PATH"              # Built by OS-level Golang
-export PATH="$HOME/.gobrew/current/bin:$PATH" # Built by gobrew's Golang
+export GOROOT="$HOME/.gobrew/current/go" # Current Golang bin managed by gobrew
+
 
 ##
 ## Rust
