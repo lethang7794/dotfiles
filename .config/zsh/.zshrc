@@ -89,11 +89,9 @@ export FZF_MARKS_JUMP="^[g"
 ## Completions from command
 # cached-eval 'kubeadm' kubeadm completion zsh
 
-## Other completions
-
-# TODO: migrate away from oh-my-zsh to have full control
-# Load completions the second time, which will make zsh startup a lot slower
-# compinit -d $ZSH_COMPDUMP
+## AWS https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-completion.html#cli-command-completion-linux
+# complete -C "$(which aws_completer)" aws
+# complete -C "$HOME/.local/share/mise/installs/awscli/latest/bin/aws_completer" aws
 
 ## Brew
 if [ -f "$HOMEBREW_BIN" ]; then
@@ -103,26 +101,11 @@ if [ -f "$HOMEBREW_BIN" ]; then
   fi
 fi
 
-function cdd {
-  br --only-folders
-}
-function treee {
-  br -c :pt "$@"
-}
-
-## AWS https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-completion.html#cli-command-completion-linux
-# complete -C "$(which aws_completer)" aws
-# complete -C "$HOME/.local/share/mise/installs/awscli/latest/bin/aws_completer" aws
-
 # Walk https://github.com/antonmedv/walk
 export WALK_REMOVE_CMD=trash
 function lk {
   cd "$(walk --icons --fuzzy --preview "$@")" || exit
 }
-
-
-# unalias run-help  # Remove the default of run-help being aliased to man
-# autoload run-help # Use zsh's run-help, which will display information for zsh builtins.
 
 # atac
 export ATAC_MAIN_DIR=~/.config/atac
@@ -132,6 +115,7 @@ if [ "$(command -v kubecolor)" ]; then
   alias kubectl="kubecolor"
   compdef kubecolor=kubectl
 fi
+
 mk_running=$(minikube status | grep Running | wc -l)
 ((mk_running > 0)) && export MINIKUBE="Running"
 
@@ -144,17 +128,6 @@ go-cover-web() {
   t=$(mktemp)
   go test "$COVERFLAGS" -coverprofile="$t" "$@" && go tool cover -html="$t" && unlink "$t"
 }
-
-# VS Code
-# VSCODE_PROFILE=Fedora
-# function code {
-#   /usr/bin/code "$@" --profile $VSCODE_PROFILE
-# }
-
-# rbenv
-if [ "$(command -v rbenv)" ]; then
-  cached-eval 'rbenv' rbenv init - zsh
-fi
 
 # tmux
 # if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
@@ -172,8 +145,6 @@ tmux-cleanup-windows() {
 function open() {
   handlr open "$@"
 }
-
-export WHERE=.zshrc
 
 timezsh() {
   shell=${1-$SHELL}
