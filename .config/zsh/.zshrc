@@ -131,9 +131,6 @@ source <(argc --argc-completions zsh ${argc_scripts[*]})
 # Load completions the second time, which will make zsh startup a lot slower
 # compinit -d $ZSH_COMPDUMP
 
-# Plugins
-export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-
 # Globalias
 # shellcheck disable=SC2034
 GLOBALIAS_FILTER_VALUES=(ls which type z grep open rm rmdir rm-yes rmdir-yes mv dotty dotfiles)

@@ -53,8 +53,9 @@ romkatv/zsh-bench kind:path
 
 # Completion plugins
 # mattmc3/ez-compinit
-aloxaf/fzf-tab
-zsh-users/zsh-completions path:src kind:fpath
+aloxaf/fzf-tab kind:defer                     #
+lethang7794/fzf-tab-source kind:defer         # 🌟🌟
+zsh-users/zsh-completions path:src kind:fpath #
 
 # Editor plugins
 romkatv/zsh-no-ps2
