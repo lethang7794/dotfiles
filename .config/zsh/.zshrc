@@ -68,7 +68,6 @@ autoload -Uz promptinit && promptinit
 ###############################################################################
 ###############################################################################
 
-#
 # dotfiles: Manage dotfiles with bare repository
 #
 # Usage:
@@ -204,14 +203,6 @@ bindkey '^Xx' enable-fzf-tab
 
 # unalias run-help  # Remove the default of run-help being aliased to man
 # autoload run-help # Use zsh's run-help, which will display information for zsh builtins.
-
-# bat: color man. help
-if [ "$(command -v bat)" ]; then
-  alias bathelp="bat -pl help"
-  function man() {
-    /usr/bin/man "$@" | bat -pl help
-  }
-fi
 
 # atac
 export ATAC_MAIN_DIR=~/.config/atac
