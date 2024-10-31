@@ -95,10 +95,6 @@ export FZF_MARKS_JUMP="^[g"
 # Load completions the second time, which will make zsh startup a lot slower
 # compinit -d $ZSH_COMPDUMP
 
-# Globalias
-# shellcheck disable=SC2034
-GLOBALIAS_FILTER_VALUES=(ls which type z grep open rm rmdir rm-yes rmdir-yes mv dotty dotfiles)
-
 ## Brew
 if [ -f "$HOMEBREW_BIN" ]; then
   HB_CNF_HANDLER="$(brew --repository)/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
