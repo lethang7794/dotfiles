@@ -141,17 +141,6 @@ tmux-cleanup-windows() {
   tmux list-windows | grep -v attached | awk 'BEGIN{FS=\":\"}{print $1}' | xargs -n 1 tmux kill-window -t 2>/dev/null || (echo 'Cleanup unattached windows!' && tmux ls)
 }
 
-# alias open=xdg-open # Linux
-function open() {
-  handlr open "$@"
-}
-
-timezsh() {
-  shell=${1-$SHELL}
-  # shellcheck disable=SC2034
-  for i in $(seq 1 10); do /usr/bin/time "$shell" -i -c exit; done
-}
-
 # Temp workaround to disable punycode deprecation logging to stderr
 # https://github.com/bitwarden/clients/issues/6689
 alias bw='NODE_OPTIONS="--no-deprecation" bw'
