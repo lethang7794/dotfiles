@@ -32,8 +32,8 @@ ohmyzsh/ohmyzsh path:plugins/copybuffer
 ohmyzsh/ohmyzsh path:plugins/copyfile
 ohmyzsh/ohmyzsh path:plugins/copypath
 ohmyzsh/ohmyzsh path:plugins/extract
-#ohmyzsh/ohmyzsh path:plugins/globalias
-ohmyzsh/ohmyzsh path:plugins/magic-enter
+ohmyzsh/ohmyzsh path:plugins/globalias    # Expands all glob expressions, subcommands and aliases (including global).
+ohmyzsh/ohmyzsh path:plugins/magic-enter  # Press Enter to execute `git status` (in a git directory); `ls` (in other directories)
 ohmyzsh/ohmyzsh path:plugins/fancy-ctrl-z
 ohmyzsh/ohmyzsh path:plugins/otp
 ohmyzsh/ohmyzsh path:plugins/zoxide
