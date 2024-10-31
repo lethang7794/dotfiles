@@ -226,26 +226,6 @@ timezsh() {
 # https://github.com/bitwarden/clients/issues/6689
 alias bw='NODE_OPTIONS="--no-deprecation" bw'
 
-## Copy - paste
-# Copy from https://stackoverflow.com/a/62517779 with some modifications
-if grep -q -i microsoft /proc/version; then
-  # on WSL: version contains the string "microsoft"
-  alias copy="clip.exe"
-  alias paste="powershell.exe Get-Clipboard"
-elif [[ "$(uname -a)" == *"cygwin"* ]]; then
-  # on CYGWIN: uname contains the string "cygwin"
-  alias copy="/dev/clipboard"
-  alias paste="cat /dev/clipboard"
-elif [[ ! -r /proc/version ]]; then
-  # on MAC: version is not readable at all
-  alias copy="pbcopy"
-  alias paste="pbpaste"
-else
-  # on "normal" linux
-  alias copy="xclip -sel clip"
-  alias paste="xclip -sel clip -o"
-fi
-
 ###############################################################################
 ###############################################################################
 ###############################################################################
