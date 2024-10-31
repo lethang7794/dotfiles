@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#
+# lk: Walk launch script:
+#
+
+cd "$(walk --icons --fuzzy --preview "$@")" || exit

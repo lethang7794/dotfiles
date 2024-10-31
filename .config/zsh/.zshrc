@@ -94,12 +94,6 @@ if [ -f "$HOMEBREW_BIN" ]; then
   fi
 fi
 
-# Walk https://github.com/antonmedv/walk
-export WALK_REMOVE_CMD=trash
-function lk {
-  cd "$(walk --icons --fuzzy --preview "$@")" || exit
-}
-
 # atac
 export ATAC_MAIN_DIR=~/.config/atac
 
