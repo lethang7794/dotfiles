@@ -5,7 +5,7 @@ Comment=Edit text files
 Comment[vi]=Soạn thảo tập tin văn bản
 Terminal=false
 TryExec=nvim
-Exec=alacritty --config-file /home/lqt/.config/alacritty/shared/pane-full.toml --class=nvim --title=Neovim -e nvim %F
+Exec=alacritty --config-file /home/lqt/.config/alacritty/apps/nvim.toml --class=nvim --title=Neovim -e nvim %F
 Type=Application
 Keywords=Text;editor;vim;nvim;neovim
 Icon=nvim
