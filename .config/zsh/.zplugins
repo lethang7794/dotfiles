@@ -36,6 +36,8 @@ ohmyzsh/ohmyzsh path:plugins/globalias         # Expands all glob expressions, s
 ohmyzsh/ohmyzsh path:plugins/magic-enter       # Press Enter to execute `git status` (in a git directory); `ls` (in other directories).
 ohmyzsh/ohmyzsh path:plugins/fancy-ctrl-z      # Press Ctrl-Z again to switch back to a background job.
 ohmyzsh/ohmyzsh path:plugins/otp
+ohmyzsh/ohmyzsh path:plugins/sudo
+ohmyzsh/ohmyzsh path:plugins/git
 # ohmyzsh/ohmyzsh path:plugins/zoxide
 
 # Add some programmer plugins
@@ -71,6 +73,7 @@ romkatv/zsh-no-ps2
 # Utils
 mattmc3/zman
 betafcc/nav kind:defer
+z-shell/F-Sy-H kind:defer
 
 # Add core plugins that make Zsh a bit more like Fish
 zdharma-continuum/fast-syntax-highlighting kind:defer
