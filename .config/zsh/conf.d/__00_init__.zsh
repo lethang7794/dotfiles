@@ -46,5 +46,4 @@ path=(
   $HOMEBREW_PREFIX/opt/ruby/bin(N)
   $HOMEBREW_PREFIX/lib/ruby/gems/*/bin(N)
   $HOME/.gem/ruby/*/bin(N)
-
 )
