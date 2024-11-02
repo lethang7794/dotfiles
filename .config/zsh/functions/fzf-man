@@ -15,7 +15,23 @@ fi
 # See: https://junegunn.github.io/fzf/reference/#anchored-match
 cmd=^$cmd
 
-export tldr_cmd="echo $ tldr {1}; tldr --color=always {1} | tail -n +3"
+# shellcheck disable=SC2016
+export tldr_cmd='
+  echo $ tldr {1}; tldr --quiet --color=always {1} | tail -n +3;
+
+  tldr-similar() {
+    word=$1
+    raw=$(tldr --raw --quiet "$word")
+    seeAlsoOrSimilarCount=$(echo "$raw" | grep -c -E "See also|Similar to")
+    if ((seeAlsoOrSimilarCount > 0)); then
+      local seeAlsoOrSimilar
+      seeAlsoOrSimilar=$(echo "$raw" | grep -a -E "See also|Similar to")
+      echo "$seeAlsoOrSimilar" | grep -oP "\`([^\`]+)\`" | sed -E "s/tldr |\`//g" | xargs -I{} sh -c "tldr --color=always --quiet {} | tail -n +2 | head -n 5 | gum style --border double --padding \"1 2\""
+    fi
+  }
+
+  tldr-similar {1}
+'
 export cheat_cmd="echo $ cheat {1}; echo; cheat --colorize {1}"
 export man_cmd="echo $ man {1}; man {1} 2>/dev/null | bat --language=man --plain --color=always"
 # shellcheck disable=SC2016
