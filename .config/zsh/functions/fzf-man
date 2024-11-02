@@ -4,15 +4,16 @@
 # fzf-man: One place for tldr, cheat, help, man
 #
 
-input=$1
-
-if [[ "${input}" == *"|"* ]]; then
-
-  cmd="${input##*| }"
-else
-
-  cmd=$input
+LBUFFER="$1"
+cmd=$LBUFFER
+# If LBUFFER is a pipeline, strip out previous commands
+if [[ "${LBUFFER}" == *"|"* ]]; then
+  cmd="${LBUFFER##*| }"
 fi
+
+# Prefix the cmd with ^ to start with an fzf anchored-match
+# See: https://junegunn.github.io/fzf/reference/#anchored-match
+cmd=^$cmd
 
 export tldr_cmd="echo $ tldr {1}; tldr --color=always {1} | tail -n +3"
 export cheat_cmd="echo $ cheat {1}; echo; cheat --colorize {1}"
@@ -98,8 +99,7 @@ fi
 
 file=$compgenlist_file
 if [[ ! -e $file || $file -ot $CACHE_TIME ]]; then
-  echo "Updating list of 
-  commands"
+  echo "Updating list of commands"
   echo
 
   compgenlist=$(compgen -c | sort -u | grep -Ev "^_")
