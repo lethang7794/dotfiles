@@ -24,7 +24,7 @@ if [[ -n $FZF_TAB_HOME ]]; then
 
   # set descriptions format to enable group support
   zstyle ':completion:*:descriptions' format '[%d]'
-  zstyle ':completion:*' format ' %d '
+  zstyle ':completion:*' format '%d'
 
   # set list-colors to enable filename colorizing
   # shellcheck disable=SC2296
