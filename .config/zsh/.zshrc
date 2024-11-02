@@ -26,13 +26,6 @@ alias zprofrc="ZPROFRC=1 zsh"
 # ZSH_THEME=(starship mmc)
 
 #
-# Completions
-#
-ZSH_COMPDUMP=${XDG_CACHE_HOME:-$HOME/.cache}/zsh/compdump
-[[ -d $ZSH_COMPDUMP:h ]] || mkdir -p $ZSH_COMPDUMP:h
-autoload -Uz compinit && compinit -i -d $ZSH_COMPDUMP
-
-#
 # Post libs
 #
 # Helpers for antidote.
