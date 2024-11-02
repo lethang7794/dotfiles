@@ -20,37 +20,37 @@ export cheat_cmd="echo $ cheat {1}; echo; cheat --colorize {1}"
 export man_cmd="echo $ man {1}; man {1} 2>/dev/null | bat --language=man --plain --color=always"
 # shellcheck disable=SC2016
 export help_cmd='
-    if ! command -v {1} >/dev/null 2>&1; then
-      echo \$ command not found: {1}
-      return
-    fi
+  if ! command -v {1} >/dev/null 2>&1; then
+    echo \$ command not found: {1}
+    return
+  fi
 
-    if timeout 1.5s bash -c "{1} -h" 1>/dev/null 2>&1; then
-      h=$({1} -h 2>/dev/null | bat --color=always -pl help)
-    fi
-    if timeout 1.5s bash -c "{1} --help" 1>/dev/null 2>&1; then
-      help=$({1} --help 2>/dev/null | bat --color=always -pl help)
-    fi
-    if timeout 1.5s bash -c "{1} help" 1>/dev/null 2>&1; then
-      help_sub=$({1} help 2>/dev/null | bat --color=always -pl help)
-    fi
-    if [[ -n "$h" ]] ; then
-      echo \$ {1} -h
-      echo $h
-    fi
-    if [[ -n "$help" ]] && [[ "$help" != "$h" ]] ; then
-      echo
-      echo \$ {1} --help
-      echo $help
-    fi
-    if [[ -n "$help_sub" ]] && [[ "$help_sub" != "$h" ]]  && [[ "$help_sub" != "$help" ]] ; then
-      echo \$ {1} help
-      echo "$help_sub"
-    fi
-    if [[ -z "$h" ]] && [[ -z "$help" ]] && [[ -z "$help_sub" ]] ; then
-      echo \$ {1}: failed trying to execute {1} with -h, --help or help
-    fi
-  '
+  if timeout 1.5s bash -c "{1} -h" 1>/dev/null 2>&1; then
+    h=$({1} -h 2>/dev/null | bat --color=always -pl help)
+  fi
+  if timeout 1.5s bash -c "{1} --help" 1>/dev/null 2>&1; then
+    help=$({1} --help 2>/dev/null | bat --color=always -pl help)
+  fi
+  if timeout 1.5s bash -c "{1} help" 1>/dev/null 2>&1; then
+    help_sub=$({1} help 2>/dev/null | bat --color=always -pl help)
+  fi
+  if [[ -n "$h" ]] ; then
+    echo \$ {1} -h
+    echo $h
+  fi
+  if [[ -n "$help" ]] && [[ "$help" != "$h" ]] ; then
+    echo
+    echo \$ {1} --help
+    echo $help
+  fi
+  if [[ -n "$help_sub" ]] && [[ "$help_sub" != "$h" ]]  && [[ "$help_sub" != "$help" ]] ; then
+    echo \$ {1} help
+    echo "$help_sub"
+  fi
+  if [[ -z "$h" ]] && [[ -z "$help" ]] && [[ -z "$help_sub" ]] ; then
+    echo \$ {1}: failed trying to execute {1} with -h, --help or help
+  fi
+'
 
 export manlist_file="/tmp/fzf-man-manlist"
 export cheatlist_file="/tmp/fzf-man-cheatlist"
@@ -70,7 +70,6 @@ if [[ ! -e $file || $file -ot $CACHE_TIME ]]; then
   manlist=$(man -k --sections=1,8 . | sort | awk -v cyan="$(tput setaf 6)" -v blue="$(tput setaf 4)" -v res="$(tput sgr0)" -v bld="$(tput bold)" '{ $1=cyan bld $1; $2=res blue;} 1')
   echo "$manlist" >"$file"
 else
-
   manlist=$(cat "$file")
 fi
 
@@ -81,7 +80,6 @@ if [[ ! -e $file || $file -ot $CACHE_TIME ]]; then
   cheatlist=$(cheat -l | awk '{printf "\033[1;36m%s\033[0m %s\n", $1, $3}' | tail --lines +2 | sed 's/community\,*//g' | column -t)
   echo "$cheatlist" >"$file"
 else
-
   cheatlist=$(cat "$file")
 fi
 
@@ -93,7 +91,6 @@ if [[ ! -e $file || $file -ot $CACHE_TIME ]]; then
   tldrlist=$(tldr --list)
   echo "$tldrlist" >"$file"
 else
-
   tldrlist=$(cat "$file")
 fi
 
@@ -105,37 +102,36 @@ if [[ ! -e $file || $file -ot $CACHE_TIME ]]; then
   compgenlist=$(compgen -c | sort -u | grep -Ev "^_")
   echo "$compgenlist" >"$file"
 else
-
   compgenlist=$(cat "$file")
 fi
 
 # shellcheck disable=SC2016
 executer='
-    if [[ $FZF_PROMPT =~ TLDR ]]; then
-      echo \$ tldr {1} | bat -pl bash; tldr {1}
-    elif [[ $FZF_PROMPT =~ Cheat ]]; then
-      echo \$ cheat {1} | bat -pl bash; cheat {1}
-    elif [[ $FZF_PROMPT =~ Man ]]; then
-      echo "$ man {1}" | bat -pl bash; echo; man {1} 2>/dev/null | bat --language=man --plain --color=always
-    else
-      :
-    fi
-    echo
-  '
+  if [[ $FZF_PROMPT =~ TLDR ]]; then
+    echo \$ tldr {1} | bat -pl bash; tldr {1}
+  elif [[ $FZF_PROMPT =~ Cheat ]]; then
+    echo \$ cheat {1} | bat -pl bash; cheat {1}
+  elif [[ $FZF_PROMPT =~ Man ]]; then
+    echo "$ man {1}" | bat -pl bash; echo; man {1} 2>/dev/null | bat --language=man --plain --color=always
+  else
+    :
+  fi
+  echo
+'
 
 # TLDR -> Cheat --> help --> man
 # shellcheck disable=SC2016
 transformer='
-    if [[ $FZF_PROMPT =~ TLDR ]]; then
-      echo "change-prompt(󰬊 Cheat > )+reload(cat $cheatlist_file)+change-preview($cheat_cmd)"
-    elif [[ $FZF_PROMPT =~ Cheat ]]; then
-      echo "change-prompt(󰬏 Help > )+reload(cat $compgenlist_file)+change-preview($help_cmd)"
-    elif [[ $FZF_PROMPT =~ Help ]]; then
-      echo "change-prompt(󰬔 Man > )+reload(cat $manlist_file)+change-preview($man_cmd)"
-    else
-      echo "change-prompt(󰬛 TLDR > )+reload(cat $tldrlist_file)+change-preview($tldr_cmd)"
-    fi
-  '
+  if [[ $FZF_PROMPT =~ TLDR ]]; then
+    echo "change-prompt(󰬊 Cheat > )+reload(cat $cheatlist_file)+change-preview($cheat_cmd)"
+  elif [[ $FZF_PROMPT =~ Cheat ]]; then
+    echo "change-prompt(󰬏 Help > )+reload(cat $compgenlist_file)+change-preview($help_cmd)"
+  elif [[ $FZF_PROMPT =~ Help ]]; then
+    echo "change-prompt(󰬔 Man > )+reload(cat $manlist_file)+change-preview($man_cmd)"
+  else
+    echo "change-prompt(󰬛 TLDR > )+reload(cat $tldrlist_file)+change-preview($tldr_cmd)"
+  fi
+'
 
 echo "$tldrlist" |
   fzf \
@@ -154,10 +150,10 @@ echo "$tldrlist" |
     --preview "$tldr_cmd" \
     --preview-window '70%,noborder,~2,+{1}+2/3' \
     --color header:italic \
-    --header $'<Ctrl-/> Toggle Preview    <Alt-/>, <F11> Change Preview mode    <Ctrl+S> Toggle Sort\n<Alt-H> Next mode    <Alt-A> tldr    <Alt-S> Cheat    <Alt-D> Help    <Alt-F> Man' \
+    --header $'<Ctrl-/> Toggle Preview    <Alt-/> or <F11> Change Preview mode    <Ctrl+S> Toggle Sort\n<Alt-H> Next mode    <Alt-A> tldr    <Alt-S> Cheat    <Alt-D> Help    <Alt-F> Man' \
+    --bind 'ctrl-/:toggle-preview' \
     --bind 'alt-/:change-preview-window:down,99%,~2,+{1}+2/3|down,~2,+{1}+2/3|hidden|' \
     --bind 'f11:change-preview-window:down,99%,~2,+{1}+2/3|down,~2,+{1}+2/3|hidden|' \
-    --bind 'ctrl-/:toggle-preview' \
     --bind='ctrl-s:toggle-sort'
 
 zle && zle reset-prompt
