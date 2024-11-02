@@ -6,5 +6,5 @@
 
 declare -f | perl -0777 -pe 's/^}\n/}\0/gm' |
   bat --plain --language bash --color always |
-  fzf --read0 --ansi --reverse --multi --highlight-line --query "$1" --gap |
+  fzf --read0 --ansi --reverse --multi --highlight-line --query "^$1" --gap |
   bat --plain --language bash --color always
