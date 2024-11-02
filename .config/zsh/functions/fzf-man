@@ -6,7 +6,7 @@
 
 LBUFFER="$1"
 cmd=$LBUFFER
-# If LBUFFER is a pipeline, strip out previous commands
+# If LBUFFER is a pipeline, strip out previous commands and control operators (|)
 if [[ "${LBUFFER}" == *"|"* ]]; then
   cmd="${LBUFFER##*| }"
 fi
