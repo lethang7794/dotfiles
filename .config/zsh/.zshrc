@@ -33,7 +33,7 @@ is-theme-p10k()     { [[ "$ZSH_THEME" == (p10k|powerlevel10k)* ]] }
 is-theme-starship() { [[ "$ZSH_THEME" == starship* ]] }
 
 #
-# Libs
+# Libs: Load antidote, history...
 #
 [[ -r ${ZDOTDIR:-$HOME}/lib ]] && for zlib in $ZDOTDIR/lib/*.zsh; source $zlib
 unset zlib

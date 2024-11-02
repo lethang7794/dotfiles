@@ -10,7 +10,6 @@ mattmc3/zephyr path:plugins/zfunctions
 mattmc3/zephyr path:plugins/color
 mattmc3/zephyr path:plugins/completion
 mattmc3/zephyr path:plugins/compstyle
-mattmc3/zephyr path:plugins/confd
 mattmc3/zephyr path:plugins/directory
 mattmc3/zephyr path:plugins/editor
 # mattmc3/zephyr path:plugins/environment
@@ -71,7 +70,8 @@ romkatv/zsh-no-ps2
 "${ZDOTDIR:-$HOME}"/.zaliases
 
 # Utils
-mattmc3/zman
+kazhala/dotbare
+mattmc3/zman kind:defer
 betafcc/nav kind:defer
 z-shell/F-Sy-H kind:defer
 
@@ -82,3 +82,4 @@ zsh-users/zsh-history-substring-search kind:defer
 
 # conf.d
 # mattmc3/zshrc.d
+mattmc3/zephyr path:plugins/confd # Load config last
