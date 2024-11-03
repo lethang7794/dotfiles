@@ -85,11 +85,6 @@ fi
 # atac
 export ATAC_MAIN_DIR=~/.config/atac
 
-
-
-mk_running=$(minikube status | grep Running | wc -l)
-((mk_running > 0)) && export MINIKUBE="Running"
-
 # Go cover https://dave.cheney.net/2013/11/14/more-simple-test-coverage-in-go-1-2
 go-cover() {
   t=$(mktemp)
