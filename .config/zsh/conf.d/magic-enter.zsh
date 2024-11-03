@@ -6,4 +6,4 @@
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/magic-enter
 
 MAGIC_ENTER_GIT_COMMAND='git status -su .'
-MAGIC_ENTER_OTHER_COMMAND='eza --icons'
+MAGIC_ENTER_OTHER_COMMAND='ls'
