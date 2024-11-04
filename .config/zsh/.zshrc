@@ -49,15 +49,6 @@ autoload -Uz promptinit && promptinit
 ###############################################################################
 ###############################################################################
 
-## Brew
-HOMEBREW_BIN=/home/linuxbrew/.linuxbrew/bin/brew
-if [ -f "$HOMEBREW_BIN" ]; then
-  eval "$($HOMEBREW_BIN shellenv)"
-
-  # Brew auto-update
-  export HOMEBREW_AUTO_UPDATE_SECS="86400"
-fi
-
 ## fzf-mark
 export FZF_MARKS_JUMP="^[g"
 
@@ -73,14 +64,6 @@ export FZF_MARKS_JUMP="^[g"
 ## AWS https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-completion.html#cli-command-completion-linux
 # complete -C "$(which aws_completer)" aws
 # complete -C "$HOME/.local/share/mise/installs/awscli/latest/bin/aws_completer" aws
-
-## Brew
-if [ -f "$HOMEBREW_BIN" ]; then
-  HB_CNF_HANDLER="$(brew --repository)/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
-  if [ -f "$HB_CNF_HANDLER" ]; then
-    source "$HB_CNF_HANDLER"
-  fi
-fi
 
 # atac
 export ATAC_MAIN_DIR=~/.config/atac
