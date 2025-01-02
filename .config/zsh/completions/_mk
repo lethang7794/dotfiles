@@ -1,0 +1,7 @@
+#compdef mk
+
+_mk_completion() {
+  eval $(env _TYPER_COMPLETE_ARGS="${words[1,$CURRENT]}" _MK_COMPLETE=complete_zsh mk)
+}
+
+compdef _mk_completion mk

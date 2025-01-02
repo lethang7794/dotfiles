@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+GITHUB="$HOME/go/src/github.com"
+
+repo="$1"
+
+if (($# == 0)); then
+  echo "Usage: ghclone ORG/REPO"
+  return 1
+fi
+
+shift 1
+# shellcheck disable=SC2124
+rest=$@
+
+if [[ -z "${repo}" ]]; then
+  echo "Usage: ghclone ORG/REPO"
+fi
+
+clone_url="git@github.com:$repo"
+dest="$GITHUB/$repo"
+
+# Check if destination directory already exists
+if [ -d "$dest" ] && [ -d "$dest/.git" ]; then
+  echo "You've already cloned this repo at: $dest"
+  echo "Happy hacking, again! 🎮 ૮ ˶ᵔ ᵕ ᵔ˶ ა"
+  cd "$dest" || return
+  return 1
+fi
+
+# Clone the repository
+echo "Cloning 󰊤  /$repo"
+# shellcheck disable=SC2086
+mkdir -p "$dest"
+git clone --depth=1 "$clone_url" "$dest" && cd "$dest" && echo "Happy hacking! 🚀 (づ｡◕‿‿◕｡)づ"

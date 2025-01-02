@@ -1,0 +1,85 @@
+#!/bin/sh
+# If you use Oh-My-Zsh with antidote, load this plugin FIRST to set things up so you
+# don't have to worry about whether OMZ will work correctly.
+# getantidote/use-omz
+
+# zephyr
+mattmc3/zephyr path:plugins/helper
+mattmc3/zephyr path:plugins/zfunctions
+
+mattmc3/zephyr path:plugins/color
+mattmc3/zephyr path:plugins/completion
+mattmc3/zephyr path:plugins/compstyle
+# mattmc3/zephyr path:plugins/directory
+mattmc3/zephyr path:plugins/editor
+# mattmc3/zephyr path:plugins/environment
+# mattmc3/zephyr path:plugins/history
+# mattmc3/zephyr path:plugins/homebrew
+# mattmc3/zephyr path:plugins/macos
+# mattmc3/zephyr path:plugins/prompt
+mattmc3/zephyr path:plugins/utility post:post-zephyr-utility
+
+# Make functions available
+# mattmc3/zfunctions
+
+# Let's go ahead and use all of Oh My Zsh's lib directory.
+ohmyzsh/ohmyzsh path:lib
+
+# Now, let's pick our Oh My Zsh utilty plugins
+ohmyzsh/ohmyzsh path:plugins/colored-man-pages # Adds colors to man pages (e.g. man man) or run `colored <command>` to color output of an command (e.g. `colored git help clone`git help clone`)
+ohmyzsh/ohmyzsh path:plugins/copybuffer        # Press Ctrl-O to copy the current text in the command line to the system clipboard.
+ohmyzsh/ohmyzsh path:plugins/copyfile          # Run `copyfile <filename>` to copy contents of a file to the system clipboard.
+ohmyzsh/ohmyzsh path:plugins/copypath          # Run `copypath <file_or_directory>` to copy the absolute path of the given file.
+ohmyzsh/ohmyzsh path:plugins/extract           # Run `extract <filename>` to extract an archive file.
+ohmyzsh/ohmyzsh path:plugins/globalias         # Expands all glob expressions, subcommands and aliases (including global).
+ohmyzsh/ohmyzsh path:plugins/magic-enter       # Press Enter to execute `git status` (in a git directory); `ls` (in other directories).
+ohmyzsh/ohmyzsh path:plugins/fancy-ctrl-z      # Press Ctrl-Z again to switch back to a background job.
+ohmyzsh/ohmyzsh path:plugins/otp
+ohmyzsh/ohmyzsh path:plugins/sudo
+ohmyzsh/ohmyzsh path:plugins/git
+# ohmyzsh/ohmyzsh path:plugins/zoxide
+
+# Add some programmer plugins
+# ohmyzsh/ohmyzsh path:plugins/git
+# ohmyzsh/ohmyzsh path:plugins/golang
+# ohmyzsh/ohmyzsh path:plugins/python
+# ohmyzsh/ohmyzsh path:plugins/ruby
+# ohmyzsh/ohmyzsh path:plugins/rails
+
+# Add macOS specific plugins
+# ohmyzsh/ohmyzsh path:plugins/brew conditional:is-macos
+ohmyzsh/ohmyzsh path:plugins/macos conditional:is-macos
+
+# Add binary utils
+romkatv/zsh-bench kind:path
+
+# Completion plugins
+# mattmc3/ez-compinit
+aloxaf/fzf-tab kind:defer post:post-fzf-tab   #
+lethang7794/fzf-tab-source kind:defer         # 🌟🌟
+zsh-users/zsh-completions path:src kind:fpath #
+
+# Editor plugins
+romkatv/zsh-no-ps2
+
+# Prompts
+# romkatv/powerlevel10k
+# ${ZDOTDIR:-$HOME}/.p10k.zsh
+
+# Aliases
+"${ZDOTDIR:-$HOME}"/.zaliases
+
+# Utils
+kazhala/dotbare
+mattmc3/zman kind:defer
+betafcc/nav kind:defer
+z-shell/F-Sy-H kind:defer
+
+# Add core plugins that make Zsh a bit more like Fish
+zdharma-continuum/fast-syntax-highlighting kind:defer
+zsh-users/zsh-autosuggestions kind:defer
+zsh-users/zsh-history-substring-search kind:defer
+
+# conf.d
+# mattmc3/zshrc.d
+mattmc3/zephyr path:plugins/confd # Load config last

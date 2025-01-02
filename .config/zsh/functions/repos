@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+#
+# repos: Find all git repos from a directory
+#
+
+if command -v gum &>/dev/null; then
+  # find "$HOME"/git -maxdepth 3 -type d \( ! -iname ".*" \) | sed 's|^\./||g' | gum filter | xargs -I % code -n %
+  find . -name .git -type d -prune -exec dirname {} \; | gum filter | xargs -I % "$EDITOR" %
+
+else
+  echo "please install gum"
+  # go install github.com/charmbracelet/gum@latest || echo "✅ installed gum (make sure GOPATH/bin is in PATH), try command again"
+fi

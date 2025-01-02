@@ -1,0 +1,6 @@
+[general]
+import = [ "~/.local/share/omakub/defaults/alacritty/pane.toml" ]
+
+[window]
+dimensions.columns = 90
+dimensions.lines = 30

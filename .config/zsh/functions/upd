@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+#
+# upd: Update dnf, antiodate, flatpak, brew
+#
+
+printf "\n🆕 Update dnf packages\n"
+printf "dnf5 upgrade -y --refresh\n"
+sudo dnf5 upgrade -y --refresh
+
+printf "\n🆕 Update zsh plugins\n"
+antidote update
+
+printf "\n🆕 Update flatpak packages\n"
+printf "flatpak update -y\n"
+flatpak update -y
+
+printf "\n🆕 Update Gnome-Software packages\n"
+printf "pkcon refresh && pkcon update\n"
+pkcon refresh && pkcon update
+
+printf "\n🆕 Update Homebrew packages\n"
+printf "brew update && brew upgrade\n"
+brew update && brew upgrade

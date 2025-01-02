@@ -1,0 +1,9 @@
+[general]
+import = ["~/.config/alacritty/share/pane.toml"]
+
+[window]
+dimensions.columns = 84
+dimensions.lines = 25
+padding.x = 8
+padding.y = 8
+decorations = "None"

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+shell=${1-$SHELL}
+
+# shellcheck disable=SC2034
+printf "real\tuser\tsys (s)\n"
+for _ in $(seq 1 10); do
+  /usr/bin/time -f '%e\t%U\t%S' "$shell" -i -c exit
+done

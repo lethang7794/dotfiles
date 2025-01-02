@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Zellij
+Comment=A terminal workspace with batteries included
+Terminal=false
+Exec=alacritty --config-file /home/lqt/.config/alacritty/apps/zellij.toml --class=zellij --title=zellij -e zsh -c 'zellij'
+Icon=/home/lqt/.local/share/icons/applications/zellij.png

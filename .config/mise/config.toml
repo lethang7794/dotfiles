@@ -1,0 +1,42 @@
+# "$schema" = "https://mise.jdx.dev/schema/mise.json"
+
+[tools]
+# argocd = "latest"
+awscli = "latest"
+# dagger = "latest"
+# dapr = "latest"
+# flux2 = "latest"
+gitleaks = "latest"
+# istioctl = "latest"
+kubectl = "latest"
+node = "latest"
+opentofu = "latest"
+# packer = "latest"
+pnpm = "latest"
+pre-commit = "latest"
+# stern = "latest"
+# tekton-cli = "latest"
+# terraform = "latest"
+yarn = "4"
+
+"npm:@vscode/vsce" = "latest"
+"npm:concurrently" = "latest"
+# "npm:extension" = "1.5.0"
+"npm:markmap-cli" = "latest"
+"npm:npkill" = "latest"
+"npm:pm2" = "latest"
+"npm:prettier" = "latest"
+"npm:ttab" = "latest"
+"npm:yo" = "latest"
+"npm:taze" = "latest"
+"npm:wipeclean" = "latest"
+"ubi:goreleaser/goreleaser" = "latest"
+"ubi:Cretezy/lazyjj" = "latest"
+"ubi:jesusprubio/up" = "latest"
+npm = "latest"
+
+[settings]
+experimental = true
+
+[settings.node]
+gpg_verify = false

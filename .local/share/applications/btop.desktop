@@ -1,0 +1,25 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=btop++
+GenericName=System Monitor
+GenericName[it]=Monitor di sistema
+Comment=Resource monitor that shows usage and stats for processor, memory, disks, network and processes
+Comment[it]=Monitoraggio delle risorse: mostra utilizzo e statistiche per CPU, dischi, rete e processi
+Icon=btop
+Exec=alacritty --config-file /home/lqt/.config/alacritty/apps/btop.toml --class=btop --title=btop -e zsh -c 'btop'
+Terminal=false
+Categories=System                                                                                                    ;Monitor;ConsoleOnly;
+Keywords=system                                                                                                      ;process;task
+Name[en]=btop++
+Name[en_US]=btop++
+Name[en_US.UTF-8]=btop++
+Comment[en]=Resource monitor that shows usage and stats for processor, memory, disks, network and processes
+Comment[en_US]=Resource monitor that shows usage and stats for processor, memory, disks, network and processes
+Comment[en_US.UTF-8]=Resource monitor that shows usage and stats for processor, memory, disks, network and processes
+Keywords[en]=system                                                                                                  ;process;task
+Keywords[en_US]=system                                                                                               ;process;task
+Keywords[en_US.UTF-8]=system                                                                                         ;process;task
+Hidden=false
+NoDisplay=false
+StartupNotify=true
