@@ -80,7 +80,7 @@ export PKG_CONFIG_PATH="/usr/lib64/pkgconfig"
 ###############################################################################
 
 # Brew
-# export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin${PATH+:$PATH}"
+export PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin${PATH+:$PATH}"
 # TODO: Why brew is already added to PATH?
 
 # Secrets
