@@ -1,4 +1,4 @@
-[shell]
+[terminal.shell]
 program = "/usr/bin/zsh"
 args = ["-l", "-c", "zellij attach --index 0 || zellij"]
 
@@ -12,3 +12,5 @@ style = { blinking = "Always" }
 
 [keyboard]
 bindings = [{ key = "F11", action = "ToggleFullscreen" }]
+
+[terminal]

@@ -1,3 +1,4 @@
+[general]
 import = [
   "~/.config/alacritty/share/default.toml",
   "~/.config/alacritty/theme.toml",
