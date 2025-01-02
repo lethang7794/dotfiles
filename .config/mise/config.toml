@@ -33,6 +33,10 @@ yarn = "4"
 "ubi:goreleaser/goreleaser" = "latest"
 "ubi:Cretezy/lazyjj" = "latest"
 "ubi:jesusprubio/up" = "latest"
+npm = "latest"
 
 [settings]
 experimental = true
+
+[settings.node]
+gpg_verify = false
