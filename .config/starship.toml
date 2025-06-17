@@ -2,7 +2,7 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 continuation_prompt = '▶▶ '
-command_timeout = 1000
+command_timeout     = 1000
 
 # format = '$all'
 format = """
@@ -102,7 +102,8 @@ $character"""
 # """
 
 [aws]
-symbol = "  "
+symbol   = "  "
+disabled = true
 
 [buf]
 symbol = " "
@@ -115,7 +116,7 @@ symbol = " "
 
 [character]
 success_symbol = '[❯](green)' # 👉➜➜＄﹩$💲󠀤
-error_symbol = '[](red)'     # 👆🯀🛑⚠️⚠
+error_symbol   = '[](red)'   # 👆🯀🛑⚠️⚠
 
 [crystal]
 symbol = " "
@@ -124,9 +125,9 @@ symbol = " "
 symbol = " "
 
 [directory]
-read_only = " 󰌾"
-repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) '
-repo_root_style = "underline"
+read_only                 = " 󰌾"
+repo_root_format          = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) '
+repo_root_style           = "underline"
 fish_style_pwd_dir_length = 1
 # truncation_length = 5
 # truncate_to_repo = true
@@ -162,6 +163,13 @@ symbol = " "
 
 [git_branch]
 symbol = " "
+style  = "bold #F05133"
+
+[git_commit]
+format       = "[\\($hash$tag\\)]($style) "
+tag_disabled = false
+tag_symbol   = " 🏷 "
+style        = "bold #F05133"
 
 [gcloud]
 disabled = true
@@ -195,10 +203,10 @@ symbol = " "
 
 [kubernetes]
 disabled = false
-format = '''[󱃾](#316CE6) [$context](red bold)[( \($namespace\))](yellow bold)
+format = '''[](#316CE6) [$symbol $context](red bold)[(\($namespace\))](yellow bold)
 '''
 # detect_folders = ["infra", "k8s"]
-detect_env_vars = ["MINIKUBE"]
+detect_env_vars = [ "MINIKUBE" ]
 contexts = [
   { context_pattern = "minikube", style = "green", symbol = "🧪", context_alias = "🧊" },
   { context_pattern = "docker-desktop", style = "green", symbol = "🧪", context_alias = "🐋" },
@@ -223,51 +231,51 @@ symbol = "󰆥 "
 symbol = " "
 
 [nodejs]
-symbol = " " # 
+symbol = " " # 
 
 [ocaml]
 symbol = " "
 
 [os.symbols]
-Alpaquita = " "
-Alpine = " "
-Amazon = " "
-Android = " "
-Arch = " "
-Artix = " "
-CentOS = " "
-Debian = " "
-DragonFly = " "
-Emscripten = " "
-EndeavourOS = " "
-Fedora = " "
-FreeBSD = " "
-Garuda = "󰛓 "
-Gentoo = " "
-HardenedBSD = "󰞌 "
-Illumos = "󰈸 "
-Linux = " "
-Mabox = " "
-Macos = " "
-Manjaro = " "
-Mariner = " "
-MidnightBSD = " "
-Mint = " "
-NetBSD = " "
-NixOS = " "
-OpenBSD = "󰈺 "
-openSUSE = " "
-OracleLinux = "󰌷 "
-Pop = " "
-Raspbian = " "
-Redhat = " "
+Alpaquita        = " "
+Alpine           = " "
+Amazon           = " "
+Android          = " "
+Arch             = " "
+Artix            = " "
+CentOS           = " "
+Debian           = " "
+DragonFly        = " "
+Emscripten       = " "
+EndeavourOS      = " "
+Fedora           = " "
+FreeBSD          = " "
+Garuda           = "󰛓 "
+Gentoo           = " "
+HardenedBSD      = "󰞌 "
+Illumos          = "󰈸 "
+Linux            = " "
+Mabox            = " "
+Macos            = " "
+Manjaro          = " "
+Mariner          = " "
+MidnightBSD      = " "
+Mint             = " "
+NetBSD           = " "
+NixOS            = " "
+OpenBSD          = "󰈺 "
+openSUSE         = " "
+OracleLinux      = "󰌷 "
+Pop              = " "
+Raspbian         = " "
+Redhat           = " "
 RedHatEnterprise = " "
-Redox = "󰀘 "
-Solus = "󰠳 "
-SUSE = " "
-Ubuntu = " "
-Unknown = " "
-Windows = "󰍲 "
+Redox            = "󰀘 "
+Solus            = "󰠳 "
+SUSE             = " "
+Ubuntu           = " "
+Unknown          = " "
+Windows          = "󰍲 "
 
 [package]
 symbol = "󰏗 "
@@ -298,13 +306,16 @@ symbol = " "
 
 [status]
 disabled = false
-format = '[\[$symbol$common_meaning$signal_name$maybe_int\]]($style) '
+format   = '[\[$symbol$common_meaning$signal_name$maybe_int\]]($style) '
 
 [sudo]
 disabled = false
 
 [swift]
 symbol = " "
+
+[terraform]
+symbol = " "
 
 [zig]
 symbol = " "
@@ -321,29 +332,75 @@ disabled = true
 
 [custom.typescript]
 description = "TypeScript"
-symbol = "󰛦 "
-style = "#3178C5 bold"
-when = "jq --exit-status '.devDependencies.typescript' package.json"
-command = "jq --raw-output '.devDependencies.typescript' package.json | tr --delete '^'"
+symbol      = " "
+style       = "#3178C5 bold"
+when        = "jq --exit-status '.devDependencies.typescript' package.json"
+command     = "jq --raw-output '.devDependencies.typescript' package.json | tr --delete '^'"
 
-[custom.react]
-description = "React"
-symbol = " "
-style = "#149ECA bold"
-when = "jq --exit-status '.dependencies.react' package.json"
-command = "jq --raw-output '.dependencies.react' package.json | tr --delete '^'"
+[custom.nodejs-package-manager]
+description = "Node.js Package Manager"
+symbol      = " pnpm "
+style       = "#F9AD00 bold"
+when        = "jq --raw-output '.packageManager' package.json | grep pnpm"
+
+[custom.yarn]
+description = "Yarn Package Manager"
+symbol      = " yarn "
+style       = "#2C8EBB bold"
+when        = "test -f yarn.lock"
 
 [custom.nextjs]
 description = "Next.js"
-symbol = "Next.js "
-style = "#F0F0F0 bold"
-when = "jq --exit-status '.dependencies.next' package.json"
-command = "jq --raw-output '.dependencies.next' package.json | tr --delete '^'"
+symbol      = " "
+style       = "#F0F0F0 bold"
+when        = "jq --exit-status '.dependencies.next' package.json"
+command     = "jq --raw-output '.dependencies.next' package.json | tr --delete '^'"
 
+[custom.react]
+description = "React"
+symbol      = " "
+style       = "#149ECA bold"
+when        = "jq --exit-status '.dependencies.react' package.json"
+command     = "jq --raw-output '.dependencies.react' package.json | tr --delete '^'"
 
 [custom.tailwind]
 description = "Tailwind CSS"
-symbol = "󱏿 "
-style = "#38BDF8 bold"
-when = "jq --exit-status '.devDependencies.tailwindcss' package.json"
-command = "jq --raw-output '.devDependencies.tailwindcss' package.json | tr --delete '^'"
+symbol      = " "
+style       = "#38BDF8 bold"
+when        = "jq --exit-status '.devDependencies.tailwindcss' package.json"
+command     = "jq --raw-output '.devDependencies.tailwindcss' package.json | tr --delete '^'"
+
+[custom.aws-cdk]
+description = "AWS CDK"
+symbol      = " CDK "
+style       = "#FF9900 bold"
+when        = "jq --exit-status '.app' cdk.json"
+command     = "jq --raw-output '.devDependencies[\"aws-cdk\"]' package.json | tr --delete '^'"
+
+[custom.aws-codebuild]
+description = "AWS CodeBuild"
+symbol      = " CodeBuild "
+style       = "#FF9900 bold"
+when        = "test -f buildspec.yml"
+command     = ""
+
+[custom.aws-codedeploy]
+description = "AWS CodeDeploy"
+symbol      = " CodeDeploy "
+style       = "#FF9900 bold"
+when        = "test -f appspec.yml"
+command     = ""
+
+[custom.github-actions]
+description = "GitHub Actions"
+symbol      = " GitHub "
+style       = "#FF9900 bold"
+when        = "[ \"$PWD\" != \"$HOME\" ] && test -d .github/workflows"
+command     = ""
+
+[custom.gitlab-ci]
+description = "GitLab CI"
+symbol      = " GitLab "
+style       = "#FF9900 bold"
+when        = "test -f .gitlab-ci.yml"
+command     = ""

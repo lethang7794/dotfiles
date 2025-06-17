@@ -1,0 +1,9 @@
+{
+  "Lua.diagnostics.globals": [
+    "ui",
+    "ya",
+    "Status",
+    "Header",
+    "cx"
+  ]
+}

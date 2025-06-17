@@ -49,8 +49,8 @@ alias utc="date -u +%Y-%m-%dT%H:%M:%SZ"
 alias unixepoch="date +%s"
 
 # find
-alias fd='find . -type d -name'
-alias ff='find . -type f -name'
+alias ffd='find . -type d -name'
+alias fff='find . -type f -name'
 
 # homebrew
 #alias brewup="brew update && brew upgrade && brew cleanup"
@@ -148,3 +148,5 @@ alias kube-tree="kube-lineage"
 alias mnk="minikube"
 
 alias awsume=". awsume"
+
+alias mp='uv run $HOME/go/src/github.com/wylie102/MakeItParquet/make_it_parquet.py'

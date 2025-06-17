@@ -20,7 +20,7 @@ export XDG_PROJECTS_DIR=${XDG_PROJECTS_DIR:-$HOME/Projects}
 : ${__zsh_config_dir:=${ZDOTDIR:-${XDG_CONFIG_HOME:-$HOME/.config}/zsh}}
 : ${__zsh_user_data_dir:=${XDG_DATA_HOME:-$HOME/.local/share}/zsh}
 : ${__zsh_cache_dir:=${XDG_CACHE_HOME:-$HOME/.cache}/zsh}
-# export ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh"
+export ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh"
 
 # Ensure Zsh directories exist.
 () {
@@ -71,9 +71,32 @@ export GOROOT="$HOME/.gobrew/current/go" # Current Golang bin managed by gobrew
 ## Rust
 ##
 # Cargo
-. "$HOME/.cargo/env"
+if [ -f "$HOME/.cargo/env" ]; then
+  . "$HOME/.cargo/env"
+fi
 # Use the system pkg-config tool (if available) to determine where a library is located. 
 export PKG_CONFIG_PATH="/usr/lib64/pkgconfig"
+
+###############################################################################
+#                             Package managers                                #
+###############################################################################
+# pnpm
+export PNPM_HOME=~/.local/share/pnpm
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# fnm
+FNM_PATH="$HOME/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="$HOME/.local/share/fnm:$PATH"
+  if [ "$(command -v fnm)" ]; then
+    eval "`fnm env`"
+  fi
+fi
+
 
 ###############################################################################
 #                                   Misc                                      #
