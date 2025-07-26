@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 ##
 ## .zshrc - Run on interactive Zsh session.
 ##
@@ -83,12 +81,12 @@ go-cover-web() {
 #   exec tmux
 # fi
 
-tmux-cleanup-sessions() {
-  tmux list-sessions | grep -v attached | awk 'BEGIN{FS=\":\"}{print \"\$1\"}' | xargs -n 1 tmux kill-session -t 2>/dev/null || (echo 'Cleanup unattached sessions!' && tmux ls)
-}
-tmux-cleanup-windows() {
-  tmux list-windows | grep -v attached | awk 'BEGIN{FS=\":\"}{print $1}' | xargs -n 1 tmux kill-window -t 2>/dev/null || (echo 'Cleanup unattached windows!' && tmux ls)
-}
+# tmux-cleanup-sessions() {
+#   tmux list-sessions | grep -v attached | awk 'BEGIN{FS=\":\"}{print \"\$1\"}' | xargs -n 1 tmux kill-session -t 2>/dev/null || (echo 'Cleanup unattached sessions!' && tmux ls)
+# }
+# tmux-cleanup-windows() {
+#   tmux list-windows | grep -v attached | awk 'BEGIN{FS=\":\"}{print $1}' | xargs -n 1 tmux kill-window -t 2>/dev/null || (echo 'Cleanup unattached windows!' && tmux ls)
+# }
 
 # Temp workaround to disable punycode deprecation logging to stderr
 # https://github.com/bitwarden/clients/issues/6689
@@ -111,6 +109,7 @@ alias bw='NODE_OPTIONS="--no-deprecation" bw'
 # Finish profiling by calling zprof.
 [[ "$ZPROFRC" -eq 1 ]] && zprof
 [[ -v ZPROFRC ]] && unset ZPROFRC
+
 
 # Always return success
 true

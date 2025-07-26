@@ -19,4 +19,7 @@ GLOBALIAS_FILTER_VALUES=(
   mv
   dotty
   dotfiles
+  awsume
+  ping
+  mp
 )

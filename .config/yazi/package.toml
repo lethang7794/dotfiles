@@ -1,17 +1,57 @@
-[plugin]
-deps = [
-  { use = "AnirudhG07/rich-preview", rev = "fe43219" },
-  { use = "Ape/mediainfo", rev = "c69314e" },
-  { use = "KKV9/command", rev = "dc9b483" },
-  { use = "ndtoan96/ouch", rev = "251da69" },
-  { use = "pirafrank/what-size", rev = "f08f7f2" },
-  { use = "Rolv-Apneseth/starship", rev = "77a65f5" },
-  { use = "sharklasers996/eza-preview", rev = "7ca4c25" },
-  { use = "Sonico98/exifaudio", rev = "855ff05" },
-  { use = "yazi-rs/plugins:full-border", rev = "4f1d0ae" },
-  { use = "yazi-rs/plugins:git", rev = "4f1d0ae" },
-  { use = "yazi-rs/plugins:max-preview", rev = "4f1d0ae" },
-]
+[[plugin.deps]]
+use = "AnirudhG07/rich-preview"
+rev = "843c3fa"
+hash = "b4040931f0d2f9670ddb4923e55cd881"
+
+[[plugin.deps]]
+use = "KKV9/command"
+rev = "4762ecc"
+hash = "65fff40a0060fe4b1c42d49d29f770fd"
+
+[[plugin.deps]]
+use = "ndtoan96/ouch"
+rev = "1ee69a5"
+hash = "63679f3daf8551ff8755be38b5ced0f"
+
+[[plugin.deps]]
+use = "pirafrank/what-size"
+rev = "0a4904c"
+hash = "fca231a128488a554823374f8f6d5241"
+
+[[plugin.deps]]
+use = "Rolv-Apneseth/starship"
+rev = "6a0f3f7"
+hash = "d5a74d95c2e8194ac352c5e10e81e64f"
+
+[[plugin.deps]]
+use = "Sonico98/exifaudio"
+rev = "e766cd2"
+hash = "5fd39bf4e88d6a046d4b81691a38d615"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:full-border"
+rev = "aeca767"
+hash = "3996fc74044bc44144b323686f887e1"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+rev = "aeca767"
+hash = "bf6f074cd41ee33c3360341d168f9733"
+
+[[plugin.deps]]
+use = "wylie102/duckdb"
+rev = "3f8c863"
+hash = "87b9233a74325e95011670ed20bbd0d4"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:toggle-pane"
+rev = "aeca767"
+hash = "d5d4f3527592da5fbe77fd6f51815f80"
+
+[[plugin.deps]]
+use = "Lil-Dank/lazygit"
+rev = "7a08a09"
+hash = "a1fa2b3e1826c3a34804ea8c548e9f80"
 
 [flavor]
-deps = [  ]
+deps = []

@@ -2,29 +2,35 @@
 
 "$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
 
-[[plugin.prepend_fetchers]]
-id   = "git"
-name = "*"
-run  = "git"
+# [[plugin.prepend_fetchers]]
+# id   = "git"
+# name = "*"
+# run  = "git"
 
-[[plugin.prepend_fetchers]]
-id   = "git"
-name = "*/"
-run  = "git"
+# [[plugin.prepend_fetchers]]
+# id   = "git"
+# name = "*/"
+# run  = "git"
 
 [plugin]
 prepend_preloaders = [
   # { mime = "image/*", run = "allmytoes" },
+  { name = "*.csv", run = "duckdb", multi = false },  
+  { name = "*.tsv", run = "duckdb", multi = false },  
+  { name = "*.json", run = "duckdb", multi = false },  
+  { name = "*.parquet", run = "duckdb", multi = false },
+  { name = "*.txt", run = "duckdb", multi = false },  
+  { name = "*.xlsx", run = "duckdb", multi = false }
 ]
 prepend_previewers = [
   # Multimedia
   { mime = "audio/*", run = "exifaudio" },
-  { mime = "image/*", run = "mediainfo" },
+  # { mime = "image/*", run = "mediainfo" },
   { mime = "video/*", run = "mediainfo" },
   { mime = "application/x-subrip", run = "mediainfo" },
 
   # Folder
-  { name = "*/", run = "eza-preview" },
+  # { name = "*/", run = "eza-preview" },
 
   # Archive
   { mime = "application/*zip", run = "ouch" },
@@ -36,4 +42,12 @@ prepend_previewers = [
 
   # CSV
   # { name = "*.csv", run = "rich-preview"},
+  { name = "*.csv", run = "duckdb" },  
+  { name = "*.tsv", run = "duckdb" },  
+  { name = "*.json", run = "duckdb" },  
+  { name = "*.parquet", run = "duckdb" },  
+  { name = "*.txt", run = "duckdb" },  
+  { name = "*.xlsx", run = "duckdb" },  
+  { name = "*.db", run = "duckdb" },
+  { name = "*.duckdb", run = "duckdb" }
 ]
